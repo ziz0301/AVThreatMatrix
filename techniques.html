@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GV Threat Matrix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <header>
+        <h1>UGV Threat Matrix</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Matrix</a></li>
+                <li><a href="tactics.html">Tactics</a></li>
+                <li><a href="techniques.html">Techniques</a></li>
+                <li><a href="references.html">References</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h2>List of Techniques</h2>
+        <table id="techniques-table" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Sub-Techniques</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <div id="popup-body"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector("#techniques-table tbody");
+            let allTechniques = [];
+
+            // Extract all techniques from all tactics
+            data.AV.tactics.forEach(tactic => {
+                tactic.techniques.forEach(tech => {
+                    allTechniques.push(tech);
+                });
+            });
+
+            allTechniques.forEach(tech => {
+                let row = document.createElement("tr");
+                let subtechHTML = "";
+
+                // Check if technique has sub-techniques and create dropdown icon
+                if (tech["sub-techniques"] && tech["sub-techniques"].length > 0) {
+                    subtechHTML += `<span onclick="toggleSubtechniques('${tech.id}')" style="cursor:pointer;">🔽</span>`;
+                }
+
+                row.innerHTML = `
+                    <td>${tech.id}</td>
+                    <td class="clickable" onclick="showPopup('${tech.id}', 'technique')">${tech.name}</td>
+                    <td>${tech.description}</td>
+                    <td>${subtechHTML}</td>
+                `;
+
+                tableBody.appendChild(row);
+
+                // If the technique has sub-techniques, fetch details and display them
+                if (tech["sub-techniques"] && tech["sub-techniques"].length > 0) {
+                    let subRow = document.createElement("tr");
+                    subRow.id = "subtech-" + tech.id;
+                    subRow.style.display = "none";
+                    subRow.innerHTML = `<td colspan="4"><table border="1" id="subtech-table-${tech.id}"><thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead><tbody></tbody></table></td>`;
+                    tableBody.appendChild(subRow);
+
+                    tech["sub-techniques"].forEach(subtechId => {
+                        let subtech = data.AV["sub-techniques"].find(sub => sub.id === subtechId);
+                        if (subtech) {
+                            let subRowContent = document.createElement("tr");
+                            subRowContent.innerHTML = `
+                                <td>${subtech.id}</td>
+                                <td class="clickable" onclick="showPopup('${subtech.id}', 'sub-technique')">${subtech.name}</td>
+                                <td>${subtech.description}</td>
+                            `;
+                            subRow.querySelector("tbody").appendChild(subRowContent);
+                        }
+                    });
+                }
+            });
+        })
+        .catch(error => console.error("Error loading data:", error));
+});
+
+// Toggle sub-technique visibility
+function toggleSubtechniques(techId) {
+    let subtechTable = document.getElementById("subtech-" + techId);
+    if (subtechTable.style.display === "none") {
+        subtechTable.style.display = "table-row";
+    } else {
+        subtechTable.style.display = "none";
+    }
+}
+
+// Show popup for techniques and sub-techniques
+function showPopup(itemId, type) {
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            let item = null;
+
+            if (type === "technique") {
+                data.AV.tactics.forEach(tactic => {
+                    tactic.techniques.forEach(tech => {
+                        if (tech.id === itemId) {
+                            item = tech;
+                        }
+                    });
+                });
+            } else if (type === "sub-technique") {
+                item = data.AV["sub-techniques"].find(sub => sub.id === itemId);
+            }
+
+            if (item) {
+                let content = `<h2>${item.name} (${item.id})</h2>`;
+                content += `<p><strong>Description:</strong> ${item.description}</p>`;
+
+                // Display sub-techniques if available
+                if (item["sub-techniques"] && item["sub-techniques"].length > 0) {
+                    content += `<h3>Sub-Techniques:</h3><table border="1"><thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead><tbody>`;
+                    item["sub-techniques"].forEach(subtechId => {
+                        let subtech = data.AV["sub-techniques"].find(sub => sub.id === subtechId);
+                        if (subtech) {
+                            content += `<tr><td>${subtech.id}</td><td>${subtech.name}</td><td>${subtech.description}</td></tr>`;
+                        }
+                    });
+                    content += `</tbody></table>`;
+                }
+
+                // Display examples if available
+                if (item.examples && item.examples.length > 0) {
+                    content += `<h3>Examples:</h3><table border="1"><thead><tr><th>Description</th></tr></thead><tbody>`;
+                    item.examples.forEach(example => {
+                        content += `<tr><td>${example.description}</td></tr>`;
+                    });
+                    content += `</tbody></table>`;
+                }
+
+                // Display references if available
+                if (item.references && item.references.length > 0) {
+                    content += `<h3>References:</h3><ul>`;
+                    item.references.forEach(ref => {
+                        content += `<li><a href='${ref.link}' target='_blank'>${ref.source_name} (${ref.id})</a></li>`;
+                    });
+                    content += `</ul>`;
+                }
+
+                document.getElementById("popup-body").innerHTML = content;
+                document.getElementById("popup").style.display = "block";
+            }
+        });
+	}
+
+	// Close popup
+	function closePopup() {
+		document.getElementById("popup").style.display = "none";
+	}
+
+    </script>
+</body>
+</html>

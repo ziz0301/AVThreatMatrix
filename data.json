@@ -1,0 +1,1924 @@
+{
+    "tactics": [
+        {
+            "ID": "TA0500",
+            "name": "Manipulate Environment",
+            "short description": "The adversary is trying to manipulate the external environment to disrupt UGV operations or enable further attacks.",
+            "full description": "Manipulate Environment consists of techniques where adversaries exploit external factors, such as wireless networks, connected infrastructure, and sensory/signal inputs, to deceive, disrupt, or compromise vehicle security without direct physical interference or initial access.\nThese techniques involves deploying rogue devices, intercepting or manipulating data transmissions, and exploiting signal inputs to mislead vehicle control systems or AI-based perception models.\nBy influencing the vehicle’s environment rather than altering its internal systems, adversaries can create conditions that enable additional attack tactics and techniques.\nThis tactic was adapted from AUTO-ISAC ATM.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5000","T5001","T5002","T5003","T5004","T5005","T5006"]
+        },
+        {
+            "ID": "TA0501",
+            "name": "Initial Access",
+            "short description": "The adversary is attempting to gain unauthorised access to the UGV’s systems or networks.",
+            "full description": "Initial Access consists of techniques that adversaries use as entry vectors to establish a foothold within UGV systems or networks.\nEntry points targeted by adversaries include telematics units, infotainment systems, and wireless interfaces (Wi-Fi, Bluetooth, or cellular connections). They may exploit vulnerabilities in manufacturer services, mobile applications, or cloud-based APIs that handle remote access and vehicle data. Physical interfaces, such as OBD-II ports, removable devices, and aftermarket dongles, can also be used as techniques to gain initial unauthorised access to the system.\nFootholds gained through initial access may enable additional attack tactics and techniques.\nThis tactic was adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5007","T5008","T5009","T5010","T5011","T5012","T5013","T5014","T5015","T5016","T5017"]
+        },
+        {
+            "ID": "TA0502",
+            "name": "Execution",
+            "short description": "The adversary is trying to run malicious code or manipulate vehicle functions and data without authorisation.",
+            "full description": "Execution consists of techniques that allow adversary-controlled code to run on a vehicle’s service, network, control unit, application, firmware, or other asset.\nThese attacks may involve direct code injection, unauthorised commands, or malicious payloads delivered through network interfaces, firmware updates, or compromised software. \nAttackers can exploit communication protocols such as the Controller Area Network (CAN) and Unified Diagnostic Services (UDS) to inject malicious messages and manipulate vehicle behUGViour. They may also execute code on vulnerable telematics units, infotainment systems, OTA update services or mobile-connected services.\nAdditionally, adversaries can tamper with UGV sensor inputs, such as LiDAR, radar, and GPS, to disrupt perception systems and trigger unintended vehicle responses.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5018","T5019","T5020","T5021","T5022","T5023","T5024","T5025","T5026","T5027","T5028"]
+        },
+        {
+            "ID": "TA0503",
+            "name": "Persistence",
+            "short description": "The adversary attempts to maintain a foothold within the UGV’s systems.",
+            "full description": "Persistence consists of techniques that enable long-term access, allowing adversaries to execute future attacks or retain control over compromised components.\nAdversaries can achieve persistence through various means, such as malicious OTA updates, unauthorised firmware modifications, or backdoors in telematics units and ECUs. These backdoors may remain active even after system reboots.\nFor example, attackers may tamper with firmware integrity mechanisms like Secure Boot to prevent recovery or install persistent malware in infotainment or telematics systems. This allows them to conduct long-term surveillance, execute unauthorised commands, and move laterally across the vehicle network.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5029","T5030","T5031","T5032","T5033","T5034","T5035","T5036","T5037"]
+        },
+        {
+            "ID": "TA0504",
+            "name": "Privilege Escalation",
+            "short description": "The adversary is attempting to obtain elevated permissions within the UGV’s systems.",
+            "full description": "Privilege escalation consists of techniques that allow adversaries to gain higher-level access within an UGV system or network. With elevated privileges, they can execute administrative commands, control vehicle components, and disable security measures.\nAdversaries often start with limited access and escalate their privileges by exploiting system weaknesses, misconfigurations, or vulnerabilities.\nExamples of elevated access include: User accounts with extended permissions, root level of infotainment system, root level of telematic system, root level of central gateway system. Once attackers gain administrative access, they can run arbitrary commands, alter vehicle firmware, and disable security features to enable further attacks.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5038","T5039","T5040"]
+        },
+        {
+            "ID": "TA0505",
+            "name": "Defense Evasion",
+            "short description": "The adversary is trying to bypass or disable the UGV's security measures.",
+            "full description": "Defense evasion consists of techniques adversaries use to disable or bypass security mechanisms within an UGV system. Unlike traditional ATT&CK approaches that focus on UGVoiding detection, these methods allow attackers to directly neutralize security controls. This enables them to execute malicious code, advance their attacks, or manipulate the system without interference.\nCommon techniques include:\n\t- Disabling or bypassing security mechanisms in the telematics system to maintain access.\n\t- Exploiting software update processes and code integrity checks to insert malicious code undetected.\n\t- Disabling vehicle IDS to evade monitoring and alerts.\n\t- Bypassing security controls in diagnostic functions to perform unauthorised operations.\nThis tactic is adapted from AUTO-ISAC ATM.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5041","T5042","T5043","T5044"]
+        },
+        {
+            "ID": "TA0506",
+            "name": "Credential Access",
+            "short description": "The adversary is trying to steal UGV authentication credentials, such as passwords, access tokens, or cryptographic keys.",
+            "full description": "Credential access consists of techniques such as compromising mobile apps or wireless network to steal authentication credentials, exploiting vulnerabilities in keyless entry systems to gain unauthorised vehicle access, and intercepting communication to obtain session tokens or API keys. These methods enable attackers to bypass security controls, execute unauthorised actions, and further infiltrate the system.\nCommon credential access techniques may include:\n\t- Compromising mobile apps or wireless network to intercept authentication credentials like tokens, passwords, and keys.\n\t- Exploiting vulnerabilities in key fob systems or remote keyless entry (RKE) to gain unauthorised access.\n\t- Targeting mobile apps or infotainment systems to steal sensitive information like vehicle identification numbers (VINs).\n\t- Intercepting vehicle-to-cloud communications to obtain session tokens or API keys that enable backend system access.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5045","T5046","T5047","T5048","T5049"]
+        },
+		{
+            "ID": "TA0507",
+            "name": "Discovery",
+            "short description": "The adversary is trying to understand the vehicle network and environment.",
+            "full description": "Discovery consists of techniques for exploring a vehicle's network, interfaces, and communication protocols to identify vulnerable components within the autonomous vehicle.\nThrough analysing system structures, scanning networks, and probing interfaces, adversaries can map attack surfaces and find exploitable vulnerabilities.\nCommon discovery techniques include intercepting and analysing network traffic or CAN messages to understand vehicle communication structures, scanning and mapping internal vehicle networks to identify vulnerabilities and access points, and exploring interfaces like OBD-II ports, telematics systems, and sensors to find misconfigurations or security weaknesses.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5050","T5051","T5052"]
+        },
+        {
+            "ID": "TA0508",
+            "name": "Lateral Movement",
+            "short description": "The adversary is trying to move through the UGV’s network or systems.",
+            "full description": "Lateral movement consists of techniques that allow adversaries to traverse the vehicle’s internal network, pivot between components to access additional resources and escalate their attack. \nBy exploiting vulnerabilities, leveraging trusted communication channels, remote services or uploading malicious tools, attackers can extend their control and compromise additional vehicle functions.\nCommon lateral movement techniques include: moving from infotainment or telematics systems to other ECUs to control critical functions (via SSH, Telnet, direct connections, or shared CAN buses); transitioning from non-critical to critical CAN buses to access safety-critical components through diagnostic functions; and uploading tools to the head unit for exploitation, control, and automated spreading across connected vehicles through cellular networks.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5053","T5054","T5055"]
+        },
+        {
+            "ID": "TA0509",
+            "name": "Collection",
+            "short description": "The adversary is collecting data of interest from the UGV’s systems or environment.",
+            "full description": "Collection consists of techniques used to capture, extract, and analyse data from vehicle networks, internal systems, and external interfaces. By obtaining critical information, attackers can gain insights into vehicle operations, exfiltrate data, and plan further exploits.\nCommon data sources include CAN bus messages, important UGV files like VIN numbers and system logs, and vehicle data such as location, camera images, phone calls, software/firmware versions, and real-time status.\nAdversaries typically collect data through network sniffing, exploiting web service vulnerabilities, or directly accessing local vehicle systems. \nThis tactic is adapted from AUTO-ISAC ATM.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5056","T5057","T5058","T5059"]
+        },
+        {
+            "ID": "TA0510",
+            "name": "Command and Control",
+            "short description": "The adversary is trying to communicate with compromised UGV systems to control them.",
+            "full description": "Command and control consists of techniques that adversaries use to maintain communication (typically remote) and issue malicious commands to vehicles. By establishing covert communication channels, attackers can manipulate UGV functions, steal data, or launch additional attacks while UGVoiding detection.\nCommon command and control techniques include using removable devices, modifying firmware, establishing reverse shells, or installing malicious applications to gain and maintain long-term remote control over compromised UGV systems.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5060","T5061","T5062"]
+        },
+		{
+            "ID": "TA0511",
+            "name": "Impair Process Control",
+            "short description": "The adversary is trying to manipulate, disable, or damage physical control processes within UGV.",
+            "full description": "Impair Process Control consists of techniques that interfere with the vehicle's operational processes by altering control logic, modifying system parameters, or manipulating reporting mechanisms. These techniques can result in unsafe driving conditions, compromised safety features, or loss of vehicle control.\nCommon techniques for this tactic include replaying normal diagnostic responses to emulate a healthy airbag system, or injecting malicious code into the control program to corrupt vehicle stability and response.\nThis tactic is adapted from MITRE ATT&CK (ICS domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5063","T5064"]
+        },
+		{
+            "ID": "TA0512",
+            "name": "Inhibit Response Function",
+            "short description": "The adversary is trying to prevent your safety, protection, quality assurance, and operator intervention functions from responding to a failure, hazard, or unsafe state.",
+            "full description": "Inhibit Response Function consists of techniques that interfere with a vehicle's ability to detect and respond to threats, manipulate safety mechanisms, and suppress critical alerts. Through blocking or altering response functions, attackers can create unsafe driving conditions, disable security features, and cause system failures.\nCommon techniques include suppressing anti-theft systems, spoofing emergency brake data, forcing unnecessary stops by creating false obstacles, and jamming radar and ultrasonic sensors. These actions prevent the vehicle from detecting real obstacles, which can lead to collisions or failure to respond to actual threats.\nThis tactic is adapted from MITRE ATT&CK (ICS domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5065","T5066"]
+        },		
+        {
+            "ID": "TA0513",
+            "name": "Exfiltration",
+            "short description": "The adversary is attempting to steal data from the UGV and transmit it externally.",
+            "full description": "Exfiltration refers to techniques that adversaries use to steal data from vehicles. After collecting data, adversaries typically package it using compression and encryption to UGVoid detection during removal.\nData can be exfiltrated manually or through automated processes using command and control channels or alternative pathways. Adversaries may exploit various vehicle connectivity features, such as mobile applications, telematics data loggers, cellular networks, Wi-Fi, or Bluetooth, to extract and transmit stolen information.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5067","T5068"]
+        },    
+        {
+            "ID": "TA0514",
+            "name": "Impact",
+            "short description": "The adversary is attempting to manipulate, disrupt, or damage the UGV's systems or its operational environment.",
+            "full description": "Impact consists of techniques that degrade vehicle functionality, compromise safety, or exploit vulnerabilities at scale. Through malicious commands, system output manipulation, or disruption of essential operations, attackers can inflict physical harm, cause financial losses, and create widespread security breaches, threatening safety, security, and privacy.\nCommon impact techniques include forcing vehicles off-road, causing accidents, initiating emergency shutdowns, and impairing safe operation. Attackers may also steal sensitive vehicle data, including operational and security-critical information, or exploit vulnerabilities across identical vehicle models to launch large-scale attacks after breaching a single vehicle.\nThis tactic is adapted from MITRE ATT&CK (Enterprise and ICS domain).",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "technique ID": ["T5069","T5070","T5071","T5072","T5073","T5074","T5075","T5076","T5077","T5078","T5079","T5080","T5081"]
+        }
+    ],
+    "techniques": [
+		{
+            "ID": "T5000",
+            "name": "Rogue Cellular Base Station ",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5001",
+            "name": "Rogue Wi-Fi Access Point ",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5002",
+            "name": "Downgrade to Insecure Protocols",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5003",
+            "name": "Jamming or Denial of Service",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5004",
+            "name": "Adversarial Machine Learning",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5005",
+            "name": "Sensor manipulation (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5006",
+            "name": "Remote Key Entry (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5007",
+            "name": "Wireless Compromise",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5008",
+            "name": "Hardware Additions",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5009",
+            "name": "Exploitation for Initial Access",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5010",
+            "name": "Remote Service",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5011",
+            "name": "External Remote Service",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5012",
+            "name": "Content Injection",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5013",
+            "name": "Exploitation of Software Vulnerability",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+        {
+            "ID": "T5014",
+            "name": "Replication Through Removable Media.",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "02/01/2023",
+            "modified": "02/01/2024",
+            "sub-technique ID": [
+                "T1001.001",
+                "T1001.002"
+            ],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5015",
+            "name": "Exploit Public Facing Application",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5016",
+            "name": "Valid Account",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5017",
+            "name": "Phishing",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5018",
+            "name": "Modify Controller Tasking",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5019",
+            "name": "Change Operation Mode",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5020",
+            "name": "Command and Scripting Interpreter",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5021",
+            "name": "Inter-Process Communication",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5022",
+            "name": "Exploitation for Client Execution",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5023",
+            "name": "Execution Through Firmware Modification",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5024",
+            "name": "Command via Diagnostic Tools (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5025",
+            "name": "External application (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5026",
+            "name": "OTA Process Manipulation (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5027",
+            "name": "Signal manipulation (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5028",
+            "name": "Execution through API",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5029",
+            "name": "Account Manipulation",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": ["T2001.001","T2001.001","T2001.002"],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5030",
+            "name": "Boot or Logon AutoStart Execution",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5031",
+            "name": "Create or Modify System Process",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5032",
+            "name": "Modify Program",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5033",
+            "name": "Event triggered execution",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5034",
+            "name": "Module Firmware",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5035",
+            "name": "Boot or Logon Initialization Scripts",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5036",
+            "name": "Pre-OS Boot",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5037",
+            "name": "Modify Configuration Files (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5038",
+            "name": "Valid Accounts",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5039",
+            "name": "Abuse Elevation Control Mechanisms",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5040",
+            "name": "Exploitation for Privilege Escalation",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5041",
+            "name": "Impair Defenses",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5042",
+            "name": "Obfuscated Files or Information",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5043",
+            "name": "Weaken Cryptography",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5044",
+            "name": "Modify Firmware",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5045",
+            "name": "Brute Force",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5046",
+            "name": "Modify Authentication Process",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5047",
+            "name": "Exploitation for  Credential Access",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5048",
+            "name": "Forge Web Credentials",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5049",
+            "name": "Steal Application Access Token",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5050",
+            "name": "Network Sniffing",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5051",
+            "name": "System Network Connection Discovery",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5052",
+            "name": "File and Directory Discovery",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5053",
+            "name": "Remote Services",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5054",
+            "name": "Lateral Tool Transfer",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5055",
+            "name": "Vehicle Worm Propagation (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5056",
+            "name": "Data from local system",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5057",
+            "name": "Network Connection Enumeration",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5058",
+            "name": "Input Capture",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5059",
+            "name": "Data from cloud service",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5060",
+            "name": "Communication Through Removable Media",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5061",
+            "name": "Remote Access Software",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5062",
+            "name": "Application Layer Protocol",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5063",
+            "name": "Spoof report message",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5064",
+            "name": "Modify Parameter",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5065",
+            "name": "Alarm Suppression",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5066",
+            "name": "Block Command Message",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5067",
+            "name": "Exfiltration Over other network medium",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5068",
+            "name": "Automated Exfiltration",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5069",
+            "name": "Network Denial of Service",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5070",
+            "name": "Endpoint Denial of Service",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5071",
+            "name": "Service Stop",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5072",
+            "name": "Manipulation of Control",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5073",
+            "name": "Loss of control",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5074",
+            "name": "Loss of Safety",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5075",
+            "name": "Loss of protection",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5076",
+            "name": "Damage to Property",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5077",
+            "name": "Equipment Hijacking (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5078",
+            "name": "Data Destruction",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5079",
+            "name": "Sensor Interference (new)",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5080",
+            "name": "Theft of Operational Information",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        },
+		{
+            "ID": "T5081",
+            "name": "System Shutdown/Reboot",
+            "description": "Exploiting software vulnerabilities to gain access.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [
+                "M2001"
+            ],
+            "example": [
+                {
+                    "reference ID": "EX1001",
+                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                }
+            ],
+            "reference ID": [
+                "T1001"
+            ]
+        }        
+    ],
+    "sub-techniques": [
+        {
+            "ID": "T1001.001",
+            "name": "Via CD",
+            "description": "Exploiting memory corruption vulnerabilities.",
+            "created": "03/01/2023",
+            "modified": "03/01/2024",
+            "mitigation ID": [],
+            "example": [
+                {
+                    "reference ID": "EX2001",
+                    "description": "An attacker used a buffer overflow attack to execute arbitrary code."
+                }
+            ],
+            "reference ID": [
+                "CVE-2023-1234"
+            ]
+        },
+        {
+            "ID": "T1001.002",
+            "name": "Via USB with updated file.",
+            "description": "Exploiting heap overflow vulnerabilities to gain control.",
+            "created": "04/01/2023",
+            "modified": "04/01/2024",
+            "mitigation ID": [],
+            "example": [
+                {
+                    "reference ID": "EX2002",
+                    "description": "An attacker used heap overflow to execute arbitrary code."
+                }
+            ],
+            "reference ID": [
+                "CVE-2023-5678"
+            ]
+        },
+        {
+            "ID": "T2001.001",
+            "name": "Remote Code Execution",
+            "description": "Executing code remotely within the vehicle system.",
+            "created": "03/02/2023",
+            "modified": "03/02/2024",
+            "mitigation ID": [],
+            "example": [
+                {
+                    "reference ID": "EX3001",
+                    "description": "An attacker injected malicious payloads remotely."
+                }
+            ],
+            "reference ID": [
+                "TIR-2023-890"
+            ]
+        },
+        {
+            "ID": "T2001.002",
+            "name": "Script Injection",
+            "description": "Injecting scripts into vehicle control software.",
+            "created": "04/02/2023",
+            "modified": "04/02/2024",
+            "mitigation ID": [],
+            "example": [
+                {
+                    "reference ID": "EX3002",
+                    "description": "A hacker injected malicious scripts into infotainment firmware."
+                }
+            ],
+            "reference ID": [
+                "CSR-2023-999"
+            ]
+        }
+    ],
+    "mitigations": [
+        {
+            "ID": "M2001",
+            "name": "Patch Management",
+            "description": "Regularly update and patch vehicle software.",
+            "created": "01/02/2023",
+            "modified": "01/02/2024",
+            "reference ID": []
+        },
+        {
+            "ID": "M2002",
+            "name": "User Training",
+            "description": "Educate users on phishing threats.",
+            "created": "02/02/2023",
+            "modified": "02/02/2024",
+            "reference ID": []
+        },
+        {
+            "ID": "M3001",
+            "name": "Code Signing",
+            "description": "Ensure all scripts are signed and verified.",
+            "created": "01/03/2023",
+            "modified": "01/03/2024",
+            "reference ID": []
+        }
+    ],
+    "references": [
+        {
+            "ID": "T1001",
+            "name": "MITRE ATT&CK",
+            "link": "https://attack.mitre.org/techniques/T1001/",
+            "description": ""
+        },
+        {
+            "ID": "SR-2023-567",
+            "name": "Security Report",
+            "link": "https://security.example.com/reports/phishing",
+            "description": ""
+        },
+        {
+            "ID": "TIR-2023-789",
+            "name": "Threat Intelligence Report",
+            "link": "https://threats.example.com/malicious-scripts",
+            "description": ""
+        },
+        {
+            "ID": "CVE-2023-1234",
+            "name": "NVD",
+            "link": "https://nvd.nist.gov/vuln/detail/CVE-2023-1234",
+            "description": ""
+        },
+        {
+            "ID": "CVE-2023-5678",
+            "name": "NVD",
+            "link": "https://nvd.nist.gov/vuln/detail/CVE-2023-5678",
+            "description": ""
+        },
+        {
+            "ID": "TIR-2023-890",
+            "name": "Threat Intel Report",
+            "link": "https://threats.example.com/remote-code-execution",
+            "description": ""
+        },
+        {
+            "ID": "CSR-2023-999",
+            "name": "Cybersecurity Report",
+            "link": "https://cybersec.example.com/script-injection",
+            "description": ""
+        }
+    ]
+}
