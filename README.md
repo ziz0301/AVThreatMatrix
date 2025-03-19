@@ -6,8 +6,8 @@ Structure
 
     index.html – Main interface for navigating the database.
     tactics.html – List of AV-specific attack tactics.
-    techniques.html – Breakdown of techniques under each tactic.
+    techniques.html – List of AV-specific techniques under each tactic.
     references.html – Sources and supporting materials.
-    scripts.js – JavaScript functions for interactive elements.
-    style.css – Styling for a clean and structured UI.
-    data.json - The main database of this project
+    scripts.js – JavaScript functions for interactive elements.    
+    data.json - The main database of this project.
+    style.css – Styling for structured UI.
