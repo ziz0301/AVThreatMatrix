@@ -140,7 +140,8 @@
 		{
             "ID": "T5000",
             "name": "Rogue Cellular Base Station ",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short description": "Adversaries may set up a rogue cellular base station (fake bts or femtocell) to intercept or manipulate vehicle telematics communication. A compromised femtocell can also allow direct interaction with a vehicle’s telematics system by bypassing carrier network restrictions",
+            "full description": "By masquerading as a legitimate tower, attackers can downgrade security protocols, intercept authentication data, or inject malicious commands, potentially compromising remote services or firmware updates.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
@@ -149,53 +150,53 @@
             ],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                    "reference ID": "RE0013",
+                    "description": "Researchers used a rogue GSM base station to intercept TCP messages and escalate access to BMW’s NBT Head Unit and Telematic Communication Box (TCB)."
+                },
+				{
+                    "reference ID": "RE0014",
+                    "description": "Researchers modified a Sprint Airave femtocell to communicate directly with Uconnect over Sprint’s network, demonstrating remote exploitation of the infotainment system."
                 }
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0013", "RE0014"]
         },
 		{
             "ID": "T5001",
             "name": "Rogue Wi-Fi Access Point ",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short description": "Adversaries may set up rogue Wi-Fi access points to perform man-in-the-middle (MitM) attacks, intercept credentials, or inject malicious firmware into vehicle systems. By spoofing trusted networks, such as those used for OTA updates, diagnostics, or infotainment, attackers can perform man-in-the-middle (MitM) attacks and capture authentication credentials.",
+			"full description": "By compromising a vehicle’s wireless entry point, adversaries can establish an initial foothold, enabling further attack techniques such as remote code execution, firmware manipulation, and CAN message injection. This can lead to deeper system compromise, allowing attackers to escalate privileges, persist within the system, or disrupt vehicle operations.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                    "reference ID": "RE0011",
+                    "description": "Researchers spoofed Tesla Guest Wi-Fi, a trusted network used by Tesla body shops and superchargers, to trick vehicles into auto-connecting. By redirecting browser traffic, they found out the vulnerabilities in QtCarBrowser."
+                },
+				{
+                    "reference ID": "RE0012",
+                    "description": "Researchers spoofed Tesla Guest Wi-Fi, a trusted network used by Tesla body shops and superchargers, to trick vehicles into auto-connecting. By redirecting browser traffic, they could exploit zero-day vulnerabilities in QtCarBrowser."
                 }
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0011", "RE0012"]
         },
 		{
             "ID": "T5002",
             "name": "Downgrade to Insecure Protocols",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short description": "Adversaries may force a vehicle’s wireless interfaces to switch to weaker communication protocols, reducing security protections. This can be achieved by jamming high-security protocols (e.g., LTE) and allowing only older, vulnerable protocols (e.g., GSM).",
+            "full description": " Attackers can then exploit the downgraded channel to intercept, manipulate, or inject malicious communications, potentially compromising remote vehicle services or authentication mechanisms.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                    "reference ID": "RE0023",
+                    "description": "Researchers downgraded a vehicle’s T-Box from LTE to GSM using a rogue base station (USRP + OpenBTS), enabling them to intercept GSM text messages."
                 }
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0023"]
         },
 		{
             "ID": "T5003",
@@ -1879,46 +1880,166 @@
     ],
     "references": [
         {
-            "ID": "T1001",
-            "name": "MITRE ATT&CK",
-            "link": "https://attack.mitre.org/techniques/T1001/",
-            "description": ""
+            "ID": "RE0001",
+            "name": "A study on cyber-security of autonomous and unmanned vehicles",
+			"cite": "E. Yağdereli, C. Gemci, and A. Z. Aktaş, “A study on cyber-security of autonomous and unmanned vehicles,” J. Def. Model. Simul., vol. 12, no. 4, pp. 369–381, 2015, doi: 10.1177/1548512915575803.",
+            "link": "https://doi.org/10.1177/1548512915575803",
+            "description": "The study by Yağdereli et al. (2015) explores the cyber-security challenges associated with autonomous and unmanned vehicles, encompassing a broad range of platforms such as autonomous cars, civilian aircraft, trains, unmanned surface vessels (USVs), and space-traversing vehicles. It categorises cyber-attacks into passive and active types, highlighting eavesdropping and traffic analysis as key passive threats, while identifying active threats like masquerading, replay attacks, message modification, and denial-of-service attacks. The study also outlines specific vulnerabilities, focusing on CAN bus protocol weaknesses in automotive systems and GPS spoofing, jamming, and signal manipulation in UAV systems. To address these risks, the authors propose mitigation strategies that include secure communication protocols for encryption and authentication, a defense-in-depth architecture, redundancy and diversity measures, secure-by-design principles, and the adoption of real-time distributed system architectures. "
         },
         {
-            "ID": "SR-2023-567",
-            "name": "Security Report",
-            "link": "https://security.example.com/reports/phishing",
-            "description": ""
+            "ID": "RE0002",
+			"name": "Cybersecurity for unmanned systems",
+            "cite": "J. Yen, J. Smigal, D. Singh, J. Ricks, D. Brower, and P. Barlow, “Cybersecurity for unmanned systems,” Unmanned Syst. Technol. XIX, vol. 10195, p. 101950R, 2017, doi: 10.1117/12.2265912.",
+            "link": "https://doi.org/10.1117/12.2265912",
+            "description": "The study by Yen et al. (2017) addresses cryptographic challenges faced by Unmanned Systems, particularly in protecting classified information in remote and high-risk environments. It highlights the importance of addressing Size, Weight, and Power (SWaP) constraints, which are critical for smaller platforms, and ensuring secure data exchange between classified and unclassified domains through Cross Domain Solutions (CDS). The authors propose cryptographic protection methods for both Data in Transit (DIT) and Data at Rest (DAR), advocating for the use of cryptographic devices to secure traffic such as data and voice transmissions and recommending secure erasure of cryptographic keys to mitigate risks in the event of system capture. For CDS, the study suggests ensuring secure transmission of data between encrypted (classified) and unencrypted (unclassified) domains, including radios and sensors, designing modular systems with secure interfaces to facilitate upgrades and integration, and employing cryptographic systems that restrict cross-boundary communication to predefined messages controlled by strict rules."
         },
         {
-            "ID": "TIR-2023-789",
-            "name": "Threat Intelligence Report",
-            "link": "https://threats.example.com/malicious-scripts",
-            "description": ""
+            "ID": "RE0003",
+            "name": "Securing unmanned autonomous systems from cyber threats",
+			"cite": "B. B. Madan, M. Banik, and D. Bein, “Securing unmanned autonomous systems from cyber threats,” J. Def. Model. Simul., vol. 16, no. 2, pp. 119–136, 2019, doi: 10.1177/1548512916628335.",
+            "link": "https://doi.org/10.1177/1548512916628335",
+            "description": "The study by Madan et al. (2019) examines the cyber threats facing unmanned and autonomous systems, highlighting their differences and commonalities. Unmanned systems rely on remote human operators for control, whereas autonomous systems depend on sensors and autonomous functions for decision-making, though both share a reliance on sensors and controllers. The study identifies initial access threats to UAV systems, such as jamming, information theft, denial-of-service attacks, GPS and wireless jamming and spoofing, and malicious software injection. Common threats include confidentiality risks like insider leaks, wireless link sniffing, weak encryption, and capturing WPA2 handshakes, which can be mitigated using access control policies (Bell–LaPadula Model), standard encryption protocols (WPA2, WPA3, AES), secure communication practices, public key cryptography, and intrusion detection systems (IDS). Integrity threats, such as man-in-the-middle (MITM) attacks and sending fake data while masquerading as legitimate sources, can be addressed through access control policies (Biba Model), cryptographic techniques like digital signatures and hashing with message integrity codes (MIC), IPSEC authentication headers for sender verification, and real-time monitoring. Availability threats, including DoS/DDoS attacks, malware injection via buffer overflow vulnerabilities, and jamming attacks that disrupt communication frequencies, can be mitigated using spread spectrum techniques, anti-DoS/DDoS solutions like IPS and traffic filters, and tools like StackGuard or NX-bit protection to prevent executable code from exploiting buffer overflow. The authors also propose other mitigation strategies, including policy-based approaches, proactive threat identification through penetration testing, and honeypots."
         },
-        {
-            "ID": "CVE-2023-1234",
-            "name": "NVD",
-            "link": "https://nvd.nist.gov/vuln/detail/CVE-2023-1234",
-            "description": ""
+		{
+            "ID": "RE0004",
+            "name": "Vulnerability Assessment of Vehicle to Infrastructure Communication: A Case Study of Unmanned Ground Vehicle",
+			"cite": "A. Abdullahi, T. Dargahi, and M. Babaie, “Vulnerability Assessment of Vehicle to Infrastructure Communication: A Case Study of Unmanned Ground Vehicle,” 2020 IEEE Globecom Work. GC Wkshps 2020 - Proc., 2020, doi: 10.1109/GCWkshps50303.2020.9367408.",
+            "link": "https://doi.org/10.1109/GCWkshps50303.2020.9367408",
+            "description": "The study by Abdullahi et al. (2020)investigates vulnerabilities in Vehicle-to-Infrastructure communication, using an Unmanned Ground Vehicle as a case study. It aims to demonstrate how insecure wireless communication, even with WPA2-protected Wi-Fi, and poor access controls can allow attackers to remotely compromise UGVs. The experiment was set up with a target system comprising a Husky UGV equipped with stereo cameras, LiDAR, GPS, IMUs, and an onboard Robot Operating System (ROS 1.0) computer, along with a Wi-Fi base station and OpenSSH. The attacker system utilised tools such as Kali Linux, Aircrack-ng for Wi-Fi attacks, Bettercap for wireless network reconnaissance, NMAP for network scanning, and Metasploit for vulnerability exploitation. \n The attack followed a step-by-step process. During the reconnaissance phase, the attacker performed a Wi-Fi handshake replay attack on the WPA2-protected base station and used Bettercap to map the network topology, identifying the UGV’s onboard computer, camera, and LiDAR. In the vulnerability assessment phase, the onboard computer's IP address was targeted, and open ports and services were scanned, revealing that port 22 for SSH was open. The exploitation phase involved launching an SSH brute force attack using Metasploit’s CVE-1999-0502 module and exploiting weak or default credentials to establish an SSH session with administrator privileges. This granted access to all ROS core packages running on the UGV. In the post-exploitation phase, the attacker achieved complete control over the UGV, overwriting legitimate operator commands, modifying velocity control commands, and manipulating the UGV’s speed and direction."
         },
-        {
-            "ID": "CVE-2023-5678",
-            "name": "NVD",
-            "link": "https://nvd.nist.gov/vuln/detail/CVE-2023-5678",
-            "description": ""
+		{
+            "ID": "RE0005",
+            "name": "Towards data-driven autonomous cyber defence for military unmanned vehicles-threats & attacks",
+			"cite": "A. D. Kaasen, G. Grov, F. Mancini, and M. Baksaas, “Towards data-driven autonomous cyber defence for military unmanned vehicles-threats & attacks,” Proc. - IEEE Mil. Commun. Conf. MILCOM, vol. 2022-Novem, pp. 861–866, 2022, doi: 10.1109/MILCOM55135.2022.10017692.",
+            "link": "https://doi.org/10.1109/MILCOM55135.2022.10017692",
+            "description": "The study by Kaasen et al. (2022) explores methods to disrupt a military unmanned ground vehicle and develops a machine-learning-based detection capability. The attacks were demonstrated using the Tor Vehicle, a diesel-electric hybrid tracked vehicle equipped with LiDAR, cameras, GPS, and accelerometers for autonomous navigation. Tor uses ROS for low-level control and ROS2 for autonomous driving software, sensor drivers, and communication middleware. The experiments included testing the attacks in both simulated and real-vehicle scenarios. \nThe researchers carried out a range of attacks on the Tor Vehicle: (1) Denial of Service (DoS) attacks involved network flooding with fake UDP or ROS messages to overload system resources. (2) Topic hijacking attacks altered the generator mode, enabled or disabled brakes, activated emergency mode, modified the cooling system, and inserted fake drive commands. (3) Configuration and launch file tampering attacks involved altering sensor clock skew to cause incorrect decisions and modifying configuration files to create hidden channels for information exfiltration. The researchers collected and labeled attack messages to build an Intrusion Detection System (IDS) using machine learning models such as decision tree classifiers, k-nearest neighbors, and random forest, achieving an accuracy of 99%."
         },
-        {
-            "ID": "TIR-2023-890",
-            "name": "Threat Intel Report",
-            "link": "https://threats.example.com/remote-code-execution",
-            "description": ""
+		{
+            "ID": "RE0006",
+            "name": "Ensuring Cybersecurity of the Cyber Physical System of Combined Fleets of Unmanned Aerial, Ground and Sea Vehicles",
+			"cite": "H. Zemlianko and V. Kharchenko, Ensuring Cybersecurity of the Cyber Physical System of Combined Fleets of Unmanned Aerial, Ground and Sea Vehicles, vol. 996 LNNS. Springer Nature Switzerland, 2024. doi: 10.1007/978-3-031-60549-9_29",
+            "link": "https://link.springer.com/chapter/10.1007/978-3-031-60549-9_29",
+            "description": "The study by H. Zemlianko and V. Kharchenko (2024) proposes a System-of-System architecture for unmanned vehicles, providing a holistic view of the system. The UV system includes UAVs, UUVs, USVs, UGVs, charging stations, control centres, cloud databases, and communication hubs. The communication infrastructure relies on satellite-based global communication and control centres. Threats to the UV system are categorised into physical, cyber, internal, and external sources. Common attacks include data manipulation, DoS, unauthorised access, and data ransom attacks. Vulnerabilities are grouped into control channels, software flaws, hardware weaknesses, and insecure data transmission protocols. \n The paper discusses several countermeasures. These include encryption protocols, secure firmware updates, multi-factor authentication, behaviour analytics, IDS, network segmentation, and redundancy mechanisms. It also introduces Intrusion Mode and Effects Criticality Analysis to qualitatively evaluate threats, vulnerabilities, attack types, consequences, UV types, likelihood, severity, and risk. Based on this analysis, the paper provides a structured matrix of criticality for risks and proposes corresponding countermeasures."
         },
-        {
-            "ID": "CSR-2023-999",
-            "name": "Cybersecurity Report",
-            "link": "https://cybersec.example.com/script-injection",
-            "description": ""
-        }
+		{
+            "ID": "RE0007",
+            "name": "Event-Triggered Adaptive Security Path Following Control for Unmanned Ground Vehicles Under Sensor Attacks",
+			"cite": "H. T. Sun and C. Peng, “Event-Triggered Adaptive Security Path Following Control for Unmanned Ground Vehicles Under Sensor Attacks,” IEEE Trans. Veh. Technol., vol. 72, no. 7, pp. 8500–8509, 2023, doi: 10.1109/TVT.2023.3250709.",
+            "link": "https://link.springer.com/chapter/10.1109/TVT.2023.3250709",
+            "description": "The study of Sun et al. (2023) proposes an Event-Triggered Adaptive Security Control (ET-ASC) mechanism for unmanned ground vehicles (UGVs) to maintain path stability under sensor attacks. The approach is based on several assumptions, including that the UGV follows a fixed, predetermined route, and its position, rotation, and other dynamics are modelled using state-space representation. Additionally, attacks are modelled as state-dependent disturbances affecting the vehicle's performance. \n The ET-ASC mechanism operates by reducing communication overhead through event-triggered transmission, where sensor data is sent only when significant deviations occur. Upon receiving data, the mechanism detects sensor compromise and applies correction signals accordingly. The system continuously adjusts corrections to restore and maintain path stability. \n For validation, the proposed method was tested using MATLAB/Simulink and CarSim in a double-lane change scenario at 30 km/h. The evaluation considered three scenarios: no attack, an attack without correction, and an attack with ET-ASC. The results demonstrate that ET-ASC effectively mitigates sensor attacks, reducing lateral offset while minimising steering oscillations, lateral acceleration, and yaw rate."
+        },
+		{
+            "ID": "RE0008",
+            "name": "Towards the resilience quantification of (military) unmanned ground vehicles",
+			"cite": "R. Krecht, A. Suta, Á. Tóth, and Á. Ballagi, “Towards the resilience quantification of (military) unmanned ground vehicles,” Clean. Eng. Technol., vol. 14, no. May, 2023, doi: 10.1016/j.clet.2023.100644.",
+            "link": "https://link.springer.com/chapter/10.1016/j.clet.2023.100644",
+            "description": "The study of Kretch et al. (2023) quantifies the resilience of military unmanned ground vehicles (UGVs). Resilience is defined as the ability of a UGV to maintain functionality or recover from faults and failures under various conditions. To achieve this, the study proposes a methodology using Process Graphs (P-Graphs) and introduces a resilience index (R). The proposed method follows a step-by-step approach, where UGVs are modelled as systems with multiple subsystems, including environmental perception (sensors and processing units), propulsion systems (engines and motors), and control units responsible for high- and low-level navigation and task execution. Based on this system model, the author examines how the system functions and identifies potential failure points when different parts malfunction. This information is then represented in a P-Graph, which illustrates the dependencies between different system components and the types of failures that may occur. \n To quantify resilience, the study defines a metric, Resilience Quantification (q), which categorises subsystem functionality into five capability levels: complete failure, minimal functionality (emergency functions only), reduced functionality (partial operation with limitations), near-full functionality (minor errors), and no failure. Furthermore, the resilience index (R) is introduced to quantify the likelihood of maintaining acceptable functionality, defined as q ≥ 0.2."
+        },
+		{
+            "ID": "RE0009",
+            "name": "Experimental security analysis of a modern automobile",
+			"cite": "K. Koscher et al., “Experimental security analysis of a modern automobile,” Proc. - IEEE Symp. Secur. Priv., pp. 447–462, 2010, doi: 10.1109/SP.2010.34.",
+            "link": "https://link.springer.com/chapter/10.1109/SP.2010.34",
+            "description": "The study by K. Koscher et al. (2010) examines vehicle architectures and protocols, highlighting significant security challenges. It focuses on the lack of authentication and access control within the CAN protocol and identifies how various vehicle components fail to meet contemporary security standards. The authors conducted experiments to demonstrate these vulnerabilities through three testing approaches: bench testing, where the ECU was reverse-engineered in a controlled lab environment; stationary testing, which involved attacking a car mounted on a rack stand; and road testing, where attacks were tested on a closed road. The study implemented several attack methods to exploit these vulnerabilities. Packet injection techniques allowed crafted CAN packets to control critical vehicle systems, such as brakes, the engine, and instrument clusters. Fuzzing was employed to send random packets continuously, uncovering undocumented functionalities and vulnerabilities within ECUs. Additionally, firmware modification involved reverse-engineering ECU firmware to inject malicious code into the telematics unit and other vehicle modules. The researchers also executed multi-component exploits, such as manipulating speedometer readings and disabling all vehicle lights.\n The paper identifies several critical security weaknesses. The broadcast nature of CAN lacks authentication and source identifiers, enabling any node to impersonate others. Unprotected firmware updates, devoid of encryption or signing, allow attackers to load unauthorized code. Weak access controls, including poorly enforced challenge-response mechanisms on diagnostic protocols, further exacerbate security risks across ECUs. Moreover, network bridging issues were highlighted, with the telematics ECU acting as a cross-domain connection point, enabling attacks from the low-speed to the high-speed CAN network."
+        },
+		{
+            "ID": "RE0010",
+            "name": "Comprehensive experimental analyses of automotive attack surfaces",
+			"cite": "S. Checkoway et al., “Comprehensive experimental analyses of automotive attack surfaces,” Proc. 20th USENIX Secur. Symp., pp. 77–92, 2011",
+            "link": "https://dl.acm.org/doi/abs/10.5555/2028067.2028073",
+            "description": "The study by S. Checkoway et al. (2011) classifies vehicle attack vectors into three main categories. Physical access is achieved through service tools like OBD-II ports or PassThru devices used by manufacturers for ECU diagnostics and reprogramming, as well as media interfaces such as CDs. Short-range wireless access includes technologies like Bluetooth, Tire Pressure Monitoring Systems (TPMS), and RFID car keys. Long-range wireless access encompasses cellular communication, FM radio, and satellite communication. \n The analysis delves into the vulnerabilities of these attack vectors. For media players, a buffer overflow in the WMA parser allows arbitrary code execution. This vulnerability can be exploited by crafting a malicious WMA file that injects CAN packets when played, enabling vehicle control. PassThru devices, which connect via OBD-II ports, expose an unauthenticated API over WiFi, permitting shell-based attack injections. Malware installed on these devices during routine maintenance compromises vehicle systems. Bluetooth systems are vulnerable due to unsafe strcpy() calls in the telematics unit firmware. Exploits include Trojan apps on paired devices or brute-forcing Bluetooth PINs, leading to code execution. Cellular telematics suffer from a buffer overflow vulnerability that enables remote command execution and data exfiltration. In advanced attacks, remote code execution is achieved by sending specially crafted audio signals via a phone call to exploit telematics firmware. The potential impacts of these vulnerabilities are significant, including GPS data exfiltration, remote vehicle control, and cabin audio monitoring."
+        },
+		{
+            "ID": "RE0011",
+            "name": "Free-fall: hacking tesla from wireless to can bus",
+			"cite": "S. Nie, L. Liu, and Y. Du, “Free-fall: hacking tesla from wireless to can bus,” Defcon, pp. 1–16, 2017, [Online].",
+            "link": "https://www.blackhat.com/docs/us-17/thursday/us-17-Nie-Free-Fall-Hacking-Tesla-From-Wireless-To-CAN-Bus-wp.pdf",
+            "description": "The study by Nie et al. (2017) presents a detailed and technical breakdown of a remote attack on Tesla Model S vehicles. The attack chain spans from wireless entry points to critical in-vehicle systems, culminating in the injection of malicious CAN bus messages. For the remote attack surface, the researchers identified Tesla's wireless connectivity features as a primary vulnerability. Tesla vehicles use Wi-Fi networks, including Tesla Guest (a hotspot for body shops and superchargers). By spoofing this hotspot and redirecting browser traffic, attackers exploited vulnerabilities in Tesla’s QtCarBrowser. After obtaining a remote shell on the browser, the researchers bypassed the AppArmor application firewall to gain access to critical processes and escalate privileges to root. From the Central Information Display (CID), they gained remote access to the Instrument Cluster (IC), Parrot Module, and Central Gateway. \n By exploiting the Gateway firmware, the researchers successfully injected CAN messages, manipulated critical vehicle functions, and introduced custom firmware into the ECU update and firmware update processes. The experiment also highlighted weaknesses in the UDS protocol, including the use of fixed seeds and XOR-based keys for security access, which enabled predictable ECU unlocking. Additionally, privileged operations, such as reading/writing memory and resetting ECUs, were achievable after bypassing the Security Access service. \n Following the report, Tesla addressed these vulnerabilities. Their efforts included updating the kernel, enforcing stricter AppArmor rules, introducing non-executable directories for binaries, and implementing signature verification for OTA updates and ECU firmware to prevent unauthorized modifications."
+        },
+		{
+            "ID": "RE0012",
+            "name": " Over-The-Air: How we remotely compromised the gateway, BCM, and Autopilot ECUs of TESLA cars",
+			"cite": "S. Nie, L. Liu, Y. Du, and W. Zhang, “Over-The-Air: How we remotely compromised the gateway, BCM, and Autopilot ECUs of TESLA cars,” BlackHat USA 2018, vol. 1, pp. 1–19, 2018, [Online].",
+            "link": "https://www.blackhat.com/us-18/briefings/schedule/over-the-air-how-we-remotely-compromised-the-gateway-bcm-and-autopilot-ecus-of-tesla-cars-10806",
+            "description": "The study by Nie et al. (2018) demonstrates how researchers executed remote attacks on Tesla Model S/X vehicles by exploiting zero-day vulnerabilities in critical components such as the gateway ECU, Body Control Modules (BCMs), and Autopilot ECUs. Using the same initial attack vectors as their previous work, they exploited the CID’s wireless connection and leveraged a Webkit vulnerability for arbitrary code execution. They then used a kernel vulnerability (CVE-2017-6261) to escalate privileges and gain root access to the CID. \n While Tesla had previously addressed known vulnerabilities, the researchers found new zero-day exploits to achieve root access. With root access, they bypassed code-signing protections using TOCTOU and filesystem flaws to inject custom firmware into the gateway ECU, allowing manipulation of CAN messages and control over vehicle functions. They also exploited flaws in the ape-service to take control of the Autopilot ECU, used weaknesses in firmware signing and metadata to deploy malicious firmware during OTA updates and create a persistent backdoor, and injected patched firmware to customise the Easter Egg feature, demonstrating their control over body control ECUs."
+        },
+		{
+            "ID": "RE0013",
+            "name": "0-days & mitigations: Roadways to exploit and secure connected BMW cars",
+			"cite": "Z. Cai, A. Wang, W. Zhang, M. Gruffke, and H. Schweppe, “0-days & mitigations: Roadways to exploit and secure connected BMW cars,” Black Hat USA, vol. 2019, p. 39, 2019.",
+            "link": "https://i.blackhat.com/USA-19/Thursday/us-19-Cai-0-Days-And-Mitigations-Roadways-To-Exploit-And-Secure-Connected-BMW-Cars-wp.pdf",
+            "description": "The study by Cai et al. (2019) reveals multiple vulnerabilities in the NBT Head Unit, Telematic Communication Box (TCB), and Central Gateway of BMW vehicles. The researchers demonstrated both physical and remote attack methods. For physical access, they exploited vulnerabilities via USB and OBD-II interfaces to gain root privileges on the Head Unit and Central Gateway. For remote attacks, they used a fake GSM base station to intercept TCP messages, gaining browser access and escalating to root privileges on the Head Unit. Similarly, they intercepted SMS messages and exploited a stack overflow to execute arbitrary code on the TCB. \n With root access to the Head Unit and TCB, the researchers were able to inject CAN messages onto the K-CAN bus, as both components are connected to the same bus. Additionally, they exploited diagnostic routing flaws in the Central Gateway to send unauthorized UDS messages across different CAN domains, allowing control over ECUs on other CAN buses. Both physical and remote methods ultimately enabled control over critical vehicle functions through CAN message injection and Central Gateway compromise. \n BMW promptly addressed these vulnerabilities with software updates and enhancements to the Remote Service flow."
+        },
+		{
+            "ID": "RE0014",
+            "name": "Remote Exploitation of an Unaltered Passenger Vehicle",
+			"cite": "C. Miller and C. Valasek, “Remote Exploitation of an Unaltered Passenger Vehicle,” Defcon 23, vol. 2015, pp. 1–91, 2015, [Online].",
+            "link": "https://www.scirp.org/reference/referencespapers?referenceid=3895347",
+            "description": "The study by Miller and Valasek (2015) outlines a detailed and systematic approach to remotely hacking and controlling a 2014 Jeep Cherokee. Their research focuses on vulnerabilities in the Uconnect infotainment system, which connects to both critical (CAN-C) and comfort (CAN-IHS) networks via the Renesas V850 chip. The authors discovered a flaw in the D-Bus service, allowing them to gain root access to the infotainment head unit. They then reprogrammed the system's firmware to send harmful CAN messages. Using this compromised system, the researchers demonstrated remote control of key functions like speed, steering, and brakes, showcasing realistic attack scenarios. \n More critically, the study explores how vulnerable vehicles could be identified over cellular networks through Uconnect’s telematics capabilities. The Uconnect system, which relies on Sprint’s cellular network for features like real-time traffic updates, in-car Wi-Fi, and remote diagnostics, exposed vehicles to scanning. By identifying Sprint’s IP address ranges, the researchers could locate vehicles with active Uconnect systems. Once found, they exploited the D-Bus service to remotely run commands on multiple vehicles. This included compromising the infotainment unit, reprogramming the V850 chip, and sending malicious CAN messages. With millions of vehicles using similar systems, such an attack could scale globally. The authors even proposed a theoretical `vehicle worm` to automate scanning, exploitation, and spreading, significantly increasing the threat's impact."
+        },
+		{
+            "ID": "RE0015",
+            "name": "Detecting attacks against robotic vehicles: A control invariant approach",
+			"cite": "H. Choi et al., “Detecting attacks against robotic vehicles: A control invariant approach,” Proc. ACM Conf. Comput. Commun. Secur., pp. 801–816, 2018, doi: 10.1145/3243734.3243752. ",
+            "link": "https://doi.org/10.1145/3243734.3243752",
+            "description": "The study of Choi et al. (2018) [1] presents a novel framework for detecting physical attacks on robotic vehicles, including drones and ground rovers. The proposed approach, known as the Control Invariant (CI) framework, verifies whether a vehicle is behaving normally by comparing its actual movements to expected behaviour based on fundamental physics and programmed control logic. \n The method consists of several key steps. First, the system performs Control Invariant Extraction by gathering information on vehicle dynamics, control algorithms, and environmental disturbances such as wind, gravity, and friction to define the vehicle’s expected behaviour. Next, the control invariant checking logic is embedded into the vehicle’s binary control software without requiring any hardware modifications. The system continuously monitors differences between the observed and predicted states, maintaining a tracking window to filter out minor, temporary variations that are not indicative of attacks. If accumulated errors exceed a predefined threshold, an alarm is triggered to indicate a potential attack. \n To evaluate its effectiveness, the CI framework was tested on 11 robotic vehicles, including quadrotors, hexarotors, and ground rovers. The results demonstrate that the framework successfully detected all tested attacks while maintaining zero false positives during normal operations, proving its reliability as a security mechanism for robotic vehicles."
+        },
+		{
+            "ID": "RE0016",
+            "name": "Security threats to automotive CAN networks. Practical examples and selected short-term countermeasures",
+			"cite": "T. Hoppe, S. Kiltz, and J. Dittmann, “Security threats to automotive CAN networks. Practical examples and selected short-term countermeasures,” Reliab. Eng. Syst. Saf., vol. 96, no. 1, pp. 11–25, 2011, doi: 10.1016/j.ress.2010.06.026.",
+            "link": "https://doi.org/10.1016/j.ress.2010.06.026",
+            "description": "The study of Hoppe et al. (2011) investigates security threats to automotive Controller Area Network (CAN) systems by exploring four practical attack scenarios targeting window lifts, warning lights, airbags, and gateway ECUs. The first scenario involves compromising the window lift system by injecting malicious code into an ECU connected to the comfort CAN subnetwork. The attacker monitors vehicle speed and replays CAN messages to open the window when the speed exceeds 200 km/h. This results in a Denial-of-Service (DoS) attack on the window system, preventing the driver from closing the window while the malicious code continuously sends CAN messages, thereby compromising driver safety and increasing potential distractions. \n The second attack scenario targets warning lights by using a tampered ECU or an external device, such as a development board, to manipulate CAN messages. The attacker intercepts ``warning light ON`` messages and injects ``warning light OFF`` messages, disrupting the anti-theft system. As a result, the attack disables the warning indicators, allowing theft without triggering alarms. \n The third attack manipulates the airbag system using a tampered device or an external controller to simulate a functional airbag ECU. The attacker records diagnostic responses and replays them during system checks, concealing the absence of an actual airbag ECU. This attack effectively hides warning indicators and bypasses diagnostic sessions, making the airbag system appear functional when it is not. \n The final scenario exploits a vulnerability in the gateway ECU’s message filtering mechanism during diagnostics. The attack initiates a diagnostic session and sends messages using reserved CAN IDs to force the gateway to forward them to critical ECUs. This enables unauthorised access to internal vehicle communications and allows potential manipulation of safety-critical systems. \n To mitigate these security threats, the study proposes short-term countermeasures, including an Intrusion Detection System (IDS) to detect abnormal message frequencies and verify message senders. Additionally, the study suggests a proactive IT forensic approach by identifying eight forensic data types that should be collected and logged during diagnostic sessions to detect suspicious activities and potential security breaches."
+        },
+		{
+            "ID": "RE0017",
+            "name": "Remote Attacks on Automated Vehicles Sensors: Experiments on Camera and LiDAR",
+			"cite": "J. Petit, B. Stottelaar, M. Feiri, and F. Kargl, “Remote Attacks on Automated Vehicles Sensors: Experiments on Camera and LiDAR,” Blackhat.com, pp. 1–13, 2015",
+            "link": "https://www.blackhat.com/docs/eu-15/materials/eu-15-Petit-Self-Driving-And-Connected-Cars-Fooling-Sensors-And-Tracking-Drivers-wp1.pdf",
+            "description": "The study of Petit et al. (2015) [9] explores the vulnerability of automated vehicle (AV) sensors to remote attacks, specifically focusing on camera and LiDAR systems. The research examines different attack techniques and their impact on the perception systems of AVs. \n For camera attacks, the study investigates two primary methods: blinding the camera and confusing its auto controls. The blinding attack involves using laser diodes and LEDs to emit intense light directly into the camera’s sensor, disrupting object detection. The effectiveness of this attack depends on factors such as the wavelength of light, distance, and environmental lighting conditions, with darker environments making the attack easier. Experimental results indicate that a 650 nm laser was the most effective in impairing the camera's function. In contrast, the second attack manipulates the camera’s automatic exposure and gain settings by rapidly flashing LED pulses. This continuous exposure adjustment creates a time lag in the camera's auto-adjustment process, leading to missed objects. The experiment shows that the camera took 5.3 seconds to recover, during which it failed to detect objects. \n For LiDAR attacks, the study analyses two attack strategies: relay attacks and spoofing. The relay attack intercepts and retransmits LiDAR pulses from a different location, creating false reflections at unintended positions. The attack is executed using two transceivers: a 905 nm photodetector to capture incoming LiDAR pulses and a laser diode to retransmit the captured signal with a delay. This deception tricks the system into misjudging object distances, potentially leading to navigation errors or collisions. The spoofing attack, on the other hand, involves synchronizing with the LiDAR’s scan cycle and injecting false echoes, causing the system to detect non-existent obstacles. Multiple reflections can be introduced to simulate multiple fake objects, leading the LiDAR to classify them as real. \n To mitigate these threats, the study proposes several countermeasures. For camera attacks, redundancy through multiple cameras, the implementation of infrared filters to block unwanted light, and the use of materials that adjust transparency based on light intensity are suggested. For LiDAR attacks, the countermeasures include introducing random probing intervals to prevent synchronization by attackers, using multi-wavelength LiDAR systems to detect anomalies, and applying data fusion techniques to compare multiple sensor inputs for consistency."
+        },
+		{
+            "ID": "RE0018",
+            "name": "Autonomous vehicle ultrasonic sensor vulnerability and impact assessment",
+			"cite": "B. S. Lim, S. L. Keoh, and V. L. L. Thing, “Autonomous vehicle ultrasonic sensor vulnerability and impact assessment,” IEEE World Forum Internet Things, WF-IoT 2018 - Proc., vol. 2018-Janua, pp. 231–236, 2018, doi: 10.1109/WF-IoT.2018.8355132.",
+            "link": "https://doi.org/10.1109/WF-IoT.2018.8355132",
+            "description": "The study of Lim et al. (2018) [10] presents a threat model where adversaries, despite lacking internal access to the vehicle, can manipulate externally exposed ultrasonic sensors. The research examines four attack scenarios in a controlled lab environment using off-the-shelf ultrasonic sensors (HC-SR04) and an Arduino to assess vulnerabilities in autonomous vehicle perception systems. \n The first attack exploits ultrasonic sensor blind spots by using thin objects such as straws, chopsticks, hairpins, or cards to evade detection. This demonstrates how small obstacles may go undetected, potentially leading to collisions. The second scenario involves physically obstructing the sensor, either at the transmitter, receiver, or both, to evaluate the impact of blockage on detection accuracy. The results confirm that any physical obstruction severely degrades the sensor’s performance. \nThe third attack employs acoustic materials, such as acoustic foam, to absorb ultrasonic waves, effectively making obstacles invisible to the sensor. This highlights the risk of adversaries placing specific materials in the environment to manipulate sensor readings. Lastly, the fourth scenario explores interference attacks by positioning two ultrasonic sensors facing each other. This setup disrupts distance measurements, causing erroneous readings and unreliable obstacle detection. \n Through these experiments, the study underscores the vulnerabilities of ultrasonic sensors in autonomous vehicles and the potential consequences of external tampering on vehicle safety and navigation."
+        },
+		{
+            "ID": "RE0019",
+            "name": "Adversarial sensor attack on LiDAR-based perception in autonomous driving",
+			"cite": "Y. Cao et al., “Adversarial sensor attack on LiDAR-based perception in autonomous driving,” Proc. ACM Conf. Comput. Commun. Secur., pp. 2267–2281, 2019, doi: 10.1145/3319535.3339815",
+            "link": "https://doi.org/10.1145/3319535.3339815",
+            "description": "The study of Cao et al. (2019) [11] explores the feasibility of adversarial sensor attacks on LiDAR-based perception in autonomous driving, specifically investigating whether spoofed LiDAR points can manipulate machine learning-based object detection pipelines and influence autonomous vehicle (AV) decision-making. The research finds that blind spoofing methods, which operate within a narrow horizontal range (~8 degrees), are ineffective at mimicking real obstacles. \n The proposed threat model assumes that an attacker leverages LiDAR spoofing techniques to inject adversarial data into the AV perception system. The adversary is granted white-box access to the perception model, allowing them to craft targeted perturbations. Attack scenarios include both static roadside attackers and those positioned in adjacent vehicles. The primary attack objective is to introduce ``front-near obstacles`` within approximately five meters of the AV, leading to incorrect driving decisions such as sudden braking or freezing at intersections. \n To achieve this, the study introduces an attack methodology termed Adv-LiDAR, which comprises four key stages. First, input perturbation analysis is performed to model the capabilities of LiDAR spoofing, including position and distance control. Next, the attack is formulated as an optimization problem to maximize the likelihood of successfully spoofing an obstacle. A hybrid approach involving global sampling and optimization is then employed to escape local minima and improve attack success rates. Finally, the driving decision impact evaluation stage simulates attacks to assess how AVs respond to spoofed obstacles. \n The research also presents two case studies demonstrating the real-world impact of these attacks. The first, an emergency brake attack, involves spoofed obstacles forcing the AV to halt abruptly, increasing the risk of rear-end collisions. The second, an AV freezing attack, exploits phantom obstacles at a traffic light to keep the AV stationary, leading to traffic congestion. These findings underscore the potential risks of LiDAR spoofing in AV systems and highlight the need for robust countermeasures."
+        },
+		{
+            "ID": "RE0020",
+            "name": "Towards robust LiDAR-based perception in autonomous driving: General black-box adversarial sensor attack and countermeasures",
+			"cite": "J. Sun, Y. Cao, Q. A. Chen, and Z. Morley Mao, “Towards robust LiDAR-based perception in autonomous driving: General black-box adversarial sensor attack and countermeasures,” Proc. 29th USENIX Secur. Symp., pp. 877–894, 2020, doi: 10.48550/arXiv.2006.16974",
+            "link": "https://doi.org/10.48550/arXiv.2006.16974",
+            "description": "The study of Sun et al. (2020) [12] investigates the vulnerabilities of current LiDAR-based perception models in autonomous driving, particularly their failure to account for occlusion patterns, which makes them susceptible to adversarial spoofing attacks. Two types of occlusion issues are identified: inter-occlusion, where objects hidden behind others receive fewer LiDAR points, and intra-occlusion, where distant objects naturally contain sparse point clouds due to self-occlusion. \n To exploit these weaknesses, the study introduces a black-box LiDAR spoofing attack, which follows a three-step process. In the first step, attack traces are generated by extracting data from occluded and distant vehicles in the KITTI dataset. A 3D mesh of a vehicle is then rendered using a ray-casting simulation to replicate the LiDAR scanning process. The second step involves transforming these attack traces and injecting them into the perception pipeline of the victim autonomous vehicle (AV). This attack can take two forms: digital spoofing, where attack traces are digitally merged into point clouds and tested in simulations, and physical spoofing, where laser-based devices inject attack traces into actual LiDAR sensors. The third step evaluates the attack’s effectiveness against three state-of-the-art LiDAR perception models: Apollo 5.0 (bird’s-eye view-based), PointPillars (voxel-based), and PointRCNN (point-wise). \n To mitigate these threats, the study proposes two countermeasures. The first approach, CARLO (oCclusion-Aware hieRarchy anomaLy detectiOn), employs a hierarchical detection pipeline. In the first stage, it identifies legitimate objects by ensuring they exhibit minimal LiDAR beam penetration due to their solid structure, whereas spoofed objects tend to allow more penetration due to their sparsity. In the second stage, the system detects spoofed vehicles by recognising their unnaturally high free-space ratios caused by a lack of occlusion. The second mitigation technique, SVF (Sequential View Fusion), enhances LiDAR perception by integrating neglected physical features. It projects 3D LiDAR point clouds into a front-view representation and combines them with traditional 3D representations to ensure both perspectives are effectively utilised. Additionally, SVF improves LiDAR feature extraction by classifying each point with confidence scores and detecting spoofed objects that fail to match expected occlusion properties."
+        },
+		{
+            "ID": "RE0021",
+            "name": "Can You Trust Autonomous Vehicles: Contactless Attacks against Sensors of Self-driving Vehicle",
+			"cite": "Y. Chen, W. Xu, and L. Jianhao, “Can You Trust Autonomous Vehicles: Contactless Attacks against Sensors of Self-driving Vehicle,” Defcon 24, pp. 189–190, 2024, doi: 10.1145/1235.",
+            "link": "https://infocon.org/cons/DEF%20CON/DEF%20CON%2024/DEF%20CON%2024%20presentations/DEF%20CON%2024%20-%20Liu-Yan-Xu-Can-You-Trust-Autonomous-Vehicles-WP.pdf",
+            "description": "The study of Chen et al. (2024) [13] highlights the security risks associated with sensor-based driving decisions in autonomous vehicles, demonstrating how attackers can exploit vulnerabilities in ultrasonic sensors, millimeter-wave radars, and forward-looking cameras to deceive or disable vehicle systems. The research presents contactless attack methods, including jamming and spoofing techniques, tested on a Tesla Model S in both lab and outdoor environments. \n The study details multiple ultrasonic sensor attacks. A jamming attack is executed using an Arduino device to continuously emit high-frequency sound waves (40–50 kHz), which overloads the vehicle’s sensors, causing them to misread distances or fail to detect obstacles entirely, increasing the risk of crashes during parking or low-speed driving. A spoofing attack, on the other hand, sends out specially crafted sound waves that mimic real echoes, tricking the sensors into detecting false obstacles or misjudging distances. Additionally, an acoustic quieting approach is explored, where attackers use sound-absorbing materials (passive approach) or noise cancellation techniques (active approach) to disrupt sensor signals. \n The research also investigates millimeter-wave radar attacks. A jamming attack is conducted by transmitting high-power electromagnetic waves (76–77 GHz) to interfere with the vehicle’s radar system, rendering it unable to detect objects and potentially disabling critical safety features like Autopilot. A spoofing attack involves injecting synthetic radar signals with modified frequency modulation patterns to generate false detections or distort object distances, leading to incorrect responses from safety systems such as cruise control and collision prevention. Furthermore, a replay attack captures and retransmits radar signals with a delay, creating phantom objects that mislead the vehicle into taking unnecessary actions or ignoring real obstacles. \n Lastly, the study explores camera-based attacks, particularly blinding attacks. This method uses three different light sources - high-power LED lights, laser pointers, and infrared LEDs - aimed either directly at the camera lens or at nearby objects to create strong glare. As a result, the attack can cause temporary or permanent blindness in the camera, preventing it from recognising lane markings, traffic signs, and obstacles. This disruption can influence the Advanced Driver Assistance System (ADAS), leading to unintended vehicle deviations, emergency braking, and potentially causing accidents. \n These findings underscore the severity of contactless attacks against autonomous vehicle sensors, highlighting the urgent need for more resilient sensing mechanisms and advanced countermeasures to mitigate these threats."
+        },
+		{
+            "ID": "RE0022",
+            "name": "A Practical Wireless Attack on the Connected Car and Security Protocol for In-Vehicle CAN",
+			"cite": "S. Woo, H. J. Jo, and D. H. Lee, “A Practical Wireless Attack on the Connected Car and Security Protocol for In-Vehicle CAN,” IEEE Trans. Intell. Transp. Syst., vol. 16, no. 2, pp. 993–1006, 2015, doi: 10.1109/TITS.2014.2351612.",
+            "link": "https://doi.org/10.1109/TITS.2014.2351612",
+            "description": "The study of Woo et al. (2015) investigates the vulnerabilities of the Controller Area Network (CAN) in connected cars and demonstrates a long-range wireless attack using a real vehicle and a malicious smartphone application. The attack exploits the OBD2 diagnostic interface, which is commonly used for vehicle monitoring and maintenance. \n The step-by-step attack begins with the installation of an OBD2 scan tool on the target vehicle, which is paired with the driver’s smartphone via Bluetooth. The smartphone runs a malicious self-diagnostic application that transmits in-vehicle CAN data frames to an attacker's remote server using mobile communication networks (3G/4G). The attacker first captures CAN data frames using diagnostic tools and subsequently injects malicious data remotely through the infected smartphone. The experiment successfully demonstrates several remote attack scenarios, including dashboard distortion, engine shutdown, and unintended acceleration, highlighting the security risks associated with connected vehicle systems. \nTo mitigate these threats, the authors propose a lightweight security protocol tailored to the constraints of CAN networks. The protocol integrates encryption and authentication mechanisms, ensuring real-time message protection through a message authentication code (MAC) and AES-128 encryption. Additionally, efficient key management is implemented to facilitate secure session key distribution and periodic updates, maintaining both forward and backward secrecy. The proposed security framework was tested on a Secure-ECU and evaluated using CANoe software, demonstrating improved efficiency compared to existing security solutions."
+        },
+		{
+			"ID": "RE0023",
+			"name": "Mercedes-Benz MBUX Security Research Report",
+			"cite": "Tencent Keen Security Lab, “Mercedes-Benz MBUX Security Research Report,” 2021.",
+			"link": "https://keenlab.tencent.com/en/whitepapers/Mercedes_Benz_Security_Research_Report_Final.pdf",
+			"description": "Tencent Lab’s research on Mercedes-Benz vehicle security uncovered multiple attack vectors targeting the T-Box, telematics system, and remote vehicle services. \n Researchers first forced the vehicle’s T-Box to downgrade from LTE to GSM using a rogue cellular base station built with USRP and OpenBTS. By jamming LTE frequencies and restricting communication to GSM, attackers positioned themselves as a man-in-the-middle (MitM), intercepting SMS messages used for remote vehicle commands. \n The team then extracted firmware from the T-Box and analyzed its software stack, encryption methods, and authentication mechanisms. They found that the vehicle communicated with backend servers using the MQTT protocol, and authentication tokens were stored locally, potentially allowing spoofed communications if extracted. Additionally, certain debugging and diagnostic functionalities remained enabled, and authentication mechanisms were not fully resistant to replay attacks. \n While analyzing the CAN bus, researchers determined that the T-Box had limited direct access, making remote takeover via telematics alone infeasible. However, attackers with physical access could modify firmware to execute unauthorized CAN commands. Furthermore, diagnostic messages and UDS-based commands presented potential avenues for further attack escalation. Lastly, some hardcoded credentials and API keys were discovered, posing a security risk if extracted."
+		}
+                
     ]
 }
