@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GV Threat Matrix</title>
+    <title>References - UGV Threat Matrix</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
      <header>
@@ -18,12 +19,30 @@
             </ul>
         </nav>
     </header>
-    <section>
-        <h2>References Page</h2>
-        <p>Content for References will be dynamically loaded here.</p>
-        <div id="references-container"></div>
+    <section class="container">
+        <h2>References</h2>
+        <table class="content-container">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody id="references-table">
+                <!-- References will be added here -->
+            </tbody>
+        </table>
     </section>
-    
-    <script src="script.js"></script>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <div id="popup-body"></div>
+        </div>
+    </div>
+	<script>	
+	
+	</script>
 </body>
 </html>
