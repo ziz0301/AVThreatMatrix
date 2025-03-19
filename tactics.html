@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GV Threat Matrix</title>
+    <title>UGV Threat Matrix - Tactics</title>
     <link rel="stylesheet" href="styles.css">
+	<script src="scripts.js" defer></script>
 </head>
 <body>
-     <header>
+    <header>
         <h1>UGV Threat Matrix</h1>
         <nav>
             <ul>
@@ -18,20 +19,24 @@
             </ul>
         </nav>
     </header>
-    <section>
+
+    <section class="container">
         <h2>List of Tactics</h2>
-        <table id="tactics-table" border="1">
+        <table class="content-container">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Description</th>
+                    <th>Short Description</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="tactics-table">
+				 <!-- Tactics will be added here -->
+			</tbody>
         </table>
     </section>
 
+    <!-- Popup Modal -->
     <div id="popup" class="popup">
         <div class="popup-content">
             <span class="close" onclick="closePopup()">&times;</span>
@@ -39,52 +44,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('data.json')
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.querySelector("#tactics-table tbody");
-                    data.AV.tactics.forEach(tactic => {
-                        let row = document.createElement("tr");
-                        row.innerHTML = `
-                            <td>${tactic.id}</td>
-                            <td class="clickable" onclick="showPopup('${tactic.id}')">${tactic.name}</td>
-                            <td>${tactic.description}</td>
-                        `;
-                        tableBody.appendChild(row);
-                    });
-                })
-                .catch(error => console.error("Error loading data:", error));
-        });
-
-        function showPopup(tacticId) {
-            fetch('data.json')
-                .then(response => response.json())
-                .then(data => {
-                    const tactic = data.AV.tactics.find(t => t.id === tacticId);
-                    if (tactic) {
-                        let content = `<h2>${tactic.name} (${tactic.id})</h2>`;
-                        content += `<p><strong>Description:</strong> ${tactic.description}</p>`;
-                        content += `<p><strong>Created:</strong> ${tactic.created} | <strong>Last Modified:</strong> ${tactic.last_modified}</p>`;
-                        
-                        if (tactic.techniques.length > 0) {
-                            content += `<h3>Techniques:</h3><table border="1"><thead><tr><th>ID</th><th>Name</th><th>Description</th></tr></thead><tbody>`;
-                            tactic.techniques.forEach(tech => {
-                                content += `<tr><td>${tech.id}</td><td>${tech.name}</td><td>${tech.description}</td></tr>`;
-                            });
-                            content += `</tbody></table>`;
-                        }
-
-                        document.getElementById("popup-body").innerHTML = content;
-                        document.getElementById("popup").style.display = "block";
-                    }
-                });
-        }
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-    </script>
+    
 </body>
 </html>
