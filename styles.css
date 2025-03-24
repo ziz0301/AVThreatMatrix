@@ -1,5 +1,6 @@
 /* Import Roboto Font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap');
 
 body {
     font-family: "Roboto", sans-serif;
@@ -114,7 +115,7 @@ p{
 table {
     width: 100%;
     border-collapse: collapse;
-    font-family: Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     background-color: #fff;
 }
@@ -216,7 +217,7 @@ td a:hover {
     background: white;
     margin: 10% auto;
     padding: 20px;
-    width: 50%;
+    width: 60%;
     max-height: 80vh; 
     overflow-y: auto;
     border-radius: 5px;
@@ -236,7 +237,7 @@ td a:hover {
 .popup-content table {
     width: 100%;
     border-collapse: collapse;
-    font-family: Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     background-color: #fff;
 }
@@ -249,8 +250,11 @@ td a:hover {
 }
 
 .popup-content td {
-    font-weight: normal;
+    font-weight: 300;
     font-size: 14px;
+	line-height: 1.5; 
+    letter-spacing: 0.05px; 
+    padding: 8px 8px;
 }
 
 .popup-content th {
