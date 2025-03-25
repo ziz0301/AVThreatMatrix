@@ -25,7 +25,7 @@
             "full_description": "Persistence consists of techniques that enable long-term access, allowing adversaries to execute future attacks or retain control over compromised components.\nAdversaries can achieve persistence through various means, such as malicious OTA updates, unauthorised firmware modifications, or backdoors in telematics units and ECUs. These backdoors may remain active even after system reboots.\nFor example, attackers may tamper with firmware integrity mechanisms like Secure Boot to prevent recovery or install persistent malware in infotainment or telematics systems. This allows them to conduct long-term surveillance, execute unauthorised commands, and move laterally across the vehicle network.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5029","T5030","T5031","T5032","T5033","T5034","T5035","T5036","T5037"]
+            "technique ID": ["T5029","T5030","T5035","T5031","T5033","T5037","T5032","T5034","T5036"]
         },
         {
             "ID": "TA0504",
@@ -679,22 +679,19 @@
 		{
             "ID": "T5029",
             "name": "Account Manipulation",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may manipulate or reuse system accounts to maintain persistent access within the vehicle network.",
+            "full_description": "Adversaries may manipulate system accounts to retain or elevate access to autonomous vehicle components. This may involve reusing session credentials, such as SSH keys, modifying authentication parameters, or assigning elevated roles to accounts. \n Unlike initial access techniques, this persistence tactic enables continued control over vehicle systems even after reboots or attempted resets.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "sub-technique ID": ["T2001.001","T2001.001","T2001.002"],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "sub-technique ID": [],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
+                    "reference ID": "RE0004",
+                    "description": "Researchers reused administrative SSH access via session hijacking to persistently control the ROS-based navigation of a Husky UGV, even overriding the legitimate operator."
                 }
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0004"]
         },
 		{
             "ID": "T5030",
