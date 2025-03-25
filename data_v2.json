@@ -675,7 +675,7 @@
             "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "RE5005",
+                    "reference ID": "RE0005",
                     "description": "Researchers modify ROS config/launch files to alter node behaviour on startup. These modifications take effect after a restart and changes persist across reboots."
                 },
 				{
