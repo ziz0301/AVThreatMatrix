@@ -683,7 +683,7 @@
                     "description": "Researchers modify pdm_nbt.xml, which is loaded and executed by the system's telematics functions. This will executes diagnostic messages onto K-CAN without user interaction."
                 }
             ],
-            "reference ID": ["RE5005"]
+            "reference ID": ["RE0005", "RE0013"]
         },
 		{
             "ID": "T5032",
