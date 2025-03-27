@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 		let content = `<h2>${item.name}</h2>`;
 		content += `<p><i>ID:</i> ${item.ID}</p>`;
-		content += `<p><strong>Created:</strong> ${item.created} | <strong>Last Modified:</strong> ${item.last_modified}</p>`;
+		content += `<p><strong>Created:</strong> ${item.created} | <strong>Last Modified:</strong> ${item.modified}</p>`;
 		content += `<h3>Description:</h3> <p>${item.short_description ? item.short_description
 					.replace(/\n/g, "<br><br>")
 					.replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")	: "No short description available."}</p>`;
