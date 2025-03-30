@@ -7,7 +7,7 @@
             "full_description": "Initial Access consists of techniques that adversaries use as entry vectors to establish a foothold within UGV systems or networks.\nEntry points targeted by adversaries include telematics units, infotainment systems, and wireless interfaces (Wi-Fi, Bluetooth, or cellular connections). They may exploit vulnerabilities in manufacturer services, mobile applications, or cloud-based APIs that handle remote access and vehicle data. Physical interfaces, such as OBD-II ports, removable devices, and aftermarket dongles, can also be used as techniques to gain initial unauthorised access to the system.\nFootholds gained through initial access may enable additional attack tactics and techniques.\nThis tactic was adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5010", "T5015", "T5011", "T5008","T5017","T5014","T5016","T5007"]
+            "technique ID": ["T5010", "T5015", "T5011", "T5008","T5017","T5002","T5014","T5003","T5016","T5007"]
         },
         {
             "ID": "TA0502",
@@ -16,7 +16,7 @@
             "full_description": "Execution consists of techniques that allow adversary-controlled code to run on a vehicle’s service, network, control unit, application, firmware, or other asset.\nThese attacks may involve direct code injection, unauthorised commands, or malicious payloads delivered through network interfaces, firmware updates, or compromised software. \nAttackers can exploit communication protocols such as the Controller Area Network (CAN) and Unified Diagnostic Services (UDS) to inject malicious messages and manipulate vehicle behUGViour. They may also execute code on vulnerable telematics units, infotainment systems, OTA update services or mobile-connected services.\nAdditionally, adversaries can tamper with UGV sensor inputs, such as LiDAR, radar, and GPS, to disrupt perception systems and trigger unintended vehicle responses.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5024","T5019","T5020","T5028","T5023","T5022","T5025","T5021","T5018","T5026"]
+            "technique ID": ["T5024","T5019","T5020","T5027","T5028","T5023","T5022","T5025","T5021","T5018","T5026"]
         },
         {
             "ID": "TA0503",
@@ -52,7 +52,7 @@
             "full_description": "Credential access consists of techniques such as compromising mobile apps or wireless network to steal authentication credentials, exploiting vulnerabilities in keyless entry systems to gain unauthorised vehicle access, and intercepting communication to obtain session tokens or API keys. These methods enable attackers to bypass security controls, execute unauthorised actions, and further infiltrate the system.\nCommon credential access techniques may include:\n\t- Compromising mobile apps or wireless network to intercept authentication credentials like tokens, passwords, and keys.\n\t- Exploiting vulnerabilities in key fob systems or remote keyless entry (RKE) to gain unauthorised access.\n\t- Targeting mobile apps or infotainment systems to steal sensitive information like vehicle identification numbers (VINs).\n\t- Intercepting vehicle-to-cloud communications to obtain session tokens or API keys that enable backend system access.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5045","T5047","T5048","T5046","T5049"]
+            "technique ID": ["T5048","T5045","T5047","T5046","T5049"]
         },
 		{
             "ID": "TA0507",
@@ -129,6 +129,43 @@
     ],
     "techniques": [
 		{
+            "ID": "T5002",
+            "name": "Physical Access",
+            "short_description": "Adversaries may gain physical access to autonomous vehicles to enable further attacks or establish a foothold in the system.",
+            "full_description": "Adversaries may begin their attack by obtaining physical access to the vehicle. This technique represents a crucial entry point, particularly for attacks requiring direct interaction with in-vehicle components such as the OBD-II port, exposed wiring, or internal ECUs. /n Physical access allows attackers to connect diagnostic tools, rogue devices, or removable media, enabling further compromise of the vehicle’s network and control systems. /n This method is especially relevant for unmanned ground vehicles, which may be more vulnerable due to their compact size, remote deployment, or lack of onboard supervision. /n In many real-world case studies, initial access was only possible after physical access was achieved, making it a foundational step for subsequent techniques under Initial Access, Persistence, or Execution tactics.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+                {
+					"reference ID": "RE0009",
+					"description": "Researchers need first physical access to the vehicle to connect an OBD device and laptop to access the internal network."
+				},
+				{
+					"reference ID": "RE0016",
+					"description": "Researchers need physical access to the vehicle to inject removable devices into the vehicle."
+				},
+				{
+					"reference ID": "RE0034",
+					"description": "Researchers need first physical access to the vehicle to connect a rogue device to the exposed wires to access the CAN network."
+				}
+            ],
+            "reference ID": ["RE0009", "RE0016","RE0034"]
+        },
+		{
+            "ID": "T5003",
+            "name": "Supply Chain Compromise",
+            "short_description": "Adversaries may manipulate products or product delivery mechanisms, such as software or hardware components during the supply chain lifecycle to gain access to or compromise vehicle systems.",
+            "full_description": " AV are composed of numerous interconnected components sourced from multiple original equipment manufacturers (OEMs), tiered suppliers, and third-party vendors. Adversaries may target these components during manufacturing, integration, or distribution phases to implant malicious modifications before the vehicle reaches the end user. \n A compromise can occur at any stage of the supply chain, including: \n\t - Manipulation of software during development or integration by OEMs or suppliers \n\t - Injection of malicious code in firmware or update mechanisms \n\t - Replacement of legitimate hardware components with altered or counterfeit versions \n\t - Insertion of malware through factory-infected removable media \n\t - Modification of vehicle sensors or physical environment elements to deceive perception systems \n While this technique is harder to detect and defend against, it presents a high-impact risk. In the AV context, this may include the insertion of backdoors in control units, manipulation of camera or LiDAR drivers, or the pre-installation of vulnerable firmware. \n This technique often enables other tactics such as Execution, Persistence, or Initial Access once the compromised component is active within the vehicle.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [],
+            "reference ID": ["RE0042"]
+        },
+		{
             "ID": "T5004",
             "name": "Adversarial Machine Learning",
             "short_description": "Adversaries may try to use adversarial machine learning techniques to cause vehicle perception systems to misclassify objects, fail to detect obstacles, misinterpret road signs, respond inappropriately to road conditions, and others.",
@@ -193,7 +230,7 @@
             "full_description": "Wireless compromise refers to an adversary’s use of wireless communication vectors, such as cellular, Wi-Fi, Bluetooth, or other short- and long-range protocols, to establish unauthorised access to autonomous vehicle systems. This can serve as a gateway for more complex attacks that manipulate internal ECUs and applications, compromise firmware, or inject malicious commands over in-vehicle networks. \n By exploiting these interfaces, adversaries can bypass perimeter security, perform man-in-the-middle  attacks, downgrade connections to insecure protocols, or jam communication channels. Sub-techniques include the use of rogue cellular base stations, rogue Wi-Fi access points, downgrade attacks, and jamming or denial-of-service attack. \n Although other wireless-based attacks like sensor manipulation or remote keyless entry spoofing also involve wireless exploitation, they often target isolated functions and do not typically provide access deeper into the AV system or network. In contrast, wireless compromise techniques under this category are characterised by their ability to create an initial foothold that enables further attack stages, including execution of additional techniques or transition to new tactics such as lateral movement, command injection, or persistence.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "sub-technique ID": ["T5007.001", "T5007.002", "T5007.003", "T5007.004"],
+            "sub-technique ID": ["T5007.001", "T5007.002", "T5007.003", "T5007.004", "T5007.005"],
             "mitigation ID": [],
             "example": [
                 {
@@ -476,6 +513,23 @@
 			],
 			"reference ID": ["RE0004", "RE0009", "RE0011", "RE0012", "RE0013", "RE0014", "RE0016"]
 		},
+		{
+            "ID": "T5027",
+            "name": "Content Injection",
+            "short_description": "",
+            "full_description": "",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+                {
+					"reference ID": "RE0022",
+					"description": "Researchers used compromised nodes to inject fake ROS messages to topics like drive state, generator mode, or brakes, resulting in system disruptions."
+				}
+            ],
+            "reference ID": ["RE0022"]
+        },
 		{
             "ID": "T5021",
             "name": "Inter-Process Communication",
@@ -842,182 +896,203 @@
 		{
             "ID": "T5041",
             "name": "Impair Defenses",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may disable or modify defensive mechanisms in autonomous vehicle systems to evade detection and enable further malicious activity.",
+            "full_description": "This includes modifying or disabling native system protections such as kernel-level security modules, loggers, and firewall rules. These protections are primarily found in Linux-based platforms, which are common in telematics and infotainment control units. \n In some cases, adversaries tamper with system-level operations to erase traces of malicious activity by wiping logs or removing attack code after execution. These actions aim to evade forensic analysis, prevent alert generation, and suppress security policies. \n The impact of impairing defenses not only conceals the attacker's presence but also enables other tactics, such as Persistence, Discovery, Execution, or Lateral Movement to be carried out.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0011",
+					"description": "Researchers invoked reset_security_ops() to disable AppArmor and gain root access on CID"
+				},
+				{
+					"reference ID": "RE0012",
+					"description": "Researchers patched aa_g_profile_mode in the kernel to disable AppArmor security protections"
+				},
+				{
+					"reference ID": "RE0009",
+					"description": "Researchers embedded attack code within telematics ECU and erased evidence after the attack"
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0011","RE0012","RE0009"]
         },
 		{
             "ID": "T5042",
             "name": "Obfuscated Files or Information",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may hide malicious content within files to evade detection or analysis.",
+            "full_description": "Adversaries may use obfuscation techniques, such as encoding, encryption, or deceptive formatting to hide malicious content within files used by the vehicle system. /n  In autonomous vehicles, this may involve disguising payloads inside media files, configuration scripts, firmware packages, or diagnostic instructions to evade detection by security mechanisms and analysts. These files appear harmless to the system or user while delivering hidden functionality for initial access, execution, or further evasion.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
-                {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+               {
+					"reference ID": "RE0010",
+					"description": "Researchers designed malicious WMA files that appeared as normal audio tracks but contained malicious information"
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0010"]
         },
 		{
             "ID": "T5043",
-            "name": "Weaken Cryptography",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "name": "Bypass Authentication Challenge (new)",
+            "short_description": "Adversaries may bypass authentication challenges to disable protections and gain unauthorised access to restricted vehicle functions or data.",
+            "full_description": "Authentication challenges are typically implemented through diagnostic protocols (e.g., UDS Security Access), backdoor mechanisms, or other ECU-level access controls. Attackers can evade these protections by exploiting weak algorithms, replaying static seeds, or using fault injection to disrupt security checks. This allows them to bypass security barriers without alerts or valid credentials, gaining access to restricted commands, memory, and configuration functions while circumventing normal authentication processes. \n Such authentication bypasses often enable broader attacks like firmware extraction, unauthorized command execution, or ECU reconfiguration. They may serve as stepping stones to persistence, execution, or system impact.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
-                {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+				{
+					"reference ID": "RE0011",
+					"description": "Researchers bypassed the UDS Security Access service by breaking a weak algorithm in the challenge-response mechanism."
+				},
+				{
+					"reference ID": "RE0011",
+					"description": "Researchers bypassed the security token of the backdoor by discovering that the token was static in the IC firmware."
+				},
+				{
+					"reference ID": "RE0041",
+					"description": "Since Ford vehicles always send the same seed, the response remains constant, allowing researchers to sniff and replay the message to bypass the challenge-response mechanism."
+				},
+				{
+					"reference ID": "RE0043",
+					"description": "Researchers targeted the privilege check inside ReadMemoryByAddress by sending commands over the CAN bus. They triggered a voltage glitch during the 1700-microsecond delay before the ECU response. This glitch disrupted the privilege-check logic, causing the ECU to return protected memory data without authentication verification. By repeating this glitch approximately 300,000 times, they extracted the full 512 KB firmware over 3 days."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0011", "RE0041", "RE0043"]
         },
 		{
             "ID": "T5044",
-            "name": "Modify Firmware",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "name": "Bypass Code Integrity Checks(new)",
+            "short_description": "Adversaries may bypass code integrity checks to weaken protection mechanisms and install unauthorised code without detection.",
+            "full_description": "Adversaries may bypass code integrity mechanisms, such as signing checks or checksums to weaken built-in protections and avoid detection. These protections ensure that ECUs and other components accept only authentic code or messages. \n In autonomous vehicle systems, this may include: \n\t - Bypassing signature checks to install malicious firmware on ECUs \n\t - Circumventing checksum validation to inject fake but seemingly legitimate CAN messages \n\t - Disabling code integrity checks to run modified software. \n When bypassed, unauthorized firmware or crafted messages can enter the system without triggering security controls. \n Successfully evading these integrity checks enables attackers to install persistent code, inject malicious messages, or escalate privileges within the vehicle network.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0014",
+					"description": "Researchers reverse engineered the Renesas V850 chip to bypass the checksum and data integrity technique to craft arbitrary messages that would be valid to the ECUs listening"
+				},
+				{
+					"reference ID": "RE0012",
+					"description": "Researchers bypassed the code signing in the Gateway to install custom firmware."
+				},
+				{
+					"reference ID": "RE0023",
+					"description": "Researchers bypassed the code signing mechanism to flash a custom SH2A MCU firmware after the T-Box system was compromised."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0014", "RE0012", "RE0023"]
+        },
+		{
+            "ID": "T5048",
+            "name": "Adversary-in-the-Middle",
+            "short_description": "Adversaries may intercept authentication-related traffic between vehicle components or external devices to steal credentials or pairing data.",
+            "full_description": "Adversaries may position themselves between two communicating entities within or around the vehicle system to intercept authentication materials such as tokens, challenge–response values, or Bluetooth pairing keys. This adversary-in-the-middle position enables the attacker to monitor or manipulate traffic during authentication flows, potentially allowing them to steal credentials and gain unauthorised access to vehicle systems. \n In the automotive context, this may involve sniffing seed-key exchanges during ECU programming (e.g., UDS SecurityAccess), or intercepting Bluetooth pairing attempts to recover MAC addresses and PINs. These credentials can then be replayed or used to impersonate legitimate devices and unlock vehicle functions without detection.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+                {
+					"reference ID": "RE0011",
+					"description": "Researchers sniffed UDS SecurityAccess seed and key values during an ECU firmware flashing process. They discovered that the ECU returned a fixed seed and accepted a predictable key, allowing them to replay these values and unlock the ECU without computing the correct response."
+				},
+				{
+					"reference ID": "RE0010",
+					"description": "Researchers sniffed Bluetooth MAC addresses using open-source tools like Bluesniff and a USRP-based software radio when the car initiated pairing with a known device. After identifying the MAC address, they brute-forced the PIN required for pairing."
+				}			
+            ],
+            "reference ID": ["RE0010", "RE0011"]
         },
 		{
             "ID": "T5045",
             "name": "Brute Force",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may use brute force techniques to gain access to credentials used by vehicle systems or connected services.",
+            "full_description": "Adversaries may use brute force techniques to obtain valid credentials when passwords, PINs, or keys are unknown. This includes repeatedly guessing login information through direct interaction with services (e.g., SSH, Bluetooth pairing) or offline analysis (e.g., cracking WPA2 handshakes). \n In autonomous vehicle systems, targets may include OS-level accounts, wireless authentication (e.g., Wi-Fi, Bluetooth), vehicle-connected applications, or cloud services integrated with the vehicle. \n Successful brute forcing can enable access to restricted functions or data, supporting further tactics such as Lateral Movement, Execution, or Discovery.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0003",
+					"description": "Researchers performed a disassociation attack on a UAV's Wi-Fi connection to repeatedly trigger WPA2 four-way handshakes. By eavesdropping on these handshakes, they intercepted the Message Integrity Code, which can be used to guess the WPA2 pre-shared key and derive encryption keys."
+				},
+				{
+					"reference ID": "RE0004",
+					"description": "Researchers conducted a dictionary-based brute force attack on SSH authentication of the Husky UGV onboard computer."
+				},
+				{
+					"reference ID": "RE0010",
+					"description": "Researchers brute-forced Bluetooth PINs to enable pairing without driver awareness."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0003", "RE0004", "RE0010"]
         },
 		{
             "ID": "T5046",
             "name": "Modify Authentication Process",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may alter the authentication process to bypass access controls or impersonate legitimate users.",
+            "full_description": "They may modify authentication logic in vehicle systems or connected platforms to gain unauthorised access without using valid credentials. This may include altering firmware-level checks within ECUs, crafting fake authentication messages or manipulating client-side code in web interfaces that interact with vehicle services. \n By changing how authentication is handled, attackers can access vehicle functions, user data, or backend systems. This technique may be used to unlock vehicles, access internal tools, or impersonate users without triggering standard access controls.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+				  "reference ID": "RE0031",
+				  "description": "Researchers reverse-engineered the ECU firmware in VW Group vehicles and discovered a global master key used for authentication. They then modify the authentication logic flow by creating their own “valid” authentication packets using the known master key, tricking the vehicle into granting access."
+				},
+				{
+				  "reference ID": "RE0040",
+				  "description": "Researchers modified the JavaScript login logic in the dev version of Toyota's CRM app to trick the app into thinking a user was logged in, bypassing the authentication process entirely.."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0031", "RE0040"]
         },
 		{
             "ID": "T5047",
             "name": "Exploitation for  Credential Access",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may exploit software vulnerabilities or misconfigurations to gain access to credentials or authenticated systems.",
+            "full_description": "Adversaries may exploit vulnerabilities or logic flaws in vehicle-connected systems, mobile apps, cloud services, or identity platforms to obtain credentials or bypass authentication mechanisms.\n  This can involve modifying application behaviour, abusing insecure API interactions, or exploiting misconfigured authentication flows such as Single Sign-On (SSO). \n In the AV ecosystem, successful exploitation can expose credentials for backend services, user accounts, or cloud-connected vehicle platforms, potentially leading to further access and control across systems.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0040",
+					"description": "Researchers bypassed login security by modifying the development application's JavaScript and redirecting it to production APIs that lacked authentication, which allowed access to actual customer credentials and data."
+				},
+				{
+					"reference ID": "RE0037",
+					"description": "Researchers exploited misconfigurations in Single Sign-On portals to perform password resets, gaining complete control over employee and contractor accounts."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
-        },
-		{
-            "ID": "T5048",
-            "name": "Forge Web Credentials",
-            "description": "Exploiting software vulnerabilities to gain access.",
-            "created": "25/02/2025",
-            "modified": "25/02/2025",
-            "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
-            "example": [
-                {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
-            ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0037","RE0040"]
         },
 		{
             "ID": "T5049",
             "name": "Steal Application Access Token",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may steal access tokens from vehicle-connected applications to gain unauthorised access to remote systems or services.",
+            "full_description": "Application access tokens are used to authenticate API requests on behalf of a user or service. In autonomous vehicle ecosystems, tokens may be used by mobile apps, third-party platforms, or telematics systems to access vehicle functions, user data, or backend services.\n Adversaries may exploit insecure token storage, misconfigurations, or exposed dashboards in third-party applications to extract valid access tokens. \n For example, researchers accessed misconfigured TeslaMate dashboards and extracted Tesla API tokens, which allowed unauthorised remote control over multiple vehicles. Once stolen, tokens can be used to interact with vehicle APIs with the same permissions as the legitimate user, potentially enabling actions like unlocking doors, disabling protections, or tracking location.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0038",			
+					"description": "Tesla owners use third-party applications like TeslaMate that have misconfigurations and security weaknesses. These applications store sensitive information, including Tesla API keys, without adequate protection. Researchers can exploit these vulnerabilities to extract the API keys from exposed TeslaMate dashboards."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0038"]
         },
 		{
             "ID": "T5050",
@@ -1062,22 +1137,27 @@
 		{
             "ID": "T5052",
             "name": "File and Directory Discovery",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may search for files or directories on vehicle systems to locate valuable information or components.",
+            "full_description": "Adversaries may explore the file system of in-vehicle components, such as infotainment units, telematics ECUs, or gateways to discover configuration files, upgrade packages, debug logs, or binaries. These files may reveal system behaviours, hardware support, or update mechanisms that support further exploitation. File and directory discovery may occur via shell access, firmware unpacking, or by analysing mounted storage devices such as USB drives or SD cards.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0040",
+					"description": "Researchers analyzed the Uconnect file system to locate sensitive configuration files and binaries."
+				},
+				{
+					"reference ID": "RE0037",
+					"description": "Researchers discovered the USB configuration file in NBT Head Unit which revealed that it supports several specific USB-to-ETHERNET adapters by default."
+				},
+				{
+					"reference ID": "RE0038",			
+					"description": "Researchers discovered that the vehicle's gateway connects to an SD card, allowing them to find debug and upgrade files."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0037","RE0038","RE0040"]
         },
 		{
             "ID": "T5053",
@@ -1813,6 +1893,23 @@
         },
 		{
             "ID": "T5007.001",
+            "name": "Rogue Ground Station",
+            "short_description": "",
+            "full_description": "",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+                {
+                    "reference ID": "RE0024",
+                    "description": "Researchers sends deauthentication frames to disconnect the Tesla from its Wi-Fi network"
+                }
+            ],
+            "reference ID": ["RE0024"]
+        },
+		{
+            "ID": "T5007.002",
             "name": "Rogue Cellular Base Station",
             "short_description": "Adversaries may set up a rogue cellular base station (fake bts or femtocell) to intercept or manipulate vehicle telematics communication. A compromised femtocell can also allow direct interaction with a vehicle’s telematics system by bypassing carrier network restrictions",
             "full_description": "By masquerading as a legitimate tower, attackers can downgrade security protocols, intercept authentication data, or inject malicious commands, potentially compromising remote services or firmware updates.",
@@ -1835,7 +1932,7 @@
             "reference ID": ["RE0013", "RE0014"]
         },
 		{
-            "ID": "T5007.002",
+            "ID": "T5007.003",
             "name": "Rogue Wi-Fi Access Point",
             "short_description": "Adversaries may set up rogue Wi-Fi access points to perform man-in-the-middle (MitM) attacks, intercept credentials, or inject malicious firmware into vehicle systems. By spoofing trusted networks, such as those used for OTA updates, diagnostics, or infotainment, attackers can perform man-in-the-middle (MitM) attacks and capture authentication credentials.",
 			"full_description": "By compromising a vehicle’s wireless entry point, adversaries can establish an initial foothold, enabling further attack techniques such as remote code execution, firmware manipulation, and CAN message injection. This can lead to deeper system compromise, allowing attackers to escalate privileges, persist within the system, or disrupt vehicle operations.",
@@ -1856,7 +1953,7 @@
             "reference ID": ["RE0011", "RE0012"]
         },
 		{
-            "ID": "T5007.003",
+            "ID": "T5007.004",
             "name": "Downgrade to Insecure Protocols",
             "short_description": "Adversaries may force a vehicle’s wireless interfaces to switch to weaker communication protocols, reducing security protections. This can be achieved by jamming high-security protocols (e.g., LTE) and allowing only older, vulnerable protocols (e.g., GSM).",
             "full_description": " Attackers can then exploit the downgraded channel to intercept, manipulate, or inject malicious communications, potentially compromising remote vehicle services or authentication mechanisms.",
@@ -1873,7 +1970,7 @@
             "reference ID": ["RE0023"]
         },
 		{
-            "ID": "T5007.004",
+            "ID": "T5007.005",
             "name": "Jamming or Denial of Service",
             "short_description": "Adversarials may jam radio signals, such as Wi-Fi, cellular, GPS to prevent the vehicle from communicating.",
             "full_description": "This technique involves disrupting or exploiting wireless communication channels integral to vehicle operations. By targeting these channels, attackers can interfere with or gain unauthorized access to vehicle systems, leading to potential control over vehicle functionalities or denial of essential services.",
@@ -1888,7 +1985,7 @@
                 }
             ],
             "reference ID": ["RE0024"]
-        },
+        },		
 		{
             "ID": "T5007.005",
             "name": "Remote Key Entry (new)",
@@ -2318,21 +2415,21 @@
 			"name": "Web Hackers vs. The Auto Industry",
 			"cite": "Web Hackers vs. The Auto Industry: Critical Vulnerabilities in Ferrari, BMW, Rolls Royce, Porsche, and More. (n.d.). Retrieved March 24, 2025, [Online]",
 			"link": "https://samcurry.net/web-hackers-vs-the-auto-industry",
-			"description": "This article provides a detailed and revealing critical vulnerability across numerous major automotive brands(BMW, Rolls Royce, Ferrari, Hyundai, Honda, Nissan, Kia, Mercedes-Benz) and telematics service providers (Spireon and Reviver). Their work focused primarily on API flaws, Single Sign-On (SSO) misconfigurations, insecure backend infrastructures, and weak access control mechanisms. \n For example, vulnerabilities in BMW and Rolls Royce's SSO systems allowed attackers to impersonate any employee, gaining access to internal dealer portals and retrieving sensitive documents. Mercedes-Benz’s SSO was similarly flawed, giving access to hundreds of internal tools, from Jenkins servers to cloud deployment dashboards, some of which were vulnerable to remote code execution. Ferrari’s systems lacked basic access controls, allowing attackers to take over user accounts, manipulate administrator permissions, and manage content on Ferrari’s websites. \n Specially, the researchers found they could send commands (like unlocking or disabling starters), track vehicle locations, update firmware, and access PII.  Similarly, Reviver’s digital license plate system was found to be fully accessible by attackers, enabling tracking and administrative control over customer vehicles, including marking them as “stolen.” \n Other vulnerabilities included Hyundai, Honda, and Nissan APIs that allowed full remote control of vehicle functions and account takeover using only email addresses or VINs. In Toyota’s case, production APIs exposed user data due to lack of authentication. Also, SiriusXM was affected, with AWS keys leaked that exposed internal databases and configuration files."
+			"description": "This article provides a detailed and revealing critical vulnerabilities across numerous major automotive brands(BMW, Rolls Royce, Ferrari, Hyundai, Honda, Nissan, Kia, Mercedes-Benz) and telematics service providers (Spireon and Reviver). Their work focused primarily on API flaws, Single Sign-On (SSO) misconfigurations, insecure backend infrastructures, and weak access control mechanisms. \n For example, vulnerabilities in BMW and Rolls Royce's SSO systems allowed attackers to impersonate any employee, gaining access to internal dealer portals and retrieving sensitive documents. Mercedes-Benz’s SSO was similarly flawed, giving access to hundreds of internal tools, from Jenkins servers to cloud deployment dashboards, some of which were vulnerable to remote code execution. Ferrari’s systems lacked basic access controls, allowing attackers to take over user accounts, manipulate administrator permissions, and manage content on Ferrari’s websites. \n Specially, the researchers found they could send commands (like unlocking or disabling starters), track vehicle locations, update firmware, and access PII.  Similarly, Reviver’s digital license plate system was found to be fully accessible by attackers, enabling tracking and administrative control over customer vehicles, including marking them as “stolen.” \n Other vulnerabilities included Hyundai, Honda, and Nissan APIs that allowed full remote control of vehicle functions and account takeover using only email addresses or VINs. In Toyota’s case, production APIs exposed user data due to lack of authentication. Also, SiriusXM was affected, with AWS keys leaked that exposed internal databases and configuration files."
 		},
 		{
 			"ID": "RE0038",
 			"name": "How I got access to 25+ Tesla’s around the world",
 			"cite": "How I got access to 25+ Tesla’s around the world. By accident. And curiosity. | by David Colombo | Medium. (n.d.). Retrieved March 24, 2025, from [Online]",
 			"link": "https://medium.com/@david_colombo/how-i-got-access-to-25-teslas-around-the-world-by-accident-and-curiosity-8b9ef040a028",
-			"description": "This article show how the reseacher gained remote access to over 25 Tesla vehicles around the world through a third-party system misconfiguration. The vulnerability lies in insecure deployments of a third-party open-source tool called TeslaMate, which users self-host to log and visualise vehicle data. The author found instances of TeslaMate exposed online, often without proper authentication. Once accessed, these dashboards revealed Tesla API tokens—authentication credentials for Tesla’s backend services. These tokens could be used with Tesla’s official API to issue remote commands to vehicles as if they came from the legitimate owner. \n He was able to locate these insecure dashboards through basic internet scans and subdomain enumeration. In many cases, the tokens were stored unencrypted and accessible through default or misconfigured Grafana dashboards bundled with TeslaMate installations. He could found over 25 similar cases across 13 countries. \n This access allowed him to perform remote commands such as disabling Sentry Mode, unlocking doors, opening windows, and initiating Keyless Driving.  However, the author clarified he did not have control over critical driving systems such as braking or steering."
+			"description": "This article show how the reseacher gained remote access to over 25 Tesla vehicles around the world through a third-party system misconfiguration. The vulnerability lie in insecure deployments of a third-party open-source tool called TeslaMate, which users self-host to log and visualise vehicle data. The author found instances of TeslaMate exposed online, often without proper authentication. Once accessed, these dashboards revealed Tesla API tokens—authentication credentials for Tesla’s backend services. These tokens could be used with Tesla’s official API to issue remote commands to vehicles as if they came from the legitimate owner. \n He was able to locate these insecure dashboards through basic internet scans and subdomain enumeration. In many cases, the tokens were stored unencrypted and accessible through default or misconfigured Grafana dashboards bundled with TeslaMate installations. He could found over 25 similar cases across 13 countries. \n This access allowed him to perform remote commands such as disabling Sentry Mode, unlocking doors, opening windows, and initiating Keyless Driving.  However, the author clarified he did not have control over critical driving systems such as braking or steering."
 		},
 		{
 			"ID": "RE0039",
 			"name": "Advancing Vulnerability Discovery Amid Automotive Innovation: An API Attack From Halfway Across the World",
 			"cite": "Advancing Vulnerability Discovery Amid Automotive Innovation: An API Attack From Halfway Across the World - VicOne. (n.d.). Retrieved March 24, 2025, from [Online]",
 			"link": "https://vicone.com/blog/advancing-vulnerability-discovery-amid-automotive-innovation-an-api-attack-from-halfway-across-the-world",
-			"description": "This article demonstrated an API-based remote attack scenario against a connected vehicle as part of the Pwn2Own Automotive 2024 event. It highlights how the increasing integration of connectivity into modern vehicles, such as SIM-enabled telematics and remote APIs expands the potential attack surface for adversaries. \n In the demonstrated scenario, researchers obtained valid credentials via simulating a phishing or ransomware-based compromise for a vehicle located across the globe. Using these credentials, they remotely interacted with the vehicle’s backend API, sending commands such as retrieving door status or starting the car. These actions demonstrated that geographical distance is no barrier when weak authentication and insufficient monitoring exist."
+			"description": "This article demonstrated an API-based remote attack scenario against a connected vehicle as part of the Pwn2Own Automotive 2024 even. It highlights how the increasing integration of connectivity into modern vehicles, such as SIM-enabled telematics and remote APIs expands the potential attack surface for adversaries. \n In the demonstrated scenario, researchers obtained valid credentials via simulating a phishing or ransomware-based compromise for a vehicle located across the globe. Using these credentials, they remotely interacted with the vehicle’s backend API, sending commands such as retrieving door status or starting the car. These actions demonstrated that geographical distance is no barrier when weak authentication and insufficient monitoring exist."
 		},
 		{
 			"ID": "RE0040",
@@ -2346,7 +2443,21 @@
 			"name": "Adventures in Automotive Networks and Control Units",
 			"cite": "C. Valasek and C. Miller, “Adventures in Automotive Networks and Control Units,” Tech. White Pap., p. 99, 2013, [Online].",
 			"link": "http://www.ioactive.com/pdfs/IOActive_Adventures_in_Automotive_Networks_and_Control_Units.pdf",
-			"description": "This paper explores post-exploitation attack vectors in modern vehicles, including a 2010 Ford Escape and a 2010 Toyota Prius, by leveraging CAN message injection. After gaining code execution on an ECU, the authors demonstrate how adversaries can inject CAN messages, both normal and diagnostic to manipulate vehicle functions like braking, steering, acceleration, speedometer, and seat belts. They reverse-engineer diagnostic services based on ISO 14229 (UDS) and ISO-TP and show how these services can be exploited to control ECUs directly via the OBD-II port using tools like EcomCat and Techstream. The study includes firmware reprogramming, SecurityAccess bypass, and manipulation of services such as DiagnosticSessionControl, RoutineControl, and WriteMemoryByAddress."
+			"description": "This paper explores post-exploitation attack vectors in modern vehicles, including a 2010 Ford Escape and a 2010 Toyota Prius by leveraging CAN message injection. After gaining code execution on an ECU, the authors demonstrate how adversaries can inject CAN messages, both normal and diagnostic to manipulate vehicle functions like braking, steering, acceleration, speedometer, and seat belts. They reverse-engineer diagnostic services based on ISO 14229 (UDS) and ISO-TP and show how these services can be exploited to control ECUs directly via the OBD-II port using tools like EcomCat and Techstream. The study includes firmware reprogramming, SecurityAccess bypass, and manipulation of services such as DiagnosticSessionControl, RoutineControl, and WriteMemoryByAddress."
+		},
+		{
+			"ID": "RE0042",
+			"name": "Supply Chain Compromise",
+			"cite": "ATT&CK Supply Chain Compromise, Retrieved March 27, 2025. [Online].",
+			"link": "https://attack.mitre.org/techniques/T1195/",
+			"description": "This link describes the Supply Chain Compromise technique in the Enterprise domain of the ATT&CK database."
+		},
+		{
+			"ID": "RE0043",
+			"name": "There Will Be Glitches Extracting and Analyzing Automotive Firmware Efficiently",
+			"cite": "N. Timmers, “There Will Be Glitches Extracting and Analyzing Automotive Firmware Efficiently,” BlackHat, pp. 1–7, 2018.",
+			"link": "https://raelize.com/upload/research/2018/2018_escareu_There-Will-Be-Glitches-Whitepaper.pdf",
+			"description": "This paper demonstrates how hardware fault injection attacks can be used to extract and analyse automotive firmware. The authors use an instrument cluster ECU as their target and focus on extracting firmware and learning how the ECU behaves internally. They demonstrate Voltage Fault Injection to successfully extract firmware from the target. Once firmware was obtained, they built a custom emulator to efficiently reverse-engineer the firmware outside of the vehicle hardware. Through dynamic analysis like taint tracking, execution tracing, and CAN fuzzing, they identify security mechanisms and even extract ECU secrets like keys."
 		}
                 
                 
