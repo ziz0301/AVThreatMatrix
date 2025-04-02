@@ -4,7 +4,7 @@
             "ID": "TA0501",
             "name": "Initial Access",
             "short_description": "The adversary is attempting to gain unauthorised access to the UGV’s systems or networks.",
-            "full_description": "Initial Access consists of techniques that adversaries use as entry vectors to establish a foothold within UGV systems or networks.\nEntry points targeted by adversaries include telematics units, infotainment systems, and wireless interfaces (Wi-Fi, Bluetooth, or cellular connections). They may exploit vulnerabilities in manufacturer services, mobile applications, or cloud-based APIs that handle remote access and vehicle data. Physical interfaces, such as OBD-II ports, removable devices, and aftermarket dongles, can also be used as techniques to gain initial unauthorised access to the system.\nFootholds gained through initial access may enable additional attack tactics and techniques.\nThis tactic was adapted from MITRE ATT&CK (Enterprise domain).",
+            "full_description": "Initial Access consists of techniques that adversaries use as entry vectors to establish a foothold within UGV systems or networks.\nEntry points targeted by adversaries include ground station, telematics units, infotainment systems, and wireless interfaces (Wi-Fi, Bluetooth, cellular or other custom connections). They may exploit vulnerabilities in manufacturer services, mobile applications, or cloud-based APIs that handle remote access and vehicle data. Physical interfaces, such as OBD-II ports, removable devices, and aftermarket dongles, can also be used as techniques to gain initial unauthorised access to the system.\nFootholds gained through initial access may enable additional attack tactics and techniques.\nThis tactic was adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "technique ID": ["T5010", "T5015", "T5011", "T5008","T5017","T5002","T5014","T5003","T5016","T5007"]
@@ -12,7 +12,7 @@
         {
             "ID": "TA0502",
             "name": "Execution",
-            "short_description": "The adversary is trying to run malicious code or manipulate vehicle functions and data without authorisation.",
+            "short_description": "The adversary is trying to run malicious code or manipulate UGV's functions and data without authorisation.",
             "full_description": "Execution consists of techniques that allow adversary-controlled code to run on a vehicle’s service, network, control unit, application, firmware, or other asset.\nThese attacks may involve direct code injection, unauthorised commands, or malicious payloads delivered through network interfaces, firmware updates, or compromised software. \nAttackers can exploit communication protocols such as the Controller Area Network (CAN) and Unified Diagnostic Services (UDS) to inject malicious messages and manipulate vehicle behUGViour. They may also execute code on vulnerable telematics units, infotainment systems, OTA update services or mobile-connected services.\nAdditionally, adversaries can tamper with UGV sensor inputs, such as LiDAR, radar, and GPS, to disrupt perception systems and trigger unintended vehicle responses.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
@@ -61,7 +61,7 @@
             "full_description": "Discovery consists of techniques for exploring a vehicle's network, interfaces, and communication protocols to identify vulnerable components within the autonomous vehicle.\nThrough analysing system structures, scanning networks, and probing interfaces, adversaries can map attack surfaces and find exploitable vulnerabilities.\nCommon discovery techniques include intercepting and analysing network traffic or CAN messages to understand vehicle communication structures, scanning and mapping internal vehicle networks to identify vulnerabilities and access points, and exploring interfaces like OBD-II ports, telematics systems, and sensors to find misconfigurations or security weaknesses.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5052","T5050","T5051"]
+            "technique ID": ["T5052","T5037","T5050","T5051"]
         },
         {
             "ID": "TA0508",
@@ -70,7 +70,7 @@
             "full_description": "Lateral movement consists of techniques that allow adversaries to traverse the vehicle’s internal network, pivot between components to access additional resources and escalate their attack. \nBy exploiting vulnerabilities, leveraging trusted communication channels, remote services or uploading malicious tools, attackers can extend their control and compromise additional vehicle functions.\nCommon lateral movement techniques include: moving from infotainment or telematics systems to other ECUs to control critical functions (via SSH, Telnet, direct connections, or shared CAN buses); transitioning from non-critical to critical CAN buses to access safety-critical components through diagnostic functions; and uploading tools to the head unit for exploitation, control, and automated spreading across connected vehicles through cellular networks.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5054","T5053","T5055"]
+            "technique ID": ["T5076","T5054","T5053","T5055"]
         },
         {
             "ID": "TA0509",
@@ -79,7 +79,7 @@
             "full_description": "Collection consists of techniques used to capture, extract, and analyse data from vehicle networks, internal systems, and external interfaces. By obtaining critical information, attackers can gain insights into vehicle operations, exfiltrate data, and plan further exploits.\nCommon data sources include CAN bus messages, important UGV files like VIN numbers and system logs, and vehicle data such as location, camera images, phone calls, software/firmware versions, and real-time status.\nAdversaries typically collect data through network sniffing, exploiting web service vulnerabilities, or directly accessing local vehicle systems. \nThis tactic is adapted from AUTO-ISAC ATM.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5059","T5056","T5058","T5057"]
+            "technique ID": ["T5057","T5059","T5056", "T5071","T5058"]
         },
         {
             "ID": "TA0510",
@@ -102,7 +102,7 @@
 		{
             "ID": "TA0512",
             "name": "Inhibit Response Function",
-            "short_description": "The adversary is trying to prevent your safety, protection, quality assurance, and operator intervention functions from responding to a failure, hazard, or unsafe state.",
+            "short_description": "The adversary is trying to prevent safety, protection, and operator intervention functions from responding to a failure, hazard, or unsafe state.",
             "full_description": "Inhibit Response Function consists of techniques that interfere with a vehicle's ability to detect and respond to threats, manipulate safety mechanisms, and suppress critical alerts. Through blocking or altering response functions, attackers can create unsafe driving conditions, disable security features, and cause system failures.\nCommon techniques include suppressing anti-theft systems, spoofing emergency brake data, forcing unnecessary stops by creating false obstacles, and jamming radar and ultrasonic sensors. These actions prevent the vehicle from detecting real obstacles, which can lead to collisions or failure to respond to actual threats.\nThis tactic is adapted from MITRE ATT&CK (ICS domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
@@ -115,7 +115,7 @@
             "full_description": "Exfiltration refers to techniques that adversaries use to steal data from vehicles. After collecting data, adversaries typically package it using compression and encryption to UGVoid detection during removal.\nData can be exfiltrated manually or through automated processes using command and control channels or alternative pathways. Adversaries may exploit various vehicle connectivity features, such as mobile applications, telematics data loggers, cellular networks, Wi-Fi, or Bluetooth, to extract and transmit stolen information.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5068","T5067"]
+            "technique ID": ["T5068","T5070","T5067"]
         },    
         {
             "ID": "TA0514",
@@ -124,7 +124,7 @@
             "full_description": "Impact consists of techniques that degrade vehicle functionality, compromise safety, or exploit vulnerabilities at scale. Through malicious commands, system output manipulation, or disruption of essential operations, attackers can inflict physical harm, cause financial losses, and create widespread security breaches, threatening safety, security, and privacy.\nCommon impact techniques include forcing vehicles off-road, causing accidents, initiating emergency shutdowns, and impairing safe operation. Attackers may also steal sensitive vehicle data, including operational and security-critical information, or exploit vulnerabilities across identical vehicle models to launch large-scale attacks after breaching a single vehicle.\nThis tactic is adapted from MITRE ATT&CK (Enterprise and ICS domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5004","T5078","T5069","T5077","T5073","T5075","T5074","T5079","T5072","T5005","T5081","T5080"]
+            "technique ID": ["T5004","T5078","T5069","T5077","T5073","T5075","T5074","T5079","T5072","T5006","T5005","T5081","T5080"]
         }
     ],
     "techniques": [
@@ -196,21 +196,50 @@
         },
 		{
             "ID": "T5005",
-            "name": "Sensor manipulation (new)",
-            "short_description": "Adversaries may manipulate vehicle sensors such as cameras, LIDAR, ultrasonic, and RADAR through various interference techniques, leading to false object detection, incorrect distance measurements, or sensor malfunctions.",
-            "full_description": "Sensor manipulation attacks pose significant threats to vehicle perception systems. These attacks primarily target five key sensor types—Camera, LIDAR, RADAR, and SONAR, motion and position sensor, using techniques such as blinding, spoofing, jamming, and replay to interfere with signal processing. By distorting sensor inputs, adversaries can disrupt object detection, mislead distance measurements, or create phantom obstacles. \n While these attacks can severely impact a vehicle's perception and navigation capabilities, their effects typically remain isolated to the perception layer without directly compromising deeper vehicle systems, unless these manipulated inputs lead to incorrect decisions at higher processing levels. \n It is also important to distinguish Sensor Manipulation from Adversarial Attacks, which also target perception systems like LIDAR or Camera but focus on exploiting AI-based algorithms rather than manipulating sensor signals. Adversarial Attacks deceive machine learning models using crafted inputs, such as perturbing images to mislead object classification, whereas Sensor Manipulation interferes directly with physical signals before they are processed by the system.",
+            "name": "Sensor Manipulation (new)",
+            "short_description": "Adversaries may manipulate vehicle sensors such as LIDAR, RADAR, ultrasonic, and GPS to create false object detection, distance readings, or positioning",
+            "full_description": "Sensor manipulation attacks pose significant threats to vehicle perception systems. These attacks primarily target five key sensor types, such as Camera, LIDAR, RADAR, and SONAR, motion and position sensor. \n Adversaries may inject crafted or replayed signals into a vehicle’s sensor systems to create specific false outputs. These attacks mislead the perception system by spoofing sensor inputs, injecting false echoes, or replaying captured data. The goal is often to trick the system into detecting phantom obstacles, incorrect distances, or altered positions. \n While these attacks can severely impact a vehicle's perception and navigation capabilities, their effects typically remain isolated to the perception layer without directly compromising deeper vehicle systems, unless these manipulated inputs lead to incorrect decisions at higher processing levels. \n It is important to distinguish Sensor Manipulation from Adversarial Attacks and Sensor Interference. Adversarial Attacks also target perception systems like LIDAR or Camera but focus on exploiting AI-based algorithms rather than manipulating sensor signals. They deceive machine learning models using crafted inputs, such as perturbing images to mislead object classification. In contrast, Sensor Interference disrupts the sensor's ability to function correctly by overwhelming or blocking signals, such as through jamming, blinding, or physical obstruction, without injecting false data.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "sub-technique ID": ["T5005.001", "T5005.002", "T5005.003", "T5005.004", "T5005.005"],
+            "sub-technique ID": ["T5005.001", "T5005.002", "T5005.003", "T5005.004"],
             "mitigation ID": [],
             "example": [
                 {
                     "reference ID": "RE0017",
-                    "description": "CAMERA Binding Attack - Researchers uses laser diodes and LEDs to emit intense light directly into the camera's sensor to prevent object detection."
+                    "description": "LIDAR Replay Attack - Researchers intercept and retransmit LiDAR pulses from a different location, creating false reflections at unintended positions."
                 },
 				{
+                    "reference ID": "RE0021",
+                    "description": "Ultrasonic Spoofing attack - Researchers injects synthetic ultrasonic signals with modified frequency modulation patterns to create false object detections or alter measured distances."
+                },
+				{
+                    "reference ID": "RE0021",
+                    "description": "Millimeter-Wave Radar Spoofing attack - Researchers injects synthetic radar signals with altered frequency modulation patterns, tricking the radar into detecting false objects or incorrect distances."
+                },
+				{
+                    "reference ID": "RE0015",
+                    "description": "Researchers injected false inertial sensor readings during flight, causing incorrect roll estimation and crash of the quadrotor."
+                }
+            ],
+            "reference ID": ["RE0015","RE0017","RE0021"]
+        },
+		{
+            "ID": "T5006",
+            "name": "Sensor Interference (new)",
+            "short_description": "Adversaries may interfere with vehicle sensors by jamming, blinding, or physically blocking signals to degrade their accuracy or disable them.",
+            "full_description": "Sensor interference attacks disrupt perception sensors by overwhelming, blinding, or physically obstructing them. These attacks cause confusion, signal loss, or degraded readings through methods like laser blinding, radar jamming, or acoustic interference. \n By distorting sensor inputs, adversaries can disrupt object detection, mislead distance measurements, or create phantom obstacles. \n While these attacks can severely impact a vehicle's perception and navigation capabilities, their effects typically remain isolated to the perception layer. They don't directly compromise deeper vehicle systems. \n This technique differs from Sensor Manipulation and Adversarial Attacks. Sensor Interference focuses on degrading or disabling sensor functionality through physical or electromagnetic disruption (jamming, blinding, or blocking) without injecting false signals. In contrast, Sensor Manipulation actively feeds false data to create misleading outputs, while Adversarial Attacks exploit AI-based perception algorithms using crafted inputs to deceive object recognition or classification models.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": ["T5006.001", "T5006.002", "T5006.003"],
+            "mitigation ID": [],
+            "example": [
+                {
                     "reference ID": "RE0017",
-                    "description": "LIDAR Replay Attack - Researchers intercept and retransmit LiDAR pulses from a different location, creating false reflections at unintended positions."
+                    "description": "CAMERA Confusing Attack - Researchers use rapid bursts of light to force the camera to continuously adjust exposure settings, creating time lag in the auto-adjustment process and causing missed object detection."
+                },
+				{
+                    "reference ID": "RE0021",
+                    "description": "CAMERA Binding Attack - Researchers uses three different light sources to temporarily or permanently blind the vehicle’s camera, obstructing recognition of lane markings, traffic signs, and obstacles."
                 },
 				{
                     "reference ID": "RE0018",
@@ -218,11 +247,11 @@
                 },
 				{
                     "reference ID": "RE0021",
-                    "description": "Millimeter-Wave Radar Spoofing attack - Researchers injects synthetic radar signals with altered frequency modulation patterns, tricking the radar into detecting false objects or incorrect distances."
+                    "description": "Millimeter-Wave Radar Jamming attack - Researchers transmit high-power electromagnetic signals to interfere with the vehicle’s radar system, preventing accurate object detection."
                 }
             ],
             "reference ID": ["RE0017", "RE0018", "RE0021"]
-        },		
+        },
 		{
             "ID": "T5007",
             "name": "Wireless Compromise",
@@ -515,20 +544,20 @@
 		},
 		{
             "ID": "T5027",
-            "name": "Content Injection",
-            "short_description": "",
-            "full_description": "",
+            "name": "Content Injection (new)",
+            "short_description": "Adversaries may execute malicious code by injecting crafted non-executable content into vehicle systems",
+            "full_description": "In autonomous vehicles, attackers can execute malicious code by injecting crafted content like media files that legitimate vehicle software processes. \n This technique differs from execution via commands, APIs, applications, or diagnostic tools—instead, it exploits how vehicle subsystems handle and interpret files. Infotainment units that process music, video, images, or documents may have vulnerabilities in their file parsing routines. Attackers can exploit these weaknesses by delivering specially crafted files (such as WMA, MP4, JPG, or PDF) that, when opened, force the target system to execute unauthorized code.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
             "mitigation ID": [],
             "example": [
-                {
-					"reference ID": "RE0022",
-					"description": "Researchers used compromised nodes to inject fake ROS messages to topics like drive state, generator mode, or brakes, resulting in system disruptions."
+				{
+					"reference ID": "RE0010",
+					"description": "Researchers transferred crafted WMA files to the vehicle's media player which, when played, exploited a buffer overflow vulnerability in the media player to send malicious CAN messages."
 				}
             ],
-            "reference ID": ["RE0022"]
+            "reference ID": ["RE0010"]
         },
 		{
             "ID": "T5021",
@@ -760,9 +789,13 @@
 				{
                     "reference ID": "RE0010",
                     "description": "Reseachers add a program which contacts with PassThru device, exploit it and modify startup script to make it always enabled."
-                }
+                },
+				{
+					"reference ID": "RE0046",
+					"description": "Researchers uploaded modified firmware to the Parking Assist Module and Electronic Parking Brake from within the vehicle’s network to enable persistent control."
+				}
             ],
-            "reference ID": ["RE0010", "RE0012"]
+            "reference ID": ["RE0046","RE0010", "RE0012"]
         },
 		{
             "ID": "T5033",
@@ -1097,7 +1130,33 @@
 		{
             "ID": "T5050",
             "name": "Network Sniffing",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may passively capture in-vehicle or external network traffic to identify communication structures, credentials, or operational data.",
+            "full_description": "Network sniffing refers to the passive monitoring or capture of data on a vehicle’s internal or external network interfaces. Adversaries may leverage direct access, such as OBD-II or Ethernet ports, to place the interface into monitoring mode and intercept messages transmitted between Electronic Control Units (ECUs) or backend servers. In-vehicle network sniffing typically focuses on CAN bus communication, revealing message IDs, control commands, and diagnostic exchanges. \n Vehicles may also use Ethernet or wireless connections for communication with external services, often over protocols such as HTTP, HTTPS, or MQTT. If unencrypted or misconfigured, these channels may expose sensitive operational data, update requests, or credentials to sniffing attacks. \n This technique provides attackers with knowledge required for further activities such as replay, spoofing, or remote exploitation.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": ["T5050.001"],
+            "mitigation ID": [],
+            "example": [
+                {
+					"reference ID": "RE0016",
+					"description": "Researchers sniff communication to capture the CAN messages between ECUs and diagnostic messages between ECUs and gateway."
+				},
+				{
+					"reference ID": "RE0022",
+					"description": "Researchers sniff and capture CAN messages from the vehicle via OBD-II port and diagnostic application."
+				},
+				{
+					"reference ID": "RE0044",
+					"description": "Researchers describes how attackers can connect to the OBD-II port and use sniffing tools like can-utils to monitor CAN traffic. By observing message IDs and data patterns."
+				}
+            ],
+            "reference ID": ["RE0014","RE0016", "RE0022", "RE0044", "RE0011"]
+        },
+		{
+            "ID": "T5037",
+            "name": "Network Service Discovery",
+            "short_description": "Adversaries may attempt to identify services running on remote systems within the in-vehicle network or on connected external interfaces.",
+            "full_description": "This is often done to discover services that can be exploited for lateral movement, remote code execution, or privilege escalation.\n Within connected and autonomous vehicles, this discovery may involve scanning the in-vehicle Ethernet network between components such as the head unit, telematics unit, and gateways. Tools like nmap can be used after gaining local access to identify open ports and active daemons, such as HTTP servers, D-Bus over IP, SSH, or custom diagnostic services.\n Externally, adversaries may scan communication links between the vehicle and backend infrastructure, such as over Wi-Fi, cellular, or OTA update channels to enumerate exposed services. Discovering these services allows attackers to understand system architecture, assess attack surfaces, and plan subsequent actions.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
@@ -1106,33 +1165,40 @@
             ],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0013",
+					"description": "Researchers gained access to the vehicle’s internal Ethernet network via a USB-to-Ethernet adapter. They ran nmap scans to identify open ports and running services on different IP addresses. This scanning revealed remote services that might be exploitable."
+				},
+				{
+					"reference ID": "RE0014",
+					"description": "Researchers performed an nmap scan on a Jeep Cherokee vehicle to identify exposed TCP services. The scan revealed multiple open ports prior to the patch, including 6667 and 6010, which were D-Bus over IP ports used for inter-process communication (IPC) and remote procedure call (RPC) mechanisms."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0013","RE0014"]
         },
 		{
             "ID": "T5051",
             "name": "System Network Connection Discovery",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may attempt to get a listing of network connections between ECUs or to/from a compromised vehicle system by querying internal communication paths",
+            "full_description": "This technique involves discovering current or potential network connections between components within the vehicle or between the vehicle and external systems. \n Within the vehicle, attackers may use utilities such as `netstat` or inspect Ethernet and wireless interfaces to identify active communication links across domains like infotainment, telematics, and gateways. In addition to standard system tools, adversaries in the automotive domain may actively probe the internal network by sending crafted diagnostic or CAN messages and observing which ECUs respond. \n Unlike Network Sniffing, which passively captures data, or Network Service Discovery, which scans for listening services (e.g., with nmap), this technique focuses on uncovering ``who is talking to whom`` within the system or over internal/external interfaces. \n  This knowledge enables targeted lateral movement, injection, or denial-of-service attacks on connected modules.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0010",
+					"description": "Researchers compromised a PassThru device connected to a vehicle’s OBD-II port and used it to send pre-programmed messages over the CAN bus to discover connected ECUs and internal communication structure."
+				},
+				{
+					"reference ID": "RE0014",
+					"description": "Researchers used netstat on the Uconnect system to list active TCP listeners and identify ports such as 6010, 6667, and 6020."
+				},
+				{
+					"reference ID": "RE0014",
+					"description": "Researchers inspected the network interfaces on the Uconnect system, identifying internal (uap0) and external (ppp) interfaces used for Wi-Fi and cellular communication. This provided insight into system-level communication paths and data flow."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0010", "RE0014"]
         },
 		{
             "ID": "T5052",
@@ -1162,107 +1228,176 @@
 		{
             "ID": "T5053",
             "name": "Remote Services",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may abuse remote services to gain access and move laterally.",
+            "full_description": "In autonomous vehicles, remote access services, such as SSH, Telnet, or manufacturer-defined command ports allow attackers to move laterally between components once initial access is obtained. \n These services may be accessible due to weak configurations (e.g., hard-coded credentials, anonymous access, or improper key management). By logging in through these legitimate remote services, attackers can interact with or control critical ECUs. \n Unlike Exploitation of Remote Services techniques, this method relies on valid credentials or insecure service configurations rather than software vulnerabilities.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0011",
+					"description": "Researchers accessed the Instrument Cluster (IC) via SSH using stored private keys without a password, enabling full root access for lateral movement from the CID."
+				},
+				{
+					"reference ID": "RE0011",
+					"description": "Researchers connected to the Parrot system via Telnet through an open port without authentication, gaining control over the component."
+				},
+				{
+					"reference ID": "RE0012",
+					"description": "Researchers used command port 3500 on the gateway to trigger a Telnet shell on port 23, which could be accessed using a hard-coded password, allowing remote login and further actions."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0011", "RE0012"]
+        },
+		{
+            "ID": "T5076",
+            "name": "Exploitation of Remote Services",
+            "short_description": "Adversaries may exploit software vulnerabilities in remote services to move laterally within the vehicle network",
+            "full_description": "In autonomous vehicles, remote services include diagnostic interfaces, inter-process communication channels, testing tools, and network protocols running on components like head units, gateway ECUs, and telematics units. These exploits enable unauthorized code execution or control over other ECUs without requiring valid credentials. \n Successful exploitation allows lateral movement across the in-vehicle network, letting adversaries inject CAN or UDS messages, flash firmware, manipulate system behavior, and affect safety-critical functions.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+                {
+					"reference ID": "RE0014",
+					"description": "Researchers exploited a vulnerability in the D-Bus service running on the head unit to achieve lateral movement towards other systems connected via the CAN bus."
+				},
+				{
+					  "reference ID": "RE0011",
+					  "description": "Researchers identified and exploited software vulnerabilities in the CID and gateway ECUs, enabling them to remotely inject CAN messages and manipulate other ECUs within the vehicle network."
+				},
+				{
+					  "reference ID": "RE0013",
+					  "description": "Researchers exploited vulnerabilities in the Head Unit and Telematics Control Box (TCB) to gain root privileges, allowing them to remotely transmit CAN and UDS messages to control downstream ECUs."
+				}
+            ],
+            "reference ID": ["RE0011", "RE0013","RE0014"]
         },
 		{
             "ID": "T5054",
             "name": "Lateral Tool Transfer",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may transfer tools or payloads between systems within the in-vehicle network to facilitate further lateral movement actions.",
+            "full_description": "After gaining access to a vehicle's internal network, adversaries can move malicious tools, scripts, or custom payloads between components, for example, from the head unit to other ECUs. \n This typically involves uploading SSH keys, configuration files, or modified firmware images to exploit vulnerabilities or establish control. These transfers occur through legitimate update mechanisms, diagnostic sessions, OBD-II port interfaces, or custom protocols. \n This technique allows attackers to move laterally across ECUs to launch additional attacks or maintain persistent access to the system.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0014",
+					"description": "Researcher uploaded SSH public key and configuration file to the head unit for further exploitation and control."
+				},
+				{
+					  "reference ID": "RE0010",
+					  "description": "Researchers use already-compromised PassThru devices to install malicious binaries on vehicles during routine service. The malware could propagate to the vehicle’s telematics ECU, and even act as a worm to infect more PassThru devices and cars."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0010","RE0014"]
         },
 		{
             "ID": "T5055",
             "name": "Vehicle Worm Propagation (new)",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may deploy self-replicating malware that autonomously spreads across connected vehicles, enabling lateral movement through vehicular networks.",
+			"full_description": "In autonomous vehicles, adversaries may design self-replicating malware capable of automatically scanning and spreading across multiple vehicles.\n  Unlike traditional lateral movement that targets a single system, this technique focuses on propagation across vehicle fleets connected via cellular networks, Wi-Fi, or vehicle-to-vehicle (V2V) communication. After compromising an initial vehicle, the worm can exploit the same vulnerability in neighboring vehicles without requiring further attacker interaction. \n Though this type of attack hasn't been demonstrated in practice, researchers have proposed it as a highly feasible and impactful scenario, especially in urban areas where vehicles frequently cluster. \n Successful execution of this technique could lead to mass compromise, coordinated vehicle manipulation, or widespread disruption of transportation systems.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0014",
+					"description": "Researchers proposed the idea of a vehicle worm that would automate scanning, exploitation, and remote control across vulnerable vehicles connected via cellular networks."
+				},
+				{
+					"reference ID": "RE0047",
+					"description": "Researchers proposed an epidemic model for vehicular worm propagation using V2V communication. The study demonstrated how worms could autonomously spread through urban traffic, infecting a large portion of the fleet in minutes under high mobility conditions."
+				}
+
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0014", "RE0047"]
         },
 		{
             "ID": "T5056",
-            "name": "Data from local system",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "name": "Data from Local System",
+            "short_description": "Adversaries may collect data stored locally within vehicle systems to support their objectives.",
+            "full_description": "This data includes configuration files, navigation history, GPS coordinates, vehicle identifiers, and internal communication logs (e.g., CAN messages). \n Data collection can occur through either physical access or remote compromise. Attackers retrieve data from local nonvolatile memory, flash storage, file systems, or inter-process communication channels. They may also use connected mobile applications or external devices to access data from in-vehicle networks. \n This information enables attackers to understand system behavior, identify vulnerabilities, track user movement, or facilitate further attacks.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0002",
+					"description": "Researchers targeted local data stored in nonvolatile memory in the unmanned system to extract sensitive information."
+				},
+				{
+					"reference ID": "RE0014",
+					"description": "Researchers exploited UConnect to collect multiple file systems from NAND flash memory, including Multimedia Card, Embedded Transaction File System and QNX file system."
+				},
+				{
+					"reference ID": "RE0014",
+					"description": "Researchers collected GPS data via D-Bus to track vehicle locations without user knowledge."
+				},
+				{
+					"reference ID": "RE0022",
+					"description": "Researchers collected CAN data from a malicious application on a mobile phone connected to the vehicle."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0002", "RE0014", "RE0022"]
+        },
+		{
+            "ID": "T5071",
+            "name": "Data from Removable Media",
+            "short_description": "Adversaries may collect sensitive files from removable media connected to vehicle systems.",
+            "full_description": "In automotive environments, removable media use is rare and typically limited to specific functions like infotainment systems, diagnostics, and firmware updates. When such media is connected and accessible, attackers with network or physical access can extract sensitive information, including logs, media files, and configuration data. \n For example, an SD card connected to a central gateway might store system updates, logs, and state information that could be valuable to attackers. \n While this technique isn't commonly seen due to the limited presence of removable media in most vehicles, it remains a potential security vulnerability in certain system designs",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+                {
+					"reference ID": "RE0035",
+					"description": "Researchers collected all files from the SD card connected to the Central Gateway after remotely gaining access to the vehicle's internal network."
+				}
+            ],
+            "reference ID": ["RE0011"]
         },
 		{
             "ID": "T5057",
-            "name": "Network Connection Enumeration",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "name": "Adversary-in-the-Middle",
+            "short_description": "Adversaries may intercept communication between vehicle systems or between the vehicle and external entities to collect sensitive data.",
+            "full_description": "Adversaries may position themselves between communicating components, either within the vehicle (e.g., ECUs and gateways) or between the vehicle and external systems (e.g., backend servers, mobile apps, diagnostic tools). From this position, they can collect valuable information such as CAN messages, credentials, diagnostic data, and communication protocols. \n This technique can be used actively to support further attacks, such as replay or data injection. It often involves exploiting in-vehicle ECUs or external interfaces like Wi-Fi, Bluetooth, or cellular connections.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0009",
+					"description": "Researchers used CARShark to collect traffic on the CAN bus to reveal how to control vehicle functions."
+				},
+				{
+					"reference ID": "RE0016",
+					"description": "Researchers collected logs and memory dumps from ECU for further investigation and forensic support."
+				},				
+				{
+					"reference ID": "RE0016",
+					"description": "Researchers actively collected CAN data between ECUs by listening from the Gateway to analyze CAN message IDs and data for further attacks."
+				},
+				{
+					"reference ID": "RE0023",
+					"description": "Researchers collected SSID and passphrase from HeadUnit to T-box by listening to the CAN bus. This information allowed them to connect to more TCP and UDP ports."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0009", "RE0016", "RE0023"]
         },
 		{
             "ID": "T5058",
             "name": "Input Capture",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may capture data inputs exchanged between processes within the vehicle system to collect sensitive information.",
+            "full_description": "Unlike traditional computer networks where input capture involves keyboards or mice, in automotive systems, `input` refers to any data transmitted between processes. This data typically comes from ECUs, sensors, or subsystems and flows through inter-process communication (IPC) or internal messaging services (like PPS or D-Bus). These channels exchange various types of information, including GPS coordinates, media settings, and control signals. \n If accessible, adversaries can exploit these interfaces to observe or intercept such inputs without detection.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
@@ -1271,213 +1406,246 @@
             ],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0014",
+					"description": "Researchers exploited the exposed D-Bus and PPS services on the Uconnect system to capture GPS coordinates and other inter-process data, such as media control commands."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0014"]
         },
 		{
             "ID": "T5059",
-            "name": "Data from cloud service",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "name": "Data from Cloud Service",
+            "short_description": "Adversaries may collect data from cloud-based services associated with vehicles.",
+            "full_description": "Adversaries may exploit vulnerabilities in cloud-based services or associated applications to collect sensitive vehicle data, including GPS locations, vehicle status, personal information, and telemetry. \n They can gain unauthorized access through compromised credentials, insecure APIs, or vulnerabilities in third-party applications.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0037",
+					"description": "Researchers discovered vulnerabilities in telematics systems that allowed unauthorized access to GPS data, personal information, and vehicle control functions."
+				},
+				{
+					"reference ID": "RE0038",
+					"description": "Researchers gained remote access to more than 25 Tesla vehicles worldwide by exploiting a vulnerability in a third-party application, enabling them to collect GPS data and execute commands."
+				},
+				{
+					"reference ID": "RE0039",
+					"description": "Researchers demonstrated how an API vulnerability enabled remote vehicle interaction and location data access."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0037", "RE0038", "RE0039"]
         },
 		{
             "ID": "T5060",
             "name": "Communication Through Removable Media",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may perform command and control using removable media devices to transmit commands to a vehicle system.",
+            "full_description": "Attackers can control compromised vehicle components or communicate between a compromised external device and the vehicle using removable media (e.g., OBD-II dongles, PassThru devices, or USB devices). These devices act as bridges to transmit commands, diagnostic messages, or malicious payloads when network segmentation or air-gapped systems prevent direct communication. \n This approach enables attackers to maintain control and send commands to vehicles without needing real-time wireless connections.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0010",
+					"description": "Researchers used PassThru devices to compromise connected vehicles, perform diagnostics, and inject vehicle control commands."
+				},
+				{
+					"reference ID": "RE0035",
+					"description": "Researchers used wireless OBD-II dongles that connect directly to vehicle internal networks and communicate wirelessly with external applications to send vehicle control commands."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0010", "RE0035"]
         },
 		{
             "ID": "T5061",
             "name": "Remote Access Software",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may use remote access software to establish command and control channels to in-vehicle systems.",
+            "full_description": "In-vehicle systems contain command and control channels through pre-installed services (like Telnet, VNC, or manufacturer remote support tools) and third-party applications on connected devices such as smartphones. \n Attackers can exploit weak security configurations, including unauthenticated access and weak credentials to execute system commands or inject CAN messages. \n Once compromised, remote access software enables persistent access, allowing attackers to send commands to ECUs and orchestrate further attacks.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [ ],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0024",
+					"description": "Researchers executed arbitrary system commands from Tesla's Parrot module via an unauthenticated Telnet port."
+				},
+				{
+					"reference ID": "RE0022",
+					"description": "Researchers remotely injected CAN messages through a malicious application installed on the driver's smartphone."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0022","RE0024"]
         },
 		{
             "ID": "T5062",
             "name": "Application Layer Protocol",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may use standard application-layer protocols to send commands to in-vehicle systems or maintain communication with compromised components.",
+            "full_description": "In autonomous vehicles, attackers can use application-layer protocols like TCP, HTTP, IRC, or proprietary communication formats to establish command and control channels and transmit malicious messages. These protocols, operating at the application layer (OSI Layer 7), normally handle legitimate functions such as media control, system services, and OTA updates. \n Attackers embed malicious commands or payloads within this seemingly normal traffic to evade detection and bypass network filtering. \n Unlike the Remote Access Software technique, this approach specifically leverages the protocols themselves for communication, rather than using a complete remote-control interface.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
-                {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+				{
+					"reference ID": "RE0011",
+					"description": "Researchers connected to a D-Bus daemon over TCP and invoked a remote method to open a reverse shell, allowing commands to be sent and received over the network using application-layer protocol communication."
+				},
+				{
+					"reference ID": "RE0010",
+					"description": "Researchers established an IRC-based command and control channel over a cellular network to broadcast and deliver control messages to the vehicle."
+				},
+				{
+					"reference ID": "RE0022",
+					"description": "Researchers remotely sent CAN injection commands via a smartphone application that communicated over 3G/4G networks using standard application-layer protocols."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0010", "RE0011", "RE0022"]
         },
 		{
             "ID": "T5063",
             "name": "Spoof report message",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may spoof reporting messages in autonomous vehicle systems to mislead diagnostic tools, monitoring components, or safety checks",
+            "full_description": "Reporting messages in AVs often include diagnostic responses, sensor health, or module status data used to determine system readiness and safety state.\n By replaying or injecting spoofed report messages, adversaries can create the illusion that a system is functioning normally when it is not. For example, spoofing a diagnostic message that reports a healthy airbag system may prevent safety alerts or inhibit protective actions. This can also support other techniques such as Alarm Suppression or Block Command Message by concealing true system conditions.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0016",
+					"description": "Researcher replayed normal diagnostic responses to emulate a healthy airbag system."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0016"]
         },
 		{
             "ID": "T5064",
             "name": "Modify Parameter",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may modify parameters within control logic or embedded software to alter the behaviour of autonomous vehicle systems.",
+            "full_description": "These parameters may influence decision thresholds, timing, or control responsiveness. For example, modifying PID controller gains during runtime can corrupt vehicle stability or trajectory following.\n  By adjusting these internal values, adversaries may cause the system to behave unpredictably, overreact, or underperform during critical operations.\n Unlike CAN injection or command message execution, which instruct the ECU from the outside, Modify Parameter alters the internal logic and how the ECU responds to those instructions.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0015",
+					"description": "Researcher injects malicious code into the control program, modifying PID controller parameters(e.g. proportional, integral and derivative gain) at runtime to corrupt vehicle stability and response."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0015"]
         },
 		{
             "ID": "T5065",
             "name": "Alarm Suppression",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may target vehicle alarm systems to prevent them from notifying drivers or safety modules of abnormal or unsafe conditions.",
+            "full_description": "Adversaries may suppress or tamper with vehicle alarm systems to prevent warnings from being triggered or noticed. \n In AVs, alarms may include seatbelt reminders, door ajar warnings, airbag malfunction indicators, brake system alerts, anti-theft notifications, check engine lights, and other dashboard related to safety-critical systems.\n Alarm suppression may involve injecting spoofed CAN messages, disabling ECU functions, tampering with memory values, or modifying firmware to hide the true state of the vehicle. \n By preventing visual, audible, or logged alerts, adversaries aim to inhibit operator response or safety system intervention.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
+				{
+					"reference ID": "RE0016",
+					"description": "Researchers disable the airbag warning notification, leaving the vehicle occupants unprotected in case of an accident."
+				},
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0016",
+					"description": "Researcher inject `light OFF` commands to suppress the anti-theft system."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["R0016"]
         },
 		{
             "ID": "T5066",
             "name": "Block Command Message",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversarials may block critical command messages in vehicle systems, preventing normal response functions and control actions from executing.",
+            "full_description": "In autonomous vehicles, Electronic Control Units send these command messages through CAN, FlexRay, or Ethernet networks. \n Blocking can happen in two ways: through signal manipulation, where sensor interference prevents the control system from issuing commands, or through low-level bus attacks like CAN dominant override, which keeps the bus in a busy state to block all other traffic. \n When these commands can't reach their destinations, attackers can disable safety features, slow down system responses, or create dangerous conditions. \n Unlike Alarm Suppression, which merely hides warnings, Block Command Message prevents actual, legitimate messages from executing.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0019",
+					"description": "Researchers demonstrated an Emergency Brake attack in which an autonomous vehicle misinterpreted spoofed data as an obstacle, triggering an emergency stop."
+				},
+				{
+					"reference ID": "RE0021",
+					"description": "Researchers demonstrated radar and ultrasonic sensor jamming attacks that prevented the autonomous vehicle from detecting real obstacles, potentially leading to collisions or failure to respond to genuine threats."
+				},
+				{
+					"reference ID": "RE0034",
+					"description": "Researchers used dominant-override mode in a CAN injector to block other CAN devices from transmitting. By maintaining a continuous dominant signal, the attacker prevented legitimate control messages from reaching their intended ECUs"
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0019", "RE0021"]
         },
 		{
             "ID": "T5067",
             "name": "Exfiltration Over other network medium",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may exfiltrate collected data over a different communication medium than the vehicle's primary network interface.",
+            "full_description": "Attackers can bypass normal vehicle communication channels by exfiltrating data through alternative network paths. For instance, while a vehicle may typically communicate with cloud services via a telematics LTE module, attackers might exploit Wi-Fi, Bluetooth, or separate mobile network connections to steal data. \n This technique is particularly relevant in automotive systems when data theft occurs through channels outside the vehicle's monitoring systems. For example, a malicious app on the vehicle's Android system could funnel sensitive data to another app with Internet access, or an OBD-II-connected device could transmit CAN data through its own cellular connection.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0022",
+					"description": "Researchers used a malicious self-diagnostic app and attacker's server to exfiltrate CAN data through the smartphone's mobile network (3G/4G/LTE), which differs from the typical vehicle backend network."
+				},
+				{
+					"reference ID": "RE0045",
+					"description": "Researchers demonstrated that third-party apps on Android Automotive can exploit system intents to force other apps with Internet access to leak data. This technique bypasses permission controls and enables data exfiltration without direct network access."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0022", "RE0045"]
+        },
+		{
+            "ID": "T5070",
+            "name": "Exfiltration Over C2 Channel",
+            "short_description": "Adversaries may exfiltrate data using the same communication channel established for command and control (C2) purposes",
+            "full_description": "In automotive environments, command and control (C2) channels may include cloud-based APIs (e.g., Tesla API), compromised telematics units over cellular networks, OBD-II-based interfaces, or custom protocols such as IRC. Once the C2 connection is active, attackers may retrieve GPS location, microphone recordings, fleet data or diagnostic information directly through the same pathway used to issue commands.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+                {
+					"reference ID": "RE0038",
+					"description": "Researcher used legitimate Tesla API credentials from third-party app misconfigurations to access multiple vehicles remotely. Through the same API channel, the attacker issued commands (e.g., unlock doors, disable sentry mode) and exfiltrated GPS location data."
+				},
+				{
+					"reference ID": "RE0010",
+					"description": "Researchers modified the telematics ECU to connect to an IRC server over a cellular data connection. The vehicle could then exfiltrate GPS location and in-cabin audio to the IRC server"
+				}
+            ],
+            "reference ID": ["RE0010", "RE0038"]
         },
 		{
             "ID": "T5068",
             "name": "Automated Exfiltration",
-            "description": "Exploiting software vulnerabilities to gain access.",
+            "short_description": "Adversaries may exfiltrate collected data through automated mechanisms embedded in malicious code, using pre-defined intervals or triggers.",
+            "full_description": "The data may include sensitive information like location, sensor logs, and cabin audio. Attackers can use automated routines embedded in malicious software deployed in AV systems. After collecting data from ECUs or sensors, the malicious code can initiate exfiltration at set intervals or specific triggers without requiring additional attacker interaction. \n This automated exfiltration can occur through cellular, Wi-Fi, or Internet-based channels via compromised telematics units, infotainment systems, or connected mobile applications. The malicious application may also delegate transmission to another component with network access to bypass permission controls. \n While this technique emphasizes automated exfiltration, it typically works in conjunction with other methods like Exfiltration Over C2 Channel or Exfiltration Over Other Network Medium.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
-            "mitigation ID": [
-                "M2001"
-            ],
+            "mitigation ID": [],
             "example": [
                 {
-                    "reference ID": "EX1001",
-                    "description": "Attacker exploited a firmware vulnerability to gain control."
-                }
+					"reference ID": "RE0010",
+					"description": "Researchers modified telematics exploit payload to download and run a small IRC client post-compromise. The code allows them to periodically “tweets” the GPS location of the vehicle and another that records cabin audio conversations and sends the recorded data to our servers over the Internet."
+				},
+				{
+					"reference ID": "RE0045",
+					"description": "Researchers developed a malicious app that records audio for every 5 seconds and automatically exfiltrates it to an attacker-controlled server using intent-based redirection. The app does not require Internet permission, however, it relied on other apps to carry out the transmission."
+				}
             ],
-            "reference ID": [
-                "T1001"
-            ]
+            "reference ID": ["RE0010","RE0045"]
         },
 		{
             "ID": "T5069",
@@ -1732,6 +1900,82 @@
     "sub-techniques": [
 		{
             "ID": "T5005.001",
+            "name": "LIDAR Spoofing and Replay",
+            "short_description": "Adversaries may spoof or replay LIDAR signals to inject false objects or alter depth perception.",
+            "full_description": "LIDAR spoofing and replay attacks exploit the system’s reliance on laser-based sensing to manipulate object detection and depth perception. Spoofing attacks introduce false LIDAR pulses that create phantom objects or alter measured distances, misleading the vehicle’s perception of its surroundings. Replay attacks involve capturing genuine LIDAR signals and retransmitting them with a delay or from a different location, causing incorrect environmental mapping. \n The impact of these attacks includes misleading obstacle detection, incorrect navigation decisions, and potential safety risks. However, LIDAR attacks typically affect only the perception layer and do not directly compromise other vehicle systems unless the false data is misinterpreted at higher decision-making levels.",
+            "created": "03/01/2023",
+            "modified": "03/01/2024",
+            "mitigation ID": [],
+            "example": [
+                {
+                    "reference ID": "RE0017",
+                    "description": "LIDAR Replay Attack - Researchers intercept and retransmit LiDAR pulses from a different location, creating false reflections at unintended positions."
+                },
+				{
+                    "reference ID": "RE0017",
+                    "description": "LIDAR Spoofing Attack - Researchers use a pulse generator to synchronize with the LiDAR's scan cycle and inject false echoes, tricking the system into detecting nonexistent obstacles."
+                }
+            ],
+            "reference ID": ["RE0017"]
+        },
+		{
+            "ID": "T5005.002",
+            "name": "Ultrasonic Spoofing",
+            "short_description": "Adversaries may inject synthetic ultrasonic signals to create false obstacle detections.",
+            "full_description": "Ultrasonic sensors are used for short-range detection and collision avoidance. These sensors can be exploited through three main techniques: spoofing, jamming, and blinding. In spoofing attacks, attackers transmit false ultrasonic signals to create fake object detections or alter measured distances, deceiving the vehicle about nearby obstacles. This attack can have serious consequences—vehicles may fail to detect obstacles, measure distances incorrectly, or face collision risks. However, ultrasonic attacks typically remain limited to the perception system and don't affect other vehicle systems or decision-making processes.",
+            "created": "03/01/2023",
+            "modified": "03/01/2024",
+            "mitigation ID": [],
+            "example": [
+				{
+                    "reference ID": "RE0021",
+                    "description": "Ultrasonic Spoofing attack - Researchers injects synthetic ultrasonic signals with modified frequency modulation patterns to create false object detections or alter measured distances."
+                }
+            ],
+            "reference ID": [ "RE0021"]
+        },
+		{
+            "ID": "T5005.003",
+            "name": "RADAR Spoofing and Replaying",
+            "short_description": "Adversaries may inject or replay radar signals to mislead object detection.",
+            "full_description": "Radar is a sensor in autonomous vehicles for detecting objects, measuring distances, and enabling adaptive cruise control. Spoofing involves sending fake radar signals to create false detections or wrong distance measurements. Replay attacks work by capturing real radar signals and sending them back with changes or delays, creating phantom objects or incorrect distance readings. \n These attacks can degrade object detection, distort the vehicle's perception of its surroundings, and cause navigation errors. \n While modern automotive radar systems, including millimeter-wave radar are built to resist interference, these attacks remain a threat mainly to the vehicle's perception system and do not directly affect other critical vehicle componentss",
+            "created": "03/01/2023",
+            "modified": "03/01/2024",
+            "mitigation ID": [],
+            "example": [
+				{
+                    "reference ID": "RE0021",
+                    "description": "Millimeter-Wave Radar Spoofing attack - Researchers injects synthetic radar signals with altered frequency modulation patterns, tricking the radar into detecting false objects or incorrect distances."
+                },
+				{
+                    "reference ID": "RE0021",
+                    "description": "Millimeter-Wave Radar Replaying attack - Researchers captures and retransmits radar signals with a delay, creating ghost objects at manipulated distances to deceive obstacle detection systems.."
+                }
+            ],
+            "reference ID": ["RE0021"]
+        },
+		{
+            "ID": "T5005.004",
+            "name": "Motion and Position Sensors",
+            "short_description": "Adversaries may manipulate motion and position sensors to alter a vehicle's perceived state.",
+            "full_description": "Adversaries may spoof or disrupt motion and position sensors such as IMUs (gyroscope, accelerometer, magnetometer) or GPS to mislead the vehicle’s state estimation systems. \n These attacks can be conducted externally, without accessing the internal network, and often serve as the initial vector for follow-on impact such as control deviation or mission failure.",
+            "created": "03/01/2023",
+            "modified": "03/01/2024",
+            "mitigation ID": [],
+            "example": [
+                {
+                    "reference ID": "RE0015",
+                    "description": "Researchers injected false inertial sensor readings during flight, causing incorrect roll estimation and crash of the quadrotor."
+                },
+				{
+                    "reference ID": "RE0015",
+                    "description": "Researchers spoofed GPS signals to cause the ground vehicle to deviate from its planned mission and fail to return to home base."
+                }
+            ],
+            "reference ID": ["RE0015"]
+        },
+		{
+            "ID": "T5006.001",
             "name": "CAMERA Blinding or confusing",
             "short_description": "Adversaries may manipulate camera sensors using light-based interference to degrade object detection and perception accuracy.",
             "full_description": "In a CAMERA blinding or confusing attack, adversaries exploit the vulnerabilities of camera-based perception by using intense light sources or rapid light bursts. The impact of this attack includes failure to detect lane markings, obstacles, and traffic signs, leading to potential navigation errors or safety risks. Additionally, repeated exposure to high-intensity light may degrade the sensor’s long-term performance. \n However, this type of attack typically affects only the camera itself and does not propagate further into the vehicle’s internal systems, as the interference is limited to the sensor’s ability to capture and process visual data",
@@ -1754,32 +1998,12 @@
 				
             ],
             "reference ID": ["RE0017", "RE0021"]
-        },
+        },		
 		{
-            "ID": "T5005.002",
-            "name": "LIDAR Spoofing and Replay",
-            "short_description": "Adversarials may manipulate LIDAR signals through spoofing or replay to create false object detections or mislead distance measurements",
-            "full_description": "LIDAR spoofing and replay attacks exploit the system’s reliance on laser-based sensing to manipulate object detection and depth perception. Spoofing attacks introduce false LIDAR pulses that create phantom objects or alter measured distances, misleading the vehicle’s perception of its surroundings. Replay attacks involve capturing genuine LIDAR signals and retransmitting them with a delay or from a different location, causing incorrect environmental mapping. \n The impact of these attacks includes misleading obstacle detection, incorrect navigation decisions, and potential safety risks. However, LIDAR attacks typically affect only the perception layer and do not directly compromise other vehicle systems unless the false data is misinterpreted at higher decision-making levels.",
-            "created": "03/01/2023",
-            "modified": "03/01/2024",
-            "mitigation ID": [],
-            "example": [
-                {
-                    "reference ID": "RE0017",
-                    "description": "LIDAR Replay Attack - Researchers intercept and retransmit LiDAR pulses from a different location, creating false reflections at unintended positions."
-                },
-				{
-                    "reference ID": "RE0017",
-                    "description": "LIDAR Spoofing Attack - Researchers use a pulse generator to synchronize with the LiDAR's scan cycle and inject false echoes, tricking the system into detecting nonexistent obstacles."
-                }
-            ],
-            "reference ID": ["RE0017"]
-        },
-		{
-            "ID": "T5005.003",
-            "name": "Ultrasonic Spoofing, Jamming and Blinding",
-            "short_description": "Adversarials may manipulate ultrasonic sensors using spoofing, jamming, or blinding techniques to interfere with distance measurements and obstacle detection.",
-            "full_description": "Ultrasonic sensors are used for short-range detection and collision avoidance. These sensors can be exploited through three main techniques: spoofing, jamming, and blinding. In spoofing attacks, false ultrasonic signals create fake object detections or change measured distances, fooling the vehicle about nearby obstacles. Jamming attacks use constant high-frequency noise to overwhelm the sensor, preventing it from working properly. Blinding attacks use thin objects or acoustic materials to physically block the sensor, making it unable to detect obstacles. \n These attacks can cause serious problems: the vehicle may fail to detect obstacles, measure distances incorrectly, or face collision risks. Yet ultrasonic attacks typically stay limited to the perception system and don't affect other vehicle systems or decision-making processes.",
+            "ID": "T5006.002",
+            "name": "Ultrasonic Jamming and Blinding",
+            "short_description": "Adversaries may jam ultrasonic sensors with noise or block them physically to impair obstacle detection.",
+            "full_description": "Ultrasonic sensors are used for short-range detection and collision avoidance. Jamming attacks use constant high-frequency noise to overwhelm the sensor, preventing it from working properly. Blinding attacks use thin objects or acoustic materials to physically block the sensor, making it unable to detect obstacles. \n These attacks can cause serious problems: the vehicle may fail to detect obstacles, measure distances incorrectly, or face collision risks. Yet ultrasonic attacks typically stay limited to the perception system and don't affect other vehicle systems or decision-making processes.",
             "created": "03/01/2023",
             "modified": "03/01/2024",
             "mitigation ID": [],
@@ -1791,19 +2015,15 @@
 				{
                     "reference ID": "RE0021",
                     "description": "Ultrasonic Jamming attack - Researchers uses an Arduino-based device to continuously transmit high-frequency sound waves, disrupting ultrasonic sensor function and preventing obstacle detection."
-                },
-				{
-                    "reference ID": "RE0021",
-                    "description": "Ultrasonic Spoofing attack - Researchers injects synthetic ultrasonic signals with modified frequency modulation patterns to create false object detections or alter measured distances."
                 }
             ],
             "reference ID": ["RE0018", "RE0021"]
         },
 		{
-            "ID": "T5005.004",
-            "name": "RADAR Spoofing, Jamming and Replaying",
-            "short_description": "Adversarials may manipulate RADAR signals through spoofing, jamming, or replay techniques to interfere with object detection and distance measurement",
-            "full_description": "Radar is a sensor in autonomous vehicles for detecting objects, measuring distances, and enabling adaptive cruise control. Attackers can exploit radar-based perception through three main types of attacks: spoofing, jamming, and replay. Spoofing involves sending fake radar signals to create false detections or wrong distance measurements. Jamming overwhelms the system with powerful electromagnetic interference, preventing it from detecting obstacles. Replay attacks work by capturing real radar signals and sending them back with changes or delays, creating phantom objects or incorrect distance readings. \n These attacks can degrade object detection, distort the vehicle's perception of its surroundings, and cause navigation errors. \n While modern automotive radar systems, including millimeter-wave radar are built to resist interference, these attacks remain a threat mainly to the vehicle's perception system and do not directly affect other critical vehicle componentss",
+            "ID": "T5006.003",
+            "name": "RADAR Jamming",
+            "short_description": "Adversaries may transmit strong signals to jam RADAR, causing loss of detection.",
+            "full_description": "Radar is a sensor in autonomous vehicles for detecting objects, measuring distances, and enabling adaptive cruise control. Jamming overwhelms the system with powerful electromagnetic interference, preventing it from detecting obstacles. \n These attacks can degrade object detection, distort the vehicle's perception of its surroundings, and cause navigation errors. \n While modern automotive radar systems, including millimeter-wave radar are built to resist interference, these attacks remain a threat mainly to the vehicle's perception system and do not directly affect other critical vehicle componentss",
             "created": "03/01/2023",
             "modified": "03/01/2024",
             "mitigation ID": [],
@@ -1811,38 +2031,10 @@
                 {
                     "reference ID": "RE0021",
                     "description": "Millimeter-Wave Radar Jamming attack - Researchers transmit high-power electromagnetic signals to interfere with the vehicle’s radar system, preventing accurate object detection."
-                },
-				{
-                    "reference ID": "RE0021",
-                    "description": "Millimeter-Wave Radar Spoofing attack - Researchers injects synthetic radar signals with altered frequency modulation patterns, tricking the radar into detecting false objects or incorrect distances."
-                },
-				{
-                    "reference ID": "RE0021",
-                    "description": "Millimeter-Wave Radar Replaying attack - Researchers captures and retransmits radar signals with a delay, creating ghost objects at manipulated distances to deceive obstacle detection systems.."
                 }
             ],
             "reference ID": ["RE0021"]
-        },
-		{
-            "ID": "T5005.005",
-            "name": "Motion and Position Sensors",
-            "short_description": "Adversaries may manipulate motion and position sensors to alter a vehicle's perceived state.",
-            "full_description": "Adversaries may spoof or disrupt motion and position sensors such as IMUs (gyroscope, accelerometer, magnetometer) or GPS to mislead the vehicle’s state estimation systems. \n These attacks can be conducted externally, without accessing the internal network, and often serve as the initial vector for follow-on impact such as control deviation or mission failure.",
-            "created": "03/01/2023",
-            "modified": "03/01/2024",
-            "mitigation ID": [],
-            "example": [
-                {
-                    "reference ID": "RE0015",
-                    "description": "Researchers injected false inertial sensor readings during flight, causing incorrect roll estimation and crash of the quadrotor."
-                },
-				{
-                    "reference ID": "RE0015",
-                    "description": "Researchers spoofed GPS signals to cause the ground vehicle to deviate from its planned mission and fail to return to home base."
-                }
-            ],
-            "reference ID": ["RE0015"]
-        },
+        },		
 		{
             "ID": "T5004.001",
             "name": "Adversarial Sensor Attack",
@@ -1894,8 +2086,8 @@
 		{
             "ID": "T5007.001",
             "name": "Rogue Ground Station",
-            "short_description": "",
-            "full_description": "",
+            "short_description": "Adversaries may deploy rogue ground stations to gain unauthorized access to UGVs through wireless communications.",
+            "full_description": "These attacks exploit the communication channels between a vehicle and its legitimate ground station. \n Using rogue ground stations, attackers can inject, override, or replay control packets to alter UGV paths, cancel missions, or prevent data collection. These attacks are conducted purely over-the-air without requiring access to the vehicle's internal systems, typically within physical range (e.g., line-of-sight or directed antenna cone).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
             "sub-technique ID": [],
@@ -1906,7 +2098,7 @@
                     "description": "Researchers sends deauthentication frames to disconnect the Tesla from its Wi-Fi network"
                 }
             ],
-            "reference ID": ["RE0024"]
+            "reference ID": []
         },
 		{
             "ID": "T5007.002",
@@ -2129,7 +2321,41 @@
 				}
             ],
             "reference ID": ["RE0005", "RE0041"]
-        }
+        },
+		{
+            "ID": "T5050.001",
+            "name": "CAN Sniffing",
+            "short_description": "Adversaries passively monitor the CAN bus to collect message traffic between ECUs and gain knowledge about the vehicle’s internal network structure.",
+            "full_description": "CAN sniffing refers to the passive interception of Controller Area Network (CAN) traffic within a vehicle. Adversaries may gain physical or remote access to the CAN bus, such as through the OBD-II port or an exposed ECU and use diagnostic tools to observe real-time communication between Electronic Control Units (ECUs). This includes both operational control messages (e.g., throttle, braking) and diagnostic exchanges between the gateway and ECUs. \n Through this method, adversaries aim to identify message IDs, patterns, and ECU functions to map out the vehicle's internal communication structure. \n This discovery process can serve as a precursor for further attacks, such as message spoofing, replay, or function manipulation.",
+            "created": "25/02/2025",
+            "modified": "25/02/2025",
+            "sub-technique ID": [],
+            "mitigation ID": [],
+            "example": [
+				{
+					"reference ID": "RE0016",
+					"description": "Researchers sniff communication to capture the CAN messages between ECUs and diagnostic messages between ECUs and gateway."
+				},
+				{
+					"reference ID": "RE0022",
+					"description": "Researchers sniff and capture CAN messages from the vehicle via OBD-II port and diagnostic application."
+				},
+				{
+					"reference ID": "RE0044",
+					"description": "Researchers describes how attackers can connect to the OBD-II port and use sniffing tools like can-utils to monitor CAN traffic. By observing message IDs and data patterns."
+				},
+				{
+					"reference ID": "RE0011",
+					"description": "Researchers passively sniffed CAN messages and UDS data frames on the CAN-CH Bus to analyse UDS request and response."
+				},
+				{
+					"reference ID": "RE0014",
+					"description": "Researchers used sniffers to observe CAN traffic on both CAN-C and CAN-IHS buses, allowing them to identify messages related to steering, braking, and other physical control systems."
+				}
+
+            ],
+            "reference ID": ["RE0014","RE0016", "RE0022", "RE0044", "RE0011"]
+		}
     ],
     "mitigations": [
         {
@@ -2458,8 +2684,34 @@
 			"cite": "N. Timmers, “There Will Be Glitches Extracting and Analyzing Automotive Firmware Efficiently,” BlackHat, pp. 1–7, 2018.",
 			"link": "https://raelize.com/upload/research/2018/2018_escareu_There-Will-Be-Glitches-Whitepaper.pdf",
 			"description": "This paper demonstrates how hardware fault injection attacks can be used to extract and analyse automotive firmware. The authors use an instrument cluster ECU as their target and focus on extracting firmware and learning how the ECU behaves internally. They demonstrate Voltage Fault Injection to successfully extract firmware from the target. Once firmware was obtained, they built a custom emulator to efficiently reverse-engineer the firmware outside of the vehicle hardware. Through dynamic analysis like taint tracking, execution tracing, and CAN fuzzing, they identify security mechanisms and even extract ECU secrets like keys."
+		},
+		{
+			"ID": "RE0044",
+			"name": "The Car Hacker ’ s Handbook",
+			"cite": "C. Smith, N. Starch, and P. Isbn, The Car Hacker ’ s Handbook, no. April. 2016.",
+			"link": "https://www.amazon.com/Car-Hackers-Handbook-Penetration-Tester/dp/1593277032",
+			"description": "The book provides a comprehensive guide to automotive penetration testing. The authors introduce core vehicle components and protocols like CAN, LIN, and OBD-II, along with tools and techniques for reverse engineering CAN traffic. It details how to sniff CAN messages using tools like can-utils, interpret message IDs, and identify control functions by monitoring changes during vehicle interaction (e.g., pressing pedals, toggling switches). \n The book also explores attack surfaces including diagnostic functions, telematics units, infotainment systems, and firmware updates. It covers wireless and physical access methods, ECU reprogramming, and building low-cost test benches."
+		},
+		{
+			"ID": "RE0045",
+			"name": "On the road with third-party apps: Security analysis of an in-vehicle app platform",
+			"cite": "B. Eriksson, J. Groth, and A. Sabelfeld, “On the road with third-party apps: Security analysis of an in-vehicle app platform,” VEHITS 2019 - Proc. 5th Int. Conf. Veh. Technol. Intell. Transp. Syst., no. Vehits, pp. 64–75, 2019, doi: 10.5220/0007678200640075.",
+			"link": "https://doi.org/10.5220/0007678200640075",
+			"description": "This paper explores the security of enabling third-party applications in modern vehicles. It focuses on Android Automotive, an emerging platform integrated directly into vehicles rather than running on connected smartphones. The authors perform a systematic security analysis of the Android Automotive OS, using a real-world case study of Volvo's Android-based infotainment system. \n The paper outlines three main attack categories: \n\t (1) Disturbance attacks: These include SoundBlast and Media Hijack. SoundBlast uses AudioManager to play loud or repeated audio that may distract the driver. Media Hijack interrupts other apps' media playback by manipulating the media session. \n\t (2) Denial-of-Service attacks: These include Fork Bomb and Service Disruption. Fork Bomb creates excessive processes to crash system components, while Service Disruption crashes media apps like Spotify by abusing their APIs. \n\t (3) Exfiltration attacks (Privacy): These include Audio Recording + Upload and No-INTERNET-Exfiltration. Audio Recording + Upload records audio and exfiltrates it using an implicit intent to another app that has Internet permission. No-INTERNET-Exfiltration bypasses permission control by leveraging system apps to leak sensitive data like audio recordings or location. \n The authors analyze how Android Automotive exposes functionality through undocumented or poorly protected APIs. They demonstrate that sensitive operations often lack permission checks, APIs like AudioManager are overly permissive, and app interactions via Intents can be abused for lateral functionality. They also introduce AutoTame, a tool that analyzes apps for misuse of platform APIs and unsafe behaviors. The tool employs FlowDroid and Amandroid for taint analysis, identifying information flows from sensitive sources (like microphones) to potential exfiltration sinks."
+		},
+		{
+			"ID": "RE0046",
+			"name": "CAN Message Injection",
+			"cite": "C. Miller and C. Valasek, “CAN Message Injection,” pp. 1–29, 2016, [Online].",
+			"link": "http://illmatics.com/can%20message%20injection.pdf",
+			"description": "This paper presents a detailed investigation into CAN message injection attacks using real-world vehicles. The researchers demonstrate how to inject crafted CAN messages from a compromised ECU to control target ECUs. Rather than fully reverse-engineering messages, they record normal CAN traffic (such as while pressing brakes) and replay those messages to replicate the action. They emphasize that the timing and frequency of messages are critical to overriding legitimate ones. The researchers show that malicious reprogramming of certain ECUs (such as the Parking Assist Module) enables persistent control. They also explore how gateway ECUs and bus segmentation affect an attacker's ability to move laterally or inject messages across networks. Their demonstrations include unlocking doors, applying brakes, changing gear positions, and disabling ABS through message injection. The attacks also encompass injecting messages from the telematics unit or compromised head unit to critical ECUs, as well as achieving persistent compromise through firmware reflashing."
+		},
+		{
+			"ID": "RE0047",
+			"name": "Worm Epidemics in Vehicular Networks",
+			"cite": "O. Trullols-Cruces, M. Fiore, and J. M. Barcelo-Ordinas, “Worm Epidemics in Vehicular Networks,” IEEE Trans. Mob. Comput., vol. 14, no. 10, pp. 2173–2187, 2015, doi: 10.1109/TMC.2014.2375822.",
+			"link": "http://doi.org/10.1109/TMC.2014.2375822",
+			"description": "This paper introduces the risk of mobile worm epidemics in vehicular networks. Unlike traditional computer worms that scan IP addresses, vehicular worms leverage vehicle mobility to discover nearby targets. The authors examine two propagation modes: broadcast carriers, which infect all nearby vehicles simultaneously, and unicast carriers, which infect one target at a time. Using real traffic data—including vehicle speed, inter-arrival time, communication range, and penetration rate—the authors develop a numerical model to estimate worm propagation speed. Their results show that even with a minimal penetration rate of 1%, a relatively fast worm (1-second propagation latency) can infect most connected vehicles in a region like Zurich within minutes. The location of initial infection proves crucial to spread speed, with outbreaks starting in high-traffic areas achieving faster and wider propagation."
 		}
-                
-                
     ]
 }
