@@ -158,6 +158,11 @@ td a:hover {
 	color: #2e4e70;
 }
 
+.section-info{
+	color: #2e4e70;
+	font-style: italic;
+	font-size: 10px;
+}
 
 #matrix-container {
     display: flex;
