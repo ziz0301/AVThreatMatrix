@@ -7,7 +7,7 @@
             "full_description": "Manipulate Environment consists of techniques where adversaries exploit external factors, such as wireless networks, connected infrastructure, and sensory/signal inputs, to deceive, disrupt, or compromise vehicle security without direct physical interference or initial access.\nThese techniques involves deploying rogue devices, intercepting or manipulating data transmissions, and exploiting signal inputs to mislead vehicle control systems or AI-based perception models.\nBy influencing the vehicle’s environment rather than altering its internal systems, adversaries can create conditions that enable additional attack tactics and techniques.\nThis tactic was adapted from AUTO-ISAC ATM.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5000","T5001","T5002","T5003","T5004","T5005","T5006"]
+            "technique ID": ["T5004","T5002","T5003","T5006","T5000","T5001","T5005"]
         },
         {
             "ID": "TA0501",
@@ -16,7 +16,7 @@
             "full_description": "Initial Access consists of techniques that adversaries use as entry vectors to establish a foothold within UGV systems or networks.\nEntry points targeted by adversaries include telematics units, infotainment systems, and wireless interfaces (Wi-Fi, Bluetooth, or cellular connections). They may exploit vulnerabilities in manufacturer services, mobile applications, or cloud-based APIs that handle remote access and vehicle data. Physical interfaces, such as OBD-II ports, removable devices, and aftermarket dongles, can also be used as techniques to gain initial unauthorised access to the system.\nFootholds gained through initial access may enable additional attack tactics and techniques.\nThis tactic was adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5007","T5008","T5009","T5010","T5011","T5012","T5013","T5014","T5015","T5016","T5017"]
+            "technique ID": ["T5012","T5015","T5009","T5013","T5011","T5008","T5017","T5010","T5014","T5016","T5007"]
         },
         {
             "ID": "TA0502",
@@ -25,7 +25,7 @@
             "full_description": "Execution consists of techniques that allow adversary-controlled code to run on a vehicle’s service, network, control unit, application, firmware, or other asset.\nThese attacks may involve direct code injection, unauthorised commands, or malicious payloads delivered through network interfaces, firmware updates, or compromised software. \nAttackers can exploit communication protocols such as the Controller Area Network (CAN) and Unified Diagnostic Services (UDS) to inject malicious messages and manipulate vehicle behUGViour. They may also execute code on vulnerable telematics units, infotainment systems, OTA update services or mobile-connected services.\nAdditionally, adversaries can tamper with UGV sensor inputs, such as LiDAR, radar, and GPS, to disrupt perception systems and trigger unintended vehicle responses.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5018","T5019","T5020","T5021","T5022","T5023","T5024","T5025","T5026","T5027","T5028"]
+            "technique ID": ["T5019","T5020","T5024","T5028","T5023","T5022","T5024","T5021","T5018","T5026","T5027"]
         },
         {
             "ID": "TA0503",
@@ -34,7 +34,7 @@
             "full_description": "Persistence consists of techniques that enable long-term access, allowing adversaries to execute future attacks or retain control over compromised components.\nAdversaries can achieve persistence through various means, such as malicious OTA updates, unauthorised firmware modifications, or backdoors in telematics units and ECUs. These backdoors may remain active even after system reboots.\nFor example, attackers may tamper with firmware integrity mechanisms like Secure Boot to prevent recovery or install persistent malware in infotainment or telematics systems. This allows them to conduct long-term surveillance, execute unauthorised commands, and move laterally across the vehicle network.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5029","T5030","T5031","T5032","T5033","T5034","T5035","T5036","T5037"]
+            "technique ID": ["T5029","T5030","T5035","T5031","T5033","T5037","T5032","T5034","T5036"]
         },
         {
             "ID": "TA0504",
@@ -43,7 +43,7 @@
             "full_description": "Privilege escalation consists of techniques that allow adversaries to gain higher-level access within an UGV system or network. With elevated privileges, they can execute administrative commands, control vehicle components, and disable security measures.\nAdversaries often start with limited access and escalate their privileges by exploiting system weaknesses, misconfigurations, or vulnerabilities.\nExamples of elevated access include: User accounts with extended permissions, root level of infotainment system, root level of telematic system, root level of central gateway system. Once attackers gain administrative access, they can run arbitrary commands, alter vehicle firmware, and disable security features to enable further attacks.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5038","T5039","T5040"]
+            "technique ID": ["T5039","T5040","T5038"]
         },
         {
             "ID": "TA0505",
@@ -52,7 +52,7 @@
             "full_description": "Defense evasion consists of techniques adversaries use to disable or bypass security mechanisms within an UGV system. Unlike traditional ATT&CK approaches that focus on UGVoiding detection, these methods allow attackers to directly neutralize security controls. This enables them to execute malicious code, advance their attacks, or manipulate the system without interference.\nCommon techniques include:\n\t- Disabling or bypassing security mechanisms in the telematics system to maintain access.\n\t- Exploiting software update processes and code integrity checks to insert malicious code undetected.\n\t- Disabling vehicle IDS to evade monitoring and alerts.\n\t- Bypassing security controls in diagnostic functions to perform unauthorised operations.\nThis tactic is adapted from AUTO-ISAC ATM.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5041","T5042","T5043","T5044"]
+            "technique ID": ["T5041","T5044","T5042","T5043"]
         },
         {
             "ID": "TA0506",
@@ -61,7 +61,7 @@
             "full_description": "Credential access consists of techniques such as compromising mobile apps or wireless network to steal authentication credentials, exploiting vulnerabilities in keyless entry systems to gain unauthorised vehicle access, and intercepting communication to obtain session tokens or API keys. These methods enable attackers to bypass security controls, execute unauthorised actions, and further infiltrate the system.\nCommon credential access techniques may include:\n\t- Compromising mobile apps or wireless network to intercept authentication credentials like tokens, passwords, and keys.\n\t- Exploiting vulnerabilities in key fob systems or remote keyless entry (RKE) to gain unauthorised access.\n\t- Targeting mobile apps or infotainment systems to steal sensitive information like vehicle identification numbers (VINs).\n\t- Intercepting vehicle-to-cloud communications to obtain session tokens or API keys that enable backend system access.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5045","T5046","T5047","T5048","T5049"]
+            "technique ID": ["T5045","T5047","T5048","T5046","T5049"]
         },
 		{
             "ID": "TA0507",
@@ -70,7 +70,7 @@
             "full_description": "Discovery consists of techniques for exploring a vehicle's network, interfaces, and communication protocols to identify vulnerable components within the autonomous vehicle.\nThrough analysing system structures, scanning networks, and probing interfaces, adversaries can map attack surfaces and find exploitable vulnerabilities.\nCommon discovery techniques include intercepting and analysing network traffic or CAN messages to understand vehicle communication structures, scanning and mapping internal vehicle networks to identify vulnerabilities and access points, and exploring interfaces like OBD-II ports, telematics systems, and sensors to find misconfigurations or security weaknesses.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5050","T5051","T5052"]
+            "technique ID": ["T5052","T5050","T5051"]
         },
         {
             "ID": "TA0508",
@@ -79,7 +79,7 @@
             "full_description": "Lateral movement consists of techniques that allow adversaries to traverse the vehicle’s internal network, pivot between components to access additional resources and escalate their attack. \nBy exploiting vulnerabilities, leveraging trusted communication channels, remote services or uploading malicious tools, attackers can extend their control and compromise additional vehicle functions.\nCommon lateral movement techniques include: moving from infotainment or telematics systems to other ECUs to control critical functions (via SSH, Telnet, direct connections, or shared CAN buses); transitioning from non-critical to critical CAN buses to access safety-critical components through diagnostic functions; and uploading tools to the head unit for exploitation, control, and automated spreading across connected vehicles through cellular networks.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5053","T5054","T5055"]
+            "technique ID": ["T5054","T5053","T5055"]
         },
         {
             "ID": "TA0509",
@@ -88,7 +88,7 @@
             "full_description": "Collection consists of techniques used to capture, extract, and analyse data from vehicle networks, internal systems, and external interfaces. By obtaining critical information, attackers can gain insights into vehicle operations, exfiltrate data, and plan further exploits.\nCommon data sources include CAN bus messages, important UGV files like VIN numbers and system logs, and vehicle data such as location, camera images, phone calls, software/firmware versions, and real-time status.\nAdversaries typically collect data through network sniffing, exploiting web service vulnerabilities, or directly accessing local vehicle systems. \nThis tactic is adapted from AUTO-ISAC ATM.",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5056","T5057","T5058","T5059"]
+            "technique ID": ["T5059","T5056","T5058","T5057"]
         },
         {
             "ID": "TA0510",
@@ -97,7 +97,7 @@
             "full_description": "Command and control consists of techniques that adversaries use to maintain communication (typically remote) and issue malicious commands to vehicles. By establishing covert communication channels, attackers can manipulate UGV functions, steal data, or launch additional attacks while UGVoiding detection.\nCommon command and control techniques include using removable devices, modifying firmware, establishing reverse shells, or installing malicious applications to gain and maintain long-term remote control over compromised UGV systems.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5060","T5061","T5062"]
+            "technique ID": ["T5062","T5060","T5061"]
         },
 		{
             "ID": "TA0511",
@@ -106,7 +106,7 @@
             "full_description": "Impair Process Control consists of techniques that interfere with the vehicle's operational processes by altering control logic, modifying system parameters, or manipulating reporting mechanisms. These techniques can result in unsafe driving conditions, compromised safety features, or loss of vehicle control.\nCommon techniques for this tactic include replaying normal diagnostic responses to emulate a healthy airbag system, or injecting malicious code into the control program to corrupt vehicle stability and response.\nThis tactic is adapted from MITRE ATT&CK (ICS domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5063","T5064"]
+            "technique ID": ["T5064","T5063"]
         },
 		{
             "ID": "TA0512",
@@ -124,7 +124,7 @@
             "full_description": "Exfiltration refers to techniques that adversaries use to steal data from vehicles. After collecting data, adversaries typically package it using compression and encryption to UGVoid detection during removal.\nData can be exfiltrated manually or through automated processes using command and control channels or alternative pathways. Adversaries may exploit various vehicle connectivity features, such as mobile applications, telematics data loggers, cellular networks, Wi-Fi, or Bluetooth, to extract and transmit stolen information.\nThis tactic is adapted from MITRE ATT&CK (Enterprise domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5067","T5068"]
+            "technique ID": ["T5068","T5067"]
         },    
         {
             "ID": "TA0514",
@@ -133,7 +133,7 @@
             "full_description": "Impact consists of techniques that degrade vehicle functionality, compromise safety, or exploit vulnerabilities at scale. Through malicious commands, system output manipulation, or disruption of essential operations, attackers can inflict physical harm, cause financial losses, and create widespread security breaches, threatening safety, security, and privacy.\nCommon impact techniques include forcing vehicles off-road, causing accidents, initiating emergency shutdowns, and impairing safe operation. Attackers may also steal sensitive vehicle data, including operational and security-critical information, or exploit vulnerabilities across identical vehicle models to launch large-scale attacks after breaching a single vehicle.\nThis tactic is adapted from MITRE ATT&CK (Enterprise and ICS domain).",
             "created": "25/02/2025",
             "modified": "25/02/2025",
-            "technique ID": ["T5069","T5070","T5071","T5072","T5073","T5074","T5075","T5076","T5077","T5078","T5079","T5080","T5081"]
+            "technique ID": ["T5076","T5078","T5070","T5077","T5073","T5075","T5074","T5072","T5069","T5079","T5071","T5081","T5080"]
         }
     ],
     "techniques": [
