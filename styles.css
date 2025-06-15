@@ -94,11 +94,15 @@ nav ul li a:hover {
 }
 
 h2 {
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 700;
     color: #3c1b5a;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
 }
+
 h3 {
     font-size: 21px;
     font-weight: 700;
@@ -110,6 +114,25 @@ h3 {
 p{
 	font-weight: 300;
 	font-size: 14px;
+}
+
+
+.matrix-toggle {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 12px;
+    font-size: 1.3em;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.matrix-toggle.selected {
+    color: #3c1b5a; /* strong text for selected tab */
+    opacity: 1.0;
+}
+
+.matrix-toggle:not(.selected) {
+    color: #555; /* dimmed text for unselected tab */
+    opacity: 0.5;
 }
 
 table {
@@ -162,9 +185,31 @@ td a:hover {
 	color: #2e4e70;
 	font-style: italic;
 	font-size: 10px;
+	margin-bottom: 10px;
+}
+.section-info p {
+	color: #2e4e70;
+	font-style: italic;
+	font-size: 10px;
 }
 
 #matrix-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+#resilience-matrix-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+#effects-matrix-container {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -206,6 +251,9 @@ td a:hover {
 }
 
 
+
+
+
 /* Popup */
 .popup {
     display: none;
@@ -237,6 +285,21 @@ td a:hover {
     letter-spacing: 0.2px; 
     padding: 5px 10px;
     text-align: justify; 
+}
+p.effectshow {
+    line-height: 1.3; 
+    padding: 0px 2px;
+}
+
+.popup-content a {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: #2e4e70; 
+    text-decoration: none;
+}
+
+.popup-content a:hover {
+    text-decoration: underline;
 }
 
 .popup-content table {
