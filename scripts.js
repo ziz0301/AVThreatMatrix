@@ -55,18 +55,25 @@ document.addEventListener("DOMContentLoaded", function () {
 		const resilienceContainer = document.getElementById("resilience-matrix-container");
 		const effectsContainer = document.getElementById("effects-matrix-container");
 		const effectsHeading = document.getElementById("effects-heading");
-		if (type === "threat") {
-			matrixContainer.removeAttribute("style");
-			resilienceContainer.style.display = "none";
-			effectsContainer.style.display = "none";
-			effectsHeading.style.display = "none";
+		const controlsHeading = document.getElementById("controls-heading");
+		const controlsContainer = document.getElementById("controls-matrix-container");
 
+		if (type === "threat") {
+			if (matrixContainer) matrixContainer.removeAttribute("style");
+			if (resilienceContainer) resilienceContainer.style.display = "none";
+			if (effectsContainer) effectsContainer.style.display = "none";
+			if (effectsHeading) effectsHeading.style.display = "none";
+			if (controlsHeading) controlsHeading.style.display = "none";
+			if (controlsContainer) controlsContainer.style.display = "none";
 			loadTacticsAndTechniques(globalData);
-		} else if (type === "resilience") {
-			resilienceContainer.removeAttribute("style");
-			effectsContainer.removeAttribute("style");
-			effectsHeading.style.display = "block";
-			matrixContainer.style.display = "none";
+		} 
+		else if (type === "resilience") {
+			if (resilienceContainer) resilienceContainer.removeAttribute("style");
+			if (effectsContainer) effectsContainer.removeAttribute("style");
+			if (effectsHeading) effectsHeading.style.display = "block";
+			if (matrixContainer) matrixContainer.style.display = "none";
+			if (controlsHeading) controlsHeading.style.display = "block";
+			if (controlsContainer) controlsContainer.removeAttribute("style");
 			loadNISTMatrix(globalData);
 		}
 	}
@@ -82,13 +89,14 @@ document.addEventListener("DOMContentLoaded", function () {
 			tacticDiv.classList.add("tactic");
 			tacticDiv.innerHTML = `<b><a href="#" onclick="showPopup('${tactic.ID}', 'tactic', globalData)">${tactic.name}</a></b>`;
 			
-			tactic["technique ID"].forEach(techId => {
+			
+			tactic.technique_ids.forEach(techId => {
 				let tech = data.techniques.find(t => t.ID === techId);
 				if (tech) {
 					let techDiv = document.createElement("div");
 					techDiv.classList.add("techniques");					
 					let toggleButton = "";
-					if (tech["sub-technique ID"].length > 0) {
+					if (tech.sub_technique_ids.length > 0) {
 						toggleButton = `<button class="toggle-btn" onclick="toggleSubTechniques(event, '${tech.ID}')">[+]</button>`;
 					}					
 					techDiv.innerHTML = `${toggleButton} <a href="#" onclick="showPopup('${tech.ID}', 'technique', globalData)">${tech.name}</a>`;
@@ -96,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					let subTechContainer = document.createElement("div");
 					subTechContainer.id = `sub-tech-${tech.ID}`;
 					subTechContainer.classList.add("sub-techniques");					
-					tech["sub-technique ID"].forEach(subTechId => {
+					tech.sub_technique_ids.forEach(subTechId => {
 						let subTech = data["sub-techniques"].find(st => st.ID === subTechId);
 						if (subTech) {
 							let subTechDiv = document.createElement("div");
@@ -116,10 +124,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	function loadNISTMatrix(data) {
 		const resilienceContainer = document.getElementById("resilience-matrix-container");
 		const effectsContainer = document.getElementById("effects-matrix-container");
-		if (!resilienceContainer || !effectsContainer || !data.NIST_CRS) return;
+		const controlsContainer = document.getElementById("controls-matrix-container");
+		if (!resilienceContainer || !effectsContainer || !controlsContainer || !data.NIST_CRS ) return;
 
 		resilienceContainer.innerHTML = "";
 		effectsContainer.innerHTML = "";
+		controlsContainer.innerHTML = "";
 
 		const nistTechniques = data.NIST_CRS.techniques || [];
 		const nistApproaches = data.NIST_CRS.approaches || [];
@@ -157,6 +167,78 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 			});
 			effectsContainer.appendChild(effectDiv);
+		});
+		
+		// Load Controls Matrix
+		const highControls = data.NIST_CRS.high_level_controls || [];
+		const lowControls = data.NIST_CRS.low_level_controls || [];
+
+		highControls.forEach(highCtrl => {
+			let highDiv = document.createElement("div");
+			highDiv.classList.add("tactic");
+			highDiv.innerHTML = `<b><a href="#" onclick="showPopup('${highCtrl.id}', 'high-control', globalData)">${toTitleCase(highCtrl.name)}</a></b>`;
+			const higherLevelMap = {};
+			
+			highCtrl.control_ids.forEach(lowId => {
+				const lowCtrl = lowControls.find(lc => lc.id === lowId);
+				if (!lowCtrl) return;
+
+				const namePartsRaw = lowCtrl.name.split("|").map(part => part.trim());
+				const nameParts = namePartsRaw.map(part => toTitleCase(part));
+				const higherName = nameParts[0];
+				const hasSub = nameParts.length === 2;
+				const lowerName = hasSub ? nameParts[1] : null;
+				const safeId = higherName.toLowerCase().replace(/\s+/g, '-');  // consistent toggle ID
+
+				if (!higherLevelMap[higherName]) {
+					const techDiv = document.createElement("div");
+					techDiv.classList.add("techniques");					
+					const labelSpan = document.createElement("span");
+					const subTechContainer = document.createElement("div");
+					subTechContainer.classList.add("sub-techniques");
+					subTechContainer.id = `sub-tech-${safeId}`;
+					subTechContainer.style.display = "none";
+
+					techDiv.appendChild(labelSpan);
+					techDiv.appendChild(subTechContainer);
+					higherLevelMap[higherName] = {
+						techDiv,
+						labelSpan,
+						subTechContainer,
+						idForLink: null,
+						needsToggle: false,
+						safeId: safeId
+					};
+					highDiv.appendChild(techDiv);
+				}
+
+				const entry = higherLevelMap[higherName];
+
+				if (hasSub) {
+					entry.needsToggle = true;
+					const subTechDiv = document.createElement("div");
+					subTechDiv.classList.add("sub-techniques-item");
+					subTechDiv.innerHTML = `<a href="#" onclick="showPopup('${lowCtrl.id}', 'low-control', globalData)">${lowerName}</a>`;
+					entry.subTechContainer.appendChild(subTechDiv);
+				} else {
+					entry.idForLink = lowCtrl.id;
+				}
+			});
+
+			// After processing, set label with correct toggle + link
+			for (const [higherName, entry] of Object.entries(higherLevelMap)) {
+				const { labelSpan, needsToggle, idForLink, safeId } = entry;
+				const toggle = needsToggle
+					? `<button class="toggle-btn" onclick="toggleSubTechniques(event, '${safeId}')">[+]</button>`
+					: "";
+
+				const label = idForLink
+					? `<a href="#" onclick="showPopup('${idForLink}', 'low-control', globalData)">${higherName}</a>`
+					: higherName;
+
+				labelSpan.innerHTML = `${toggle} ${label}`;
+			}			
+			controlsContainer.appendChild(highDiv);
 		});
 	}
 
@@ -204,28 +286,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		const approachesMap = {};
 		const effectsMap = {};
+		const controlsMap = {};
 
 		// Build maps for fast lookup
 		if (data.NIST_CRS) {
 			(data.NIST_CRS.approaches || []).forEach(a => approachesMap[a.id] = a);
 			(data.NIST_CRS.effects || []).forEach(e => effectsMap[e.id] = e);
+			(data.NIST_CRS.low_level_controls || []).forEach(c => controlsMap[c.id] = c);
 		}
 
 		mitigationTable.innerHTML = "";
 
 		mitigations.forEach(mitigation => {
-			const approachLinks = (mitigation.NISTCRS_approaches || []).map(id => {
-				const approach = approachesMap[id];
-				return approach
-					? `<a href="#" onclick="showPopup('${id}', 'approach', globalData)">${approach.name}</a>`
-					: `<span>${id}</span>`;
-			}).join(", ");
+			const approachLinks = (mitigation.NISTCRS_approaches || [])
+				.map(id => {
+					const approach = approachesMap[id];
+					return approach
+						? `<a href="#" onclick="showPopup('${id}', 'approach', globalData)">${approach.name}</a><br>`
+						: `<span>${id}</span><br>`;
+				}).join("");
+
+			const controlLinks = (mitigation.NISTCRS_controls || [])
+				.map(id => {
+					const control = controlsMap[id];
+					return control
+						? `<a href="#" onclick="showPopup('${id}', 'low-control', globalData)">${toTitleCase(control.name)}</a><br>`
+						: `<span>${id}</span><br>`;
+				}).join("");
 
 			const groupedEffects = {};
 			const lowEffects = data.NIST_CRS?.low_level_effects || [];
 			const highEffects = data.NIST_CRS?.high_level_effects || [];
 
-			// Map low-level IDs in this mitigation to their high-level parents
 			(mitigation.NISTCRS_effects || []).forEach(lowId => {
 				const high = highEffects.find(h => h.low_level_effects_ids.includes(lowId));
 				const low = lowEffects.find(l => l.id === lowId);
@@ -240,13 +332,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 			});
 
-		
 			const effectLines = Object.values(groupedEffects).map(group => {
 				const highLink = `<a href="#" onclick="showPopup('${group.high.id}', 'high-effect', globalData)">${group.high.name}</a>`;
 				const lowLinks = group.low.map(le => `<a href="#" onclick="showPopup('${le.id}', 'low-effect', globalData)">${le.name}</a>`).join(", ");
 				return `${highLink}: ${lowLinks}`;
 			}).join("<br>");
 
+			// Add full row
 			let row = document.createElement("tr");
 			row.innerHTML = `
 				<td>${mitigation.ID}</td>
@@ -256,10 +348,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				<td>${mitigation.short_description || "No description available."}</td>
 				<td class="clickable">${approachLinks || "-"}</td>
 				<td class="clickable" style="font-size: 12px; line-height: 1.6em;">${effectLines || "-"}</td>
+				<td class="clickable">${controlLinks || "-"}</td>
 			`;
 			mitigationTable.appendChild(row);
-		});		
+		});
 	}
+
 
 
 	
@@ -289,7 +383,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 		const nistTechniques = data.NIST_CRS?.techniques || [];
 		const nistApproaches = data.NIST_CRS?.approaches || [];
-		const nistEffects = data.NIST_CRS?.effects || [];
+		const nistEffects = data.NIST_CRS?.low_level_effects || [];
+		const nistControls = data.NIST_CRS?.low_level_controls || [];
 		const mitigations = data.mitigations || [];
 		
 		const threatStats = document.getElementById("stats-threat");
@@ -298,7 +393,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		const nistStats = document.getElementById("stats-nist");
 		if (nistStats) {
-			nistStats.textContent = `Number of NIST Techniques: ${nistTechniques.length} | Number of NIST Approaches: ${nistApproaches.length} | Number of NIST Effects: ${nistEffects.length}`;		
+			nistStats.textContent = `Number of NIST Techniques: ${nistTechniques.length} | Number of NIST Approaches: ${nistApproaches.length} | Number of NIST Effects: ${nistEffects.length} | Number of NIST Controls: ${nistControls.length} | Number of Mitigations: ${mitigations.length}`;		
 		}
 		
 		const tacticsStats = document.getElementById("tactics-stats");
@@ -319,6 +414,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 
+
+	function toTitleCase(str) {
+		return str
+			.toLowerCase()
+			.split(" ")
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(" ");
+	}
 
 	
     function toggleSubTechniques(event, techID) {
@@ -344,6 +447,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		else if (type === "approach") {item = data.NIST_CRS?.approaches?.find(a => a.id === id);} 
 		else if (type === "high-effect") {item = data.NIST_CRS?.high_level_effects?.find(e => e.id === id);} 
 		else if (type === "low-effect") {item = data.NIST_CRS?.low_level_effects?.find(e => e.id === id);}
+		else if (type === "high-control") { item = data.NIST_CRS?.high_level_controls?.find(c => c.id === id);}
+		else if (type === "low-control") {item = data.NIST_CRS?.low_level_controls?.find(c => c.id === id);}
 
 		if (!item) return;
 		
@@ -358,17 +463,17 @@ document.addEventListener("DOMContentLoaded", function () {
 					.replace(/\n/g, "<br><br>")  
 					.replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;") : "No full description available."}</p>`;
 		
-		if (type === "tactic" && item["technique ID"].length > 0) {
+		if (type === "tactic" && item.technique_ids.length > 0) {
 			content += `<h3>Techniques</h3>`;
 			content += `<table border="1" width="100%">
 				<tr><th>ID</th><th>Name</th><th>Description</th></tr>`;
-			item["technique ID"].forEach(techId => {
+			item.technique_ids.forEach(techId => {
 				let tech = data.techniques.find(t => t.ID === techId);
 				if (tech) {
 					content += `<tr><td>${tech.ID}</td>
 								<td><a href="#" onclick="showPopup('${tech.ID}', 'technique', globalData)">${tech.name}</a></td>
 								<td>${tech.short_description}</td></tr>`;
-					tech["sub-technique ID"].forEach(subTechId => {
+					tech.sub_technique_ids.forEach(subTechId => {
 						let subTech = data["sub-techniques"].find(st => st.ID === subTechId);
 						if (subTech) {
 							content += `<tr class="sub-technique-row">
@@ -382,11 +487,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			content += `</table>`;
 		}
 		
+		// Handle technique type
 		if (type === "technique") {
-			if (item["sub-technique ID"].length > 0) {
+			if (item.sub_technique_ids.length > 0) {
 				content += `<h3>Sub-Techniques</h3><table border="1" width="100%">
 					<tr><th>ID</th><th>Name</th><th>Description</th></tr>`;
-				item["sub-technique ID"].forEach(subTechId => {
+				item.sub_technique_ids.forEach(subTechId => {
 					let subTech = data["sub-techniques"].find(st => st.ID === subTechId);
 					if (subTech) {
 						content += `<tr class="sub-technique-row">
@@ -409,16 +515,46 @@ document.addEventListener("DOMContentLoaded", function () {
 				content += `</table>`;
 			}
 			
-			if (item["mitigation ID"].length > 0) {
+			if (item.mitigation_ids?.length > 0) {
 				content += `<h3>Mitigations</h3><table border="1" width="100%">
-					<tr><th>ID</th><th>Name</th><th>Description</th><th>Reference</th></tr>`;
-				item["mitigation ID"].forEach(mitId => {
-					let mit = data.mitigations.find(m => m.ID === mitId);
-					let refLinks = mit["reference ID"].map(refId => {
-						let ref = data.references.find(r => r.ID === refId);
-						return ref ? `<a href='${ref.link}' target='_blank'>${ref.name}</a>` : "Unknown Reference";
-					}).join(", ");
-					content += `<tr><td>${mit.ID}</td><td>${mit.name}</td><td>${mit.description}</td><td>${refLinks}</td></tr>`;
+					<tr><th>ID</th><th>Name</th><th>Description</th><th>NIST Approaches</th><th>NIST Controls</th></tr>`;
+				item.mitigation_ids.forEach(mitId => {
+					const mit = data.mitigations.find(m => m.ID === mitId);
+					if (mit) {
+						const shortDesc = mit.short_description
+							? mit.short_description.replace(/\n/g, "<br>").replace(/\t/g, "&nbsp;&nbsp;") : "";
+						const fullDesc = mit.full_description
+							? mit.full_description.replace(/\n/g, "<br>").replace(/\t/g, "&nbsp;&nbsp;") : "";
+						const combinedDesc = `${shortDesc}${shortDesc && fullDesc ? "<br><br>" : ""}${fullDesc}`;
+
+						// NIST Approaches
+						const approachLinks = (mit.NISTCRS_approaches || [])
+							.map(appId => {
+								const app = data.NIST_CRS?.approaches?.find(a => a.id === appId);
+								return app
+									? `<a href="#" onclick="showPopup('${app.id}', 'approach', globalData)">${app.name}</a>`
+									: appId;
+							})
+							.join("<br><br>");
+
+						// NIST Controls
+						const controlLinks = (mit.NISTCRS_controls || [])
+							.map(ctrlId => {
+								const ctrl = data.NIST_CRS?.low_level_controls?.find(c => c.id === ctrlId);
+								return ctrl
+									? `<a href="#" onclick="showPopup('${ctrl.id}', 'low-control', globalData)">${toTitleCase(ctrl.name)}</a><br>`
+									: ctrlId;
+							})
+							.join("<br>");
+
+						content += `<tr>
+							<td>${mit.ID}</td>
+							<td><a href="#" onclick="showPopup('${mit.ID}', 'mitigation', globalData)">${mit.name}</a></td>
+							<td>${combinedDesc}</td>
+							<td>${approachLinks || "—"}</td>
+							<td>${controlLinks || "—"}</td>
+						</tr>`;
+					}
 				});
 				content += `</table>`;
 			}
@@ -441,6 +577,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				content += `<p><h3>References:</h3> No references available.</p>`;
 			}
 		}
+		
+		
 		// Handle sub-technique type
 		if (type === "sub-technique") {
 			if (item["example"]?.length > 0) {
@@ -454,12 +592,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				content += `</table>`;
 			}
 			
-			if (item["mitigation ID"]?.length > 0) {
+			if (item.mitigation_ids?.length > 0) {
 				content += `<h3>Mitigations</h3><table border="1" width="100%">
 					<tr><th>ID</th><th>Name</th><th>Description</th><th>Reference</th></tr>`;
-				item["mitigation ID"].forEach(mitId => {
+				item.mitigation_ids.forEach(mitId => {
 					let mit = data.mitigations.find(m => m.ID === mitId);
-					let refLinks = mit["reference ID"].map(refId => {
+					let refLinks = mit["reference_ID"].map(refId => {
 						let ref = data.references.find(r => r.ID === refId);
 						return ref ? `<a href='${ref.link}' target='_blank'>${ref.name}</a>` : "Unknown Reference";
 					}).join(", ");
@@ -494,7 +632,13 @@ document.addEventListener("DOMContentLoaded", function () {
             content = `<h2>${item.name}</h2>`;
 			content += `<p><i>ID:</i> ${item.ID}</p>`;
 			content += `<p><strong>Created:</strong> ${item.created} | <strong>Last Modified:</strong> ${item.modified}</p>`;
-			content += `<h3>Description</h3><p>${item.short_description}</p><p>${item.full_description}</p>`;
+			content += `<h3>Description</h3><p>${item.short_description
+					? item.short_description.replace(/\n/g, "<br><br>").replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")
+					: "No short description available."}</p>`;
+			content += `<p>${item.full_description
+					? item.full_description.replace(/\n/g, "<br><br>").replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")
+					: "No full description available."}</p>`;
+
 
             // Show mapped techniques
             if (item.techniques?.length > 0) {
@@ -558,8 +702,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 				content += `</table>`;
 			}
-
-            // Show References (if any)
+			
+		    // Show References (if any)
              if (item["reference_ID"]?.length > 0) {
 				content += `<h3>References</h3><table border="1" width="100%">
 					<tr><th>ID</th><th>Name</th><th>Link</th></tr>`;
@@ -579,7 +723,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
         }
 		
-		// Handle NIST CRS Technique (similar to ATT&CK tactic)
+		// Handle NIST CRS Technique
 		if (type === "nist-technique") {
 			item = data.NIST_CRS.techniques.find(t => t.id === id);
 			if (!item) return;
@@ -614,8 +758,36 @@ document.addEventListener("DOMContentLoaded", function () {
 					});
 					content += `</table>`;
 				}
-			} else {
+			} 
+			else {
 				content += `<p><h3>Approaches:</h3> No approaches available.</p>`;
+			}
+			
+			// Show associated controls
+			if (item.control_ids?.length > 0) {
+				const controlList = [];
+				item.control_ids.forEach(ctrlId => {
+					let ctrl = data.NIST_CRS.low_level_controls.find(c => c.id === ctrlId);
+					if (ctrl) controlList.push(ctrl);
+				});
+
+				if (controlList.length > 0) {
+					content += `<h3>Associated Controls</h3><table border="1" width="100%">
+						<tr><th>ID</th><th>Name</th><th>Definition</th></tr>`;
+					controlList.forEach(ctrl => {
+						const definition = ctrl.definition
+							? ctrl.definition.replace(/\n/g, "<br>").replace(/\t/g, "&nbsp;&nbsp;")
+							: "—";
+						content += `<tr>
+							<td>${ctrl.id}</td>
+							<td><a href="#" onclick="showPopup('${ctrl.id}', 'low-control', globalData)">${ctrl.name}</a></td>
+							<td>${definition}</td>
+						</tr>`;
+					});
+					content += `</table>`;
+				}
+			} else {
+				content += `<p><h3>Associated Controls:</h3> No controls available.</p>`;
 			}
 		}
 
@@ -631,8 +803,30 @@ document.addEventListener("DOMContentLoaded", function () {
 				? item.example.replace(/\n\t*-/g, "<br>&nbsp;&nbsp;&nbsp;&nbsp;-").replace(/\n/g, "<br>")
 				: "No example available.";
 			content += `<h3>Example</h3><p>${formattedExample}</p>`;
+			
+			//Show associated mitigations
+			if (item.mitigation_ids?.length > 0) {
+				content += `<h3>Mitigations</h3><table border="1" width="100%">
+					<tr><th>ID</th><th>Name</th><th>Description</th></tr>`;
+				item.mitigation_ids.forEach(mitId => {
+					const mit = data.mitigations.find(m => m.ID === mitId);
+					if (mit) {
+						const shortDesc = mit.short_description
+							? mit.short_description.replace(/\n/g, "<br>").replace(/\t/g, "&nbsp;&nbsp;") : "";
+						const fullDesc = mit.full_description
+							? mit.full_description.replace(/\n/g, "<br>").replace(/\t/g, "&nbsp;&nbsp;") : "";
+						const combinedDesc = `${shortDesc}${shortDesc && fullDesc ? "<br><br>" : ""}${fullDesc}`;
 
-
+						content += `<tr>
+							<td>${mit.ID}</td>
+							<td><a href="#" onclick="showPopup('${mit.ID}', 'mitigation', globalData)">${mit.name}</a></td>
+							<td>${shortDesc}</td>
+						</tr>`;
+					}
+				});
+				content += `</table>`;
+			}
+			//Show associated effects
             if (item.effect_ids?.length > 0) {
                 content += `<h3>Associated Effects</h3><ul>`;
                 item.effect_ids.forEach(eid => {
@@ -643,7 +837,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 content += `</ul>`;
             }
+			// Dynamically find all low-level controls related to this approach
+			const associatedControls = data.NIST_CRS?.low_level_controls?.filter(c => c.approaches_id?.includes(item.id));
+			if (associatedControls?.length > 0) {
+				content += `<h3>Associated Controls</h3><table border="1" width="100%">
+					<tr><th>ID</th><th>Name</th><th>Definition</th></tr>`;
+				associatedControls.forEach(ctrl => {
+					const def = ctrl.definition
+						? ctrl.definition.replace(/\n/g, "<br>").replace(/\t/g, "&nbsp;&nbsp;")
+						: "No definition available.";
+					content += `<tr>
+						<td>${ctrl.id}</td>
+						<td><a href="#" onclick="showPopup('${ctrl.id}', 'low-control', globalData)">${ctrl.name}</a></td>
+						<td>${def}</td>
+					</tr>`;
+				});
+				content += `</table>`;
+			} else {
+				content += `<h3>Associated Controls</h3><p>No low-level controls found for this approach.</p>`;
+			}			
         }
+
 
         // Handle NIST CRS High-Level Effect
 		if (type === "high-effect") {
@@ -678,6 +892,77 @@ document.addEventListener("DOMContentLoaded", function () {
 				content += `<h3>Examples</h3><p>${item.examples.replace(/\n/g, "<br>")}</p>`;
 			}
 		}
+		
+		// Handle NIST CRS High-level Control
+		if (type === "high-control") {
+			content = `<h2>${item.name}</h2>`;
+			content += `<p><i>ID:</i> ${item.id}</p>`;
+			content += `<h3>Mapped Low-Level Controls</h3>`;
+			const lowControls = data.NIST_CRS?.low_level_controls || [];
+			const linkedControls = item.control_ids.map(cid => lowControls.find(c => c.id === cid)).filter(Boolean);
+
+			if (linkedControls.length > 0) {
+				content += `<ul>`;
+				linkedControls.forEach(ctrl => {
+					content += `<li><a href="#" onclick="showPopup('${ctrl.id}', 'low-control', globalData)">${ctrl.name}</a></li>`;
+				});
+				content += `</ul>`;
+			} else {
+				content += `<p>No linked low-level controls.</p>`;
+			}
+		}
+		
+		// Handle NIST CRS Low-level Control
+		if (type === "low-control") {
+			content = `<h2>${item.name}</h2>`;
+			content += `<p><i>ID:</i> ${item.id}</p>`;
+			content += `<h3>Discussion on UGV/AV</h3><p>${item.ugv_discussion ? item.ugv_discussion.replace(/\n/g, "<br><br>").replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;") : "No discussion on UGV available."}</p>`;
+			content += `<h3>Original Definition from NIST 800-53</h3><p>${item.definition ? item.definition.replace(/\n/g, "<br><br>").replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;") : "No definition available."}</p>`;
+			content += `<h3>Original Discussion from NIST 800-53</h3><p>${item.discussion ? item.discussion.replace(/\n/g, "<br><br>").replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;") : "No discussion available."}</p>`;
+
+			// Combine techniques + their mapped approaches
+			if (item.techniques_id?.length > 0) {
+				content += `<h3>Resiliency Technique [Approaches]</h3><ul>`;
+				item.techniques_id.forEach(tid => {
+					const tech = data.NIST_CRS?.techniques?.find(t => t.id === tid);
+					if (tech) {
+						const approachNames = (tech.approach_ids || [])
+							.filter(aid => item.approaches_id?.includes(aid))  // only show approaches used in this low-control
+							.map(aid => {
+								const app = data.NIST_CRS?.approaches?.find(a => a.id === aid);
+								return app
+									? `<a href="#" onclick="showPopup('${app.id}', 'approach', globalData)">${app.name}</a>`
+									: aid;
+							})
+							.join(", ");
+
+						content += `<li><a href="#" onclick="showPopup('${tech.id}', 'nist-technique', globalData)">${tech.name}</a> [${approachNames}]</li>`;
+					}
+				});
+				content += `</ul>`;
+			}
+			
+			// Add Mitigations
+			if (data.mitigations?.length > 0) {
+				const matchingMits = data.mitigations.filter(m => (m.NISTCRS_controls || []).includes(item.id));
+				if (matchingMits.length > 0) {
+					content += `<h3>Mitigations mapped to this Control</h3>`;
+					content += `<table border="1" width="100%">
+						<tr><th>ID</th><th>Name</th><th>Description</th></tr>`;
+					matchingMits.forEach(mit => {
+						content += `<tr>
+							<td>${mit.ID}</td>
+							<td><a href="#" onclick="showPopup('${mit.ID}', 'mitigation', globalData)">${mit.name}</a></td>
+							<td>${mit.short_description || "-"}</td>
+						</tr>`;
+					});
+					content += `</table>`;
+				}
+			}
+
+		}
+
+
 		
 		document.getElementById("popup").style.display = "block";
 		popupBody.innerHTML = content;
