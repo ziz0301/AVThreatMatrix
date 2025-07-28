@@ -216,6 +216,13 @@ td a:hover {
     gap: 10px;
     padding: 20px 0;
 }
+#controls-matrix-container{ 
+	display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 20px 0;
+}
 
 .tactic {    
     padding: 10px;
